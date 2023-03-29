@@ -1,10 +1,11 @@
 import { Component, For } from "solid-js"
+import { A } from "@solidjs/router"
 import "./Navbar.scss"
 
 const navbarItems = [
   {
     name: "discover",
-    link: "#",
+    link: "/",
     icon: "./icons/discover.svg",
   },
   {
@@ -14,7 +15,7 @@ const navbarItems = [
   },
   {
     name: "log in",
-    link: "#",
+    link: "/login",
     icon: "./icons/account.svg",
   },
 ]
@@ -26,8 +27,10 @@ const Navbar: Component = () => {
         <For each={navbarItems}>
           {item => (
             <li class="navbar__item">
-              <img class="navbar__icon" src={item.icon} alt={item.name} />
-              <span class="navbar__text">{item.name}</span>
+              <A class="navbar__link" href={item.link}>
+                <img class="navbar__icon" src={item.icon} alt={item.name} />
+                <span class="navbar__text">{item.name}</span>
+              </A>
             </li>
           )}
         </For>

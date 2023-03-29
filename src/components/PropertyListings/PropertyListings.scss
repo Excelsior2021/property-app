@@ -1,6 +1,9 @@
+@use "../../partials/mixins" as *;
+
 .property-listings {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   row-gap: 24px;
+  column-gap: 24px;
   margin-top: 24px;
 }

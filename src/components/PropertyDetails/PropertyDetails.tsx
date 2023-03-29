@@ -1,7 +1,12 @@
 import { Component } from "solid-js"
+import { propertyType } from "../../types/general"
 import "./PropertyDetails.scss"
 
-const PropertyDetails: Component = props => {
+interface PropertyDetailsProps {
+  property: propertyType
+}
+
+const PropertyDetails: Component<PropertyDetailsProps> = props => {
   return (
     <div class="property-details">
       <p class="property-details__location">{props.property.location}</p>

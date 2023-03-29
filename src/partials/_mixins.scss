@@ -1,0 +1,11 @@
+@mixin media-two-column {
+  @media (min-width: 550px) {
+    @content;
+  }
+}
+
+@mixin media-three-column {
+  @media (min-width: 950px) {
+    @content;
+  }
+}

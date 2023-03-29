@@ -15,16 +15,6 @@ const Header: Component = () => (
         id="search"
         placeholder="where do you want to live?"
       />
-
-      {/* <nav class="nav">
-        <ul class="nav__list">
-          <li class="nav__item">
-            <a class="nav__link" href="#">
-              sign in
-            </a>
-          </li>
-        </ul>
-      </nav> */}
     </div>
   </header>
 )
