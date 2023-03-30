@@ -1,0 +1,18 @@
+.register {
+  padding: 24px 0;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+    margin: 24px 0;
+  }
+
+  &__input {
+    font-size: 1.8rem;
+    border: 1px solid lightgrey;
+    border-radius: 8px;
+    padding: 1.2rem;
+    outline: none;
+  }
+}

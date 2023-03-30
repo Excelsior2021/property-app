@@ -21,11 +21,14 @@ const Header: Component = () => {
               placeholder="where do you want to live?"
             />
           </Match>
-          <Match when={location.pathname === "/login"}>
-            <h2 class="header__heading">log in or register</h2>
-          </Match>
           <Match when={location.pathname === "/saved"}>
             <h2 class="header__heading">saved properties</h2>
+          </Match>
+          <Match when={location.pathname === "/login"}>
+            <h2 class="header__heading">log in</h2>
+          </Match>
+          <Match when={location.pathname === "/register"}>
+            <h2 class="header__heading">register</h2>
           </Match>
         </Switch>
       </div>
