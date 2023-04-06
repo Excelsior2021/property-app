@@ -1,3 +1,5 @@
+@use "../../partials/mixins" as *;
+
 .navbar {
   position: fixed;
   bottom: 0;
@@ -5,6 +7,16 @@
   width: 100%;
   border-top: 1px solid lightgrey;
   padding: 8px;
+  transition: bottom 0.1s linear;
+
+  @include media-tablet {
+    display: none;
+  }
+
+  &--scroll-down {
+    bottom: -60px;
+    transition: bottom 0.1s linear;
+  }
 
   &__list {
     display: flex;

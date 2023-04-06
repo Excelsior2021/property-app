@@ -1,5 +1,6 @@
-import { Component, Switch, Match } from "solid-js"
-import { useLocation } from "@solidjs/router"
+import { Component, Switch, Match, For } from "solid-js"
+import { useLocation, A } from "@solidjs/router"
+import { navbarItems } from "../Navbar/Navbar"
 import "./Header.scss"
 
 const Header: Component = () => {
@@ -31,6 +32,21 @@ const Header: Component = () => {
             <h2 class="header__heading">register</h2>
           </Match>
         </Switch>
+
+        <nav class="header__nav">
+          <ul class="header__list">
+            <For each={navbarItems}>
+              {item => (
+                <li class="nav__item">
+                  <A class="nav__link" href={item.link}>
+                    <img class="nav__icon" src={item.icon} alt={item.name} />
+                    <span class="nav__text">{item.name}</span>
+                  </A>
+                </li>
+              )}
+            </For>
+          </ul>
+        </nav>
       </div>
     </header>
   )

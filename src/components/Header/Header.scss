@@ -1,15 +1,25 @@
+@use "../../partials/mixins" as *;
+
 .header {
   position: sticky;
   top: 0;
   background-color: white;
   border-bottom: 1px solid lightgrey;
+  z-index: 100;
 
   &__container {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 1280px;
     margin: 0 24px;
+
+    @include media-tablet {
+      flex-direction: row;
+      padding: 20px 0;
+      margin: auto;
+    }
   }
 
   &__icon {
@@ -17,6 +27,11 @@
     width: 20px;
     top: 52px;
     left: 10px;
+
+    @include media-tablet {
+      top: 32px;
+      left: 90px;
+    }
   }
 
   &__search {
@@ -27,6 +42,11 @@
     border: 1px solid lightgrey;
     padding: 1rem;
     padding-left: 3.5rem;
+
+    @include media-tablet {
+      margin: 0;
+      margin-right: 24px;
+    }
   }
 
   &__logo {
@@ -36,10 +56,42 @@
   &__heading {
     margin: 8px;
   }
+
+  &__nav {
+    display: none;
+
+    @include media-tablet {
+      display: flex;
+      margin-left: auto;
+    }
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    column-gap: 32px;
+  }
 }
 
 .nav {
   &__item {
     list-style: none;
+  }
+
+  &__link {
+    width: fit-content;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    width: 20px;
+    margin-right: 4px;
+  }
+
+  &__text {
+    text-decoration: none;
   }
 }

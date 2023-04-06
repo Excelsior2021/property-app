@@ -6,6 +6,7 @@ import Discover from "./pages/Discover/Discover"
 import SavedProperties from "./pages/SavedProperties/SavedProperties"
 import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
+import Profile from "./pages/Profile/Profile"
 import "./App.scss"
 
 const App: Component = () => {
@@ -18,6 +19,7 @@ const App: Component = () => {
           <Route path="/saved" component={() => <SavedProperties />} />
           <Route path="/login" component={() => <Login />} />
           <Route path="/register" component={() => <Register />} />
+          <Route path="/profile" component={() => <Profile />} />
         </Routes>
       </main>
       <Navbar />

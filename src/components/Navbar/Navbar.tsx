@@ -2,7 +2,7 @@ import { Component, For, createSignal, createEffect } from "solid-js"
 import { A } from "@solidjs/router"
 import "./Navbar.scss"
 
-const navbarItems = [
+export const navbarItems = [
   {
     name: "discover",
     link: "/",
@@ -14,7 +14,7 @@ const navbarItems = [
     icon: "./icons/saved.svg",
   },
   {
-    name: "log in",
+    name: "login",
     link: "/login",
     icon: "./icons/account.svg",
   },
@@ -39,22 +39,20 @@ const Navbar: Component = () => {
 
   return (
     <>
-      {showNavbar() && (
-        <nav class="navbar">
-          <ul class="navbar__list">
-            <For each={navbarItems}>
-              {item => (
-                <li class="navbar__item">
-                  <A class="navbar__link" href={item.link}>
-                    <img class="navbar__icon" src={item.icon} alt={item.name} />
-                    <span class="navbar__text">{item.name}</span>
-                  </A>
-                </li>
-              )}
-            </For>
-          </ul>
-        </nav>
-      )}
+      <nav class={showNavbar() ? "navbar" : "navbar navbar--scroll-down"}>
+        <ul class="navbar__list">
+          <For each={navbarItems}>
+            {item => (
+              <li class="navbar__item">
+                <A class="navbar__link" href={item.link}>
+                  <img class="navbar__icon" src={item.icon} alt={item.name} />
+                  <span class="navbar__text">{item.name}</span>
+                </A>
+              </li>
+            )}
+          </For>
+        </ul>
+      </nav>
     </>
   )
 }

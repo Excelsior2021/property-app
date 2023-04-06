@@ -1,9 +1,8 @@
 @use "../../partials/mixins" as *;
 
 .property-item {
+  position: relative;
   list-style: none;
-  // display: flex;
-  // flex-direction: column;
   width: 100%;
 
   @include media-two-column {
@@ -28,6 +27,15 @@
     @include media-three-column {
       height: 25vw;
     }
+  }
+
+  &__icon {
+    position: absolute;
+    width: 30px;
+    top: 10px;
+    right: 10px;
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(146deg)
+      brightness(104%) contrast(101%);
   }
 
   &__details {

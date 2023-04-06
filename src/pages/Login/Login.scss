@@ -32,4 +32,9 @@
       background-color: salmon;
     }
   }
+
+  &__error {
+    color: red;
+    margin-top: -16px;
+  }
 }
