@@ -4,4 +4,5 @@ export interface propertyType {
   type: string
   rate: number
   img: string
+  saved: boolean
 }

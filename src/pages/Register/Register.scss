@@ -1,11 +1,19 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+
 .register {
-  padding: 24px 0;
+  padding: $padding-form;
+
+  @include media-tablet {
+    max-width: 500px;
+    margin: auto;
+  }
 
   &__form {
     display: flex;
     flex-direction: column;
     row-gap: 24px;
-    margin: 24px 0;
+    margin: $padding-form;
   }
 
   &__input {

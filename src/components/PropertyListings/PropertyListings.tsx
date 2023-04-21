@@ -6,7 +6,7 @@ const PropertyListings: Component = () => {
   const [properties, setProperties] = createSignal(null)
 
   createEffect(async () => {
-    const data = await fetch("./src/data/properties.json")
+    const data = await fetch("http://localhost:8080/properties")
     setProperties(await data.json())
   }, [])
 
