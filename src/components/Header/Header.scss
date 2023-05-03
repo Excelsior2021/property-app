@@ -56,6 +56,11 @@
 
   &__heading {
     margin: 8px;
+    text-transform: capitalize;
+
+    @include media-tablet {
+      display: none;
+    }
   }
 
   &__nav {
@@ -94,5 +99,9 @@
 
   &__text {
     text-decoration: none;
+  }
+
+  &__hide {
+    display: none;
   }
 }

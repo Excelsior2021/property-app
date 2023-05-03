@@ -4,7 +4,7 @@ import "./Profile.scss"
 const Profile: Component = () => {
   return (
     <div class="profile">
-      <h2>Profile</h2>
+      <h2>Hello John</h2>
     </div>
   )
 }

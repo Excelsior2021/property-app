@@ -7,6 +7,7 @@ import SavedProperties from "./pages/SavedProperties/SavedProperties"
 import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
 import Profile from "./pages/Profile/Profile"
+import Property from "./pages/Property/Property"
 import "./App.scss"
 
 const App: Component = () => {
@@ -20,6 +21,7 @@ const App: Component = () => {
           <Route path="/login" component={() => <Login />} />
           <Route path="/register" component={() => <Register />} />
           <Route path="/profile" component={() => <Profile />} />
+          <Route path="/property/:id" component={() => <Property />} />
         </Routes>
       </main>
       <Navbar />

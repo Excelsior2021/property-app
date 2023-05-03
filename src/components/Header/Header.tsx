@@ -1,6 +1,7 @@
 import { Component, Switch, Match, For } from "solid-js"
 import { useLocation, A } from "@solidjs/router"
 import { navbarItems } from "../Navbar/Navbar"
+import { loggedIn } from "../../store/store"
 import "./Header.scss"
 
 const Header: Component = () => {
@@ -23,13 +24,13 @@ const Header: Component = () => {
             />
           </Match>
           <Match when={location.pathname === "/saved"}>
-            <h2 class="header__heading">saved properties</h2>
+            <h1 class="header__heading">saved properties</h1>
           </Match>
           <Match when={location.pathname === "/login"}>
-            <h2 class="header__heading">log in</h2>
+            <h1 class="header__heading">log in</h1>
           </Match>
           <Match when={location.pathname === "/register"}>
-            <h2 class="header__heading">register</h2>
+            <h1 class="header__heading">register</h1>
           </Match>
         </Switch>
 
@@ -37,7 +38,16 @@ const Header: Component = () => {
           <ul class="header__list">
             <For each={navbarItems}>
               {item => (
-                <li class="nav__item">
+                <li
+                  class={
+                    loggedIn() && item.profile
+                      ? "nav__item"
+                      : loggedIn() && item.login
+                      ? "nav__hide"
+                      : !loggedIn() && item.profile
+                      ? `nav__hide`
+                      : "nav__item"
+                  }>
                   <A class="nav__link" href={item.link}>
                     <img class="nav__icon" src={item.icon} alt={item.name} />
                     <span class="nav__text">{item.name}</span>

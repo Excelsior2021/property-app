@@ -1,0 +1,17 @@
+.property-details {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2px;
+
+  &__location {
+    text-transform: capitalize;
+    font-weight: bold;
+  }
+
+  &__type {
+    text-transform: capitalize;
+  }
+
+  &__rate {
+  }
+}

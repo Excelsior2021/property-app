@@ -1,6 +1,7 @@
 import { Component } from "solid-js"
-import { A } from "@solidjs/router"
+import { A, useNavigate } from "@solidjs/router"
 import { createForm, Field, Form, required, email } from "@modular-forms/solid"
+import { setLoggedIn } from "../../store/store"
 import "./Login.scss"
 
 type LoginForm = {
@@ -10,17 +11,21 @@ type LoginForm = {
 
 const Login: Component = () => {
   const loginForm = createForm<LoginForm>()
+  const naviagte = useNavigate()
 
   const handleSubmit = () => {
-    console.log("hello world")
+    setLoggedIn(true)
+    naviagte("/profile")
   }
 
   return (
     <div class="login">
+      <h1 class="page__heading">Log in</h1>
+
       <p class="login__text">
         Please log in. Don't have an account? Click the register button below.
       </p>
-      <Form of={loginForm} class="login__form" onSubmit={handleSubmit}>
+      <Form of={loginForm} class="login__form" onsubmit={handleSubmit}>
         <Field
           of={loginForm}
           name="email"
