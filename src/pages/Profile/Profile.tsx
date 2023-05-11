@@ -1,12 +1,29 @@
 import { Component } from "solid-js"
+import { A } from "@solidjs/router"
+import { loggedIn } from "../../store/store"
+import { userData } from "../../store/store"
 import "./Profile.scss"
 
 const Profile: Component = () => {
-  return (
-    <div class="profile">
-      <h2>Hello John</h2>
-    </div>
-  )
+  if (loggedIn()) {
+    return (
+      <div class="profile">
+        {/* <img
+          class="profile__image"
+          src="./icons/account.svg"
+          alt="profile image"
+        /> */}
+        <h2 class="profile__greeting">
+          Hello {userData() ? userData().name : "john"},
+        </h2>
+        <p class="profile__text">What would you like to do?</p>
+
+        <A class="profile__link" href="../add-property">
+          add property
+        </A>
+      </div>
+    )
+  }
 }
 
 export default Profile

@@ -1,7 +1,8 @@
 import { Component, createSignal } from "solid-js"
-import { A } from "@solidjs/router"
+import { A, useNavigate } from "@solidjs/router"
 import { createForm, Field, Form, required, email } from "@modular-forms/solid"
 import "./Register.scss"
+import { setLoggedIn, setUserData } from "../../store/store"
 
 type registerForm = {
   name: string
@@ -16,12 +17,14 @@ const Register: Component = () => {
     email: "",
     password: "",
   })
+  const [accessToken, setAccessToken] = createSignal(null)
+  const navigate = useNavigate()
 
   const handleSubmit = async () => {
     console.log(registerFormData())
 
     try {
-      const data = await fetch("http://localhost:8080/api/auth/v1/signup", {
+      const res = await fetch("http://localhost:8080/api/auth/v1/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,7 +32,31 @@ const Register: Component = () => {
         body: JSON.stringify(registerFormData()),
       })
 
-      console.log(await data.json())
+      if (res.status === 201) {
+        const res = await fetch("http://localhost:8080/api/auth/v1/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(registerFormData()),
+        })
+
+        const data = await res.json()
+        setAccessToken(data.accessToken)
+
+        const userDataRes = await fetch("http://localhost:8080/profile", {
+          headers: {
+            Authorization: `Bearer ${accessToken()}`,
+          },
+        })
+
+        const userData = await userDataRes.json()
+
+        setLoggedIn(true)
+        setUserData(userData)
+
+        navigate("/profile")
+      }
     } catch (error) {
       console.log(error)
     }
@@ -95,7 +122,7 @@ const Register: Component = () => {
               <input
                 {...field.props}
                 class="register__input"
-                type="passowrd"
+                type="password"
                 placeholder="password"
                 onchange={handleInput}
                 required
