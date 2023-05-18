@@ -1,14 +1,16 @@
 import { Component, createSignal } from "solid-js"
 import { A, useNavigate } from "@solidjs/router"
 import { createForm, Field, Form, required, email } from "@modular-forms/solid"
-import "./Register.scss"
 import { setLoggedIn, setUserData } from "../../store/store"
+import "./Register.scss"
 
 type registerForm = {
   name: string
   email: string
   password: string
 }
+
+export const [accessToken, setAccessToken] = createSignal(null)
 
 const Register: Component = () => {
   const registerForm = createForm<registerForm>()
@@ -17,7 +19,6 @@ const Register: Component = () => {
     email: "",
     password: "",
   })
-  const [accessToken, setAccessToken] = createSignal(null)
   const navigate = useNavigate()
 
   const handleSubmit = async () => {

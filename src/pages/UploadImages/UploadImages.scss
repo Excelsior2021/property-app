@@ -1,0 +1,16 @@
+.upload-images {
+  &__input {
+    margin: 24px auto;
+  }
+
+  &__submit {
+    display: block;
+    background-color: transparent;
+    font-size: 1.6rem;
+    text-transform: capitalize;
+    width: 100%;
+    border: 3px solid black;
+    border-radius: 1rem;
+    padding: 2rem;
+  }
+}

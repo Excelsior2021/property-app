@@ -18,8 +18,8 @@ const Profile: Component = () => {
         </h2>
         <p class="profile__text">What would you like to do?</p>
 
-        <A class="profile__link" href="../add-property">
-          add property
+        <A class="profile__link" href="../upload-images">
+          upload images
         </A>
       </div>
     )

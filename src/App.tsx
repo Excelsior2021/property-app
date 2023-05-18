@@ -8,8 +8,7 @@ import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
 import Profile from "./pages/Profile/Profile"
 import Property from "./pages/Property/Property"
-import AddProperty from "./pages/AddProperty/AddProperty"
-import S3 from "./pages/S3Test/S3"
+import UploadImages from "./pages/UploadImages/UploadImages"
 import "./App.scss"
 
 const App: Component = () => {
@@ -24,8 +23,7 @@ const App: Component = () => {
           <Route path="/register" component={() => <Register />} />
           <Route path="/profile" component={() => <Profile />} />
           <Route path="/property/:id" component={() => <Property />} />
-          <Route path="/add-property" component={() => <AddProperty />} />
-          <Route path="/test" component={() => <S3 />} />
+          <Route path="/upload-images" component={() => <UploadImages />} />
         </Routes>
       </main>
       <Navbar />
