@@ -1,16 +1,22 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+
 .upload-images {
+  &__form {
+    @include form;
+  }
+
   &__input {
     margin: 24px auto;
   }
 
-  &__submit {
-    display: block;
-    background-color: transparent;
-    font-size: 1.6rem;
-    text-transform: capitalize;
+  &__actions {
+    display: flex;
+    column-gap: 1rem;
+  }
+
+  &__button {
+    @include button-form;
     width: 100%;
-    border: 3px solid black;
-    border-radius: 1rem;
-    padding: 2rem;
   }
 }

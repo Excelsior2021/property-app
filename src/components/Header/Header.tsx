@@ -32,6 +32,9 @@ const Header: Component = () => {
           <Match when={location.pathname === "/register"}>
             <h1 class="header__heading">register</h1>
           </Match>
+          <Match when={location.pathname === "/new-listing"}>
+            <h1 class="header__heading">new listing</h1>
+          </Match>
         </Switch>
 
         <nav class="header__nav">

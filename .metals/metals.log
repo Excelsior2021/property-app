@@ -49,3 +49,29 @@ WARNING: Unmatched cancel notification for request id 78
 2023.05.14 14:22:19 INFO  Shutting down server
 2023.05.14 14:22:19 INFO  shutting down Metals
 2023.05.14 14:22:19 INFO  Exiting server
+2023.05.20 22:00:38 INFO  Started: Metals version 0.11.12 in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property' for client Visual Studio Code 1.78.2.
+May 20, 2023 10:00:38 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
+INFO: Flyway Community Edition 9.16.3 by Redgate
+May 20, 2023 10:00:38 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: See release notes here: https://rd.gt/416ObMi
+May 20, 2023 10:00:38 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: 
+May 20, 2023 10:00:38 PM org.flywaydb.core.internal.database.base.BaseDatabaseType createDatabase
+INFO: Database: jdbc:h2:file:C:\Users\temid\Documents\Programming\sarpong\lifestyle-property\.metals\metals (H2 2.1)
+May 20, 2023 10:00:38 PM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 4 migrations (execution time 00:00.020s)
+May 20, 2023 10:00:38 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "PUBLIC": 4
+May 20, 2023 10:00:38 PM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Schema "PUBLIC" is up to date. No migration necessary.
+2023.05.20 22:00:38 INFO  time: initialize in 0.55s
+2023.05.20 22:00:40 WARN  Build server is not auto-connectable.
+2023.05.20 22:00:40 WARN  no build tool detected in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2023.05.20 22:00:40 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\service\PropertiesService.scala
+2023.05.20 22:00:41 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\service\PropertiesService.scala
+2023.05.20 22:00:44 INFO  no build target found for C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\service\PropertiesService.scala. Using presentation compiler with project's scala-library version: 3.2.2
+2023.05.20 22:00:46 INFO  time: code lens generation in 4.02s
+2023.05.20 22:00:46 INFO  time: code lens generation in 5.26s
+2023.05.20 22:37:37 INFO  Shutting down server
+2023.05.20 22:37:37 INFO  shutting down Metals
+2023.05.20 22:37:37 INFO  Exiting server

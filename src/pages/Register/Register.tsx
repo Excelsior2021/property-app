@@ -1,7 +1,13 @@
 import { Component, createSignal } from "solid-js"
 import { A, useNavigate } from "@solidjs/router"
 import { createForm, Field, Form, required, email } from "@modular-forms/solid"
-import { setLoggedIn, setUserData } from "../../store/store"
+import {
+  setLoggedIn,
+  setUserData,
+  accessToken,
+  setAccessToken,
+} from "../../store/store"
+import { handleFormInput } from "../../utils/utils"
 import "./Register.scss"
 
 type registerForm = {
@@ -9,8 +15,6 @@ type registerForm = {
   email: string
   password: string
 }
-
-export const [accessToken, setAccessToken] = createSignal(null)
 
 const Register: Component = () => {
   const registerForm = createForm<registerForm>()
@@ -63,17 +67,9 @@ const Register: Component = () => {
     }
   }
 
-  const handleInput = event => {
-    setRegisterFormData(prevState => ({
-      ...prevState,
-      [event.target.name]: event.target.value,
-    }))
-  }
-
   return (
     <div class="register">
       <h1 class="page__heading">Register</h1>
-      <p class="register__text">Register for an account here.</p>
       <Form of={registerForm} class="register__form" onSubmit={handleSubmit}>
         <Field
           of={registerForm}
@@ -86,7 +82,7 @@ const Register: Component = () => {
                 class="register__input"
                 type="text"
                 placeholder="name"
-                onchange={handleInput}
+                onchange={event => handleFormInput(event, setRegisterFormData)}
                 required
               />
               {field.error && <p class="register__error">{field.error}</p>}
@@ -107,7 +103,7 @@ const Register: Component = () => {
                 class="register__input"
                 type="email"
                 placeholder="email"
-                onchange={handleInput}
+                onchange={event => handleFormInput(event, setRegisterFormData)}
                 required
               />
               {field.error && <p class="register__error">{field.error}</p>}
@@ -125,14 +121,14 @@ const Register: Component = () => {
                 class="register__input"
                 type="password"
                 placeholder="password"
-                onchange={handleInput}
+                onchange={event => handleFormInput(event, setRegisterFormData)}
                 required
               />
               {field.error && <p class="register__error">{field.error}</p>}
             </>
           )}
         </Field>
-        <button class="login__button login__button--register">register</button>
+        <button class="register__button">register</button>
       </Form>
 
       <p class="login__text">

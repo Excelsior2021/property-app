@@ -10,6 +10,7 @@ import Profile from "./pages/Profile/Profile"
 import Property from "./pages/Property/Property"
 import UploadImages from "./pages/UploadImages/UploadImages"
 import "./App.scss"
+import NewListing from "./pages/NewListing/NewListing"
 
 const App: Component = () => {
   return (
@@ -23,6 +24,7 @@ const App: Component = () => {
           <Route path="/register" component={() => <Register />} />
           <Route path="/profile" component={() => <Profile />} />
           <Route path="/property/:id" component={() => <Property />} />
+          <Route path="/new-listing" component={() => <NewListing />} />
           <Route path="/upload-images" component={() => <UploadImages />} />
         </Routes>
       </main>

@@ -1,5 +1,8 @@
-import { Component } from "solid-js"
+import { Component, createSignal } from "solid-js"
+import { useNavigate } from "@solidjs/router"
 import { createForm, Field, Form } from "@modular-forms/solid"
+import { newListingFormData } from "../NewListing/NewListing"
+import { accessToken } from "../../store/store"
 import "./UploadImages.scss"
 
 type uploadImagesForm = {
@@ -8,11 +11,13 @@ type uploadImagesForm = {
 
 const uploadImages: Component = () => {
   const uploadImagesForm = createForm<uploadImagesForm>()
+  const [propertyID, setPropertyID] = createSignal(null)
+  const navigate = useNavigate()
   let fileRef
 
-  const handleUpload = () => uploadImages(fileRef.files)
+  const uploadImages = () => handleUpload(fileRef.files)
 
-  const uploadImages = async files => {
+  const handleUpload = async files => {
     const formData = new FormData()
 
     for (const file of files) {
@@ -20,14 +25,32 @@ const uploadImages: Component = () => {
     }
 
     try {
-      await fetch("http://localhost:8080/upload", {
+      const res = await fetch("http://localhost:8080/property", {
         method: "POST",
-        body: formData,
         headers: {
-          Authorization:
-            "Bearear eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2ODQzNTY5MjksImlhdCI6MTY4NDM1NTEyOSwKICAgICJpZCIgOiAiOWZiMmY4NmItMjE2ZC00OWRkLThlMWUtNzk0Y2E4MTQzMTE2IiwKICAgICJuYW1lIiA6ICJjaHJpcyIsCiAgICAiZW1haWwiIDogImNocmlzIiwKICAgICJwYXNzd29yZCIgOiAiJDJhJDEyJFJrQlJKaDhnVDRBcFNBUHhLRnpZTHVsSXltWTN6dXlFSUdHTldYQlBxMC5abTYwVlVERHp1Igp9.GaFEQQ0HfzDafw_5Gu2Mzr2X1QbE1hLUKTTFH4mbUKiCRMC_FoHE4mBLCcUUS2zAXcHeOLOF0x1KbiN9_ien3Q",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken()}`,
         },
+        body: JSON.stringify(newListingFormData()),
       })
+      setPropertyID(await res.json())
+    } catch (error) {
+      console.log(error)
+    }
+
+    try {
+      const res = await fetch(
+        `http://localhost:8080/upload?propertyId=${propertyID()}`,
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${accessToken()}`,
+          },
+        }
+      )
+
+      console.log(await res)
     } catch (error) {
       console.log(error)
     }
@@ -39,7 +62,7 @@ const uploadImages: Component = () => {
       <Form
         of={uploadImagesForm}
         class="upload-images__form"
-        onSubmit={handleUpload}>
+        onSubmit={uploadImages}>
         <Field of={uploadImagesForm} name="upload">
           {field => (
             <input
@@ -53,7 +76,16 @@ const uploadImages: Component = () => {
             />
           )}
         </Field>
-        <button class="upload-images__submit">submit</button>
+        <div class="upload-images__actions">
+          <button
+            class="upload-images__button"
+            onclick={() => navigate("/new-listing")}>
+            back
+          </button>
+          <button class="upload-images__button" onsubmit={handleUpload}>
+            submit
+          </button>
+        </div>
       </Form>
     </div>
   )

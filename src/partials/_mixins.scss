@@ -1,3 +1,5 @@
+@use "./variables" as *;
+
 @mixin media-two-column {
   @media (min-width: 550px) {
     @content;
@@ -14,4 +16,34 @@
   @media (min-width: 768px) {
     @content;
   }
+}
+
+@mixin form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  margin: $padding-form;
+}
+
+@mixin form-field {
+  font-size: 1.8rem;
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+  padding: 1.2rem;
+  outline: none;
+}
+
+@mixin button-form {
+  color: white;
+  background-color: dodgerblue;
+  font-size: 1.8rem;
+  border: none;
+  border-radius: 8px;
+  padding: 1.2rem;
+  cursor: pointer;
+}
+
+@mixin error-form {
+  color: red;
+  margin-top: -16px;
 }
