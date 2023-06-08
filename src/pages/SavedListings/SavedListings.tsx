@@ -1,7 +1,7 @@
 import { Component, createSignal, createEffect, For } from "solid-js"
 import PropertyItem from "../../components/ListingItem/ListingItem"
 
-const SavedProperties: Component = () => {
+const SavedListings: Component = () => {
   const [properties, setProperties] = createSignal(null)
 
   createEffect(async () => {
@@ -23,4 +23,4 @@ const SavedProperties: Component = () => {
   )
 }
 
-export default SavedProperties
+export default SavedListings

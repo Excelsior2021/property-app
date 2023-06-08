@@ -3,7 +3,7 @@ import { Routes, Route } from "@solidjs/router"
 import Header from "./components/Header/Header"
 import Navbar from "./components/Navbar/Navbar"
 import Discover from "./pages/Discover/Discover"
-import SavedProperties from "./pages/SavedProperties/SavedProperties"
+import SavedListings from "./pages/SavedListings/SavedListings"
 import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
 import Profile from "./pages/Profile/Profile"
@@ -22,7 +22,7 @@ const App: Component = () => {
       <main class="main">
         <Routes>
           <Route path="/" component={() => <Discover />} />
-          <Route path="/saved" component={() => <SavedProperties />} />
+          <Route path="/saved" component={() => <SavedListings />} />
           <Route path="/login" component={() => <Login />} />
           <Route path="/register" component={() => <Register />} />
           <Route path="/profile" component={() => <Profile />} />
