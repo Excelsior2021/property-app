@@ -1,6 +1,6 @@
 @use "../../partials/mixins" as *;
 
-.property-item {
+.listing-item {
   position: relative;
   list-style: none;
   width: 100%;
@@ -13,21 +13,6 @@
 
   @include media-three-column {
     width: 31.5%;
-  }
-
-  &__img {
-    width: 100%;
-    height: 75vw;
-    object-fit: cover;
-    border-radius: 12px;
-
-    @include media-two-column {
-      height: 37.5vw;
-    }
-
-    @include media-three-column {
-      height: 25vw;
-    }
   }
 
   &__icon {

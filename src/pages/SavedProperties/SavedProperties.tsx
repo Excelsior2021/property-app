@@ -1,5 +1,5 @@
 import { Component, createSignal, createEffect, For } from "solid-js"
-import PropertyItem from "../../components/PropertyItem/PropertyItem"
+import PropertyItem from "../../components/ListingItem/ListingItem"
 
 const SavedProperties: Component = () => {
   const [properties, setProperties] = createSignal(null)

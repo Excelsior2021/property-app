@@ -1,4 +1,4 @@
-import { Component } from "solid-js"
+import { Component, createEffect } from "solid-js"
 import { Routes, Route } from "@solidjs/router"
 import Header from "./components/Header/Header"
 import Navbar from "./components/Navbar/Navbar"
@@ -7,12 +7,15 @@ import SavedProperties from "./pages/SavedProperties/SavedProperties"
 import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
 import Profile from "./pages/Profile/Profile"
-import Property from "./pages/Property/Property"
+import Listing from "./pages/Listing/Listing"
+import NewListing from "./pages/NewListing/NewListing"
+import MyListings from "./pages/MyListings/MyListings"
 import UploadImages from "./pages/UploadImages/UploadImages"
 import "./App.scss"
-import NewListing from "./pages/NewListing/NewListing"
 
 const App: Component = () => {
+  createEffect(() => {})
+
   return (
     <div class="app">
       <Header />
@@ -23,7 +26,8 @@ const App: Component = () => {
           <Route path="/login" component={() => <Login />} />
           <Route path="/register" component={() => <Register />} />
           <Route path="/profile" component={() => <Profile />} />
-          <Route path="/property/:id" component={() => <Property />} />
+          <Route path="/listing/:id" component={() => <Listing />} />
+          <Route path="/my-listings" component={() => <MyListings />} />
           <Route path="/new-listing" component={() => <NewListing />} />
           <Route path="/upload-images" component={() => <UploadImages />} />
         </Routes>

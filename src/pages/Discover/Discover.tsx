@@ -1,9 +1,9 @@
 import { Component } from "solid-js"
-import PropertyListings from "../../components/PropertyListings/PropertyListings"
+import Listings from "../../components/Listings/Listings"
 
 const Discover: Component = () => (
   <div class="discover">
-    <PropertyListings />
+    <Listings />
   </div>
 )
 

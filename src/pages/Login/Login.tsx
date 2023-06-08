@@ -30,6 +30,7 @@ const Login: Component = () => {
       })
 
       const data = await res.json()
+      console.log(data.accessToken)
       setAccessToken(data.accessToken)
       setLoggedIn(true)
       naviagte("/profile")

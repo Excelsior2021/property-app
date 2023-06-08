@@ -1,25 +1,38 @@
-import { Component } from "solid-js"
+import { Component, createEffect } from "solid-js"
 import { A } from "@solidjs/router"
-import { loggedIn } from "../../store/store"
+import { accessToken, loggedIn, setUserData } from "../../store/store"
 import { userData } from "../../store/store"
 import "./Profile.scss"
 
 const Profile: Component = () => {
+  createEffect(async () => {
+    const res = await fetch("http://localhost:8080/profile", {
+      headers: {
+        Authorization: `Bearer ${accessToken()}`,
+      },
+    })
+
+    const data = await res.json()
+    console.log(data)
+    setUserData(prev => ({
+      ...prev,
+      name: data.name,
+    }))
+  }, [])
+
   if (loggedIn()) {
     return (
       <div class="profile">
-        {/* <img
-          class="profile__image"
-          src="./icons/account.svg"
-          alt="profile image"
-        /> */}
         <h2 class="profile__greeting">
-          Hello {userData() ? userData().name : "john"},
+          Hello {userData().name ? userData().name : "user"},
         </h2>
         <p class="profile__text">What would you like to do?</p>
 
-        <A class="profile__link" href="../new-listing">
+        <A class="profile__link" href="/new-listing">
           new listing
+        </A>
+        <A class="profile__link" href="/my-listings">
+          my listings
         </A>
       </div>
     )

@@ -1,17 +1,18 @@
 import { Component } from "solid-js"
-import { propertyType } from "../../types/general"
+import { propertyDetailsType } from "../../types/general"
 import "./PropertyDetails.scss"
 
 interface PropertyDetailsProps {
-  property: propertyType
+  propertyDetails: propertyDetailsType
 }
 
 const PropertyDetails: Component<PropertyDetailsProps> = props => {
   return (
     <div class="property-details">
-      <p class="property-details__location">{props.property.location}</p>
-      <p class="property-details__type">{props.property.type}</p>
-      <p class="property-details__rate">Gh₵{props.property.rate} p/m</p>
+      <p class="property-details__location">{props.propertyDetails.location}</p>
+      <p class="property-details__price">
+        Gh₵{props.propertyDetails.price} p/m
+      </p>
     </div>
   )
 }
