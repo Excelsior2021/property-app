@@ -8,17 +8,18 @@ import {
   setAccessToken,
 } from "../../store/store"
 import { handleFormInput } from "../../utils/utils"
-import "./Register.scss"
+import { login, profile, signup } from "../../api/api-endpoints"
+import "./Signup.scss"
 
-type registerForm = {
+type signupForm = {
   name: string
   email: string
   password: string
 }
 
-const Register: Component = () => {
-  const registerForm = createForm<registerForm>()
-  const [registerFormData, setRegisterFormData] = createSignal({
+const Signup: Component = () => {
+  const signupForm = createForm<signupForm>()
+  const [signupFormData, setSignupFormData] = createSignal({
     name: "",
     email: "",
     password: "",
@@ -26,30 +27,30 @@ const Register: Component = () => {
   const navigate = useNavigate()
 
   const handleSubmit = async () => {
-    console.log(registerFormData())
+    console.log(signupFormData())
 
     try {
-      const res = await fetch("http://localhost:8080/api/auth/v1/signup", {
+      const res = await fetch(signup, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(registerFormData()),
+        body: JSON.stringify(signupFormData()),
       })
 
       if (res.status === 201) {
-        const res = await fetch("http://localhost:8080/api/auth/v1/login", {
+        const res = await fetch(login, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(registerFormData()),
+          body: JSON.stringify(signupFormData()),
         })
 
         const data = await res.json()
         setAccessToken(data.accessToken)
 
-        const userDataRes = await fetch("http://localhost:8080/profile", {
+        const userDataRes = await fetch(profile, {
           headers: {
             Authorization: `Bearer ${accessToken()}`,
           },
@@ -68,29 +69,29 @@ const Register: Component = () => {
   }
 
   return (
-    <div class="register">
-      <h1 class="page__heading">Register</h1>
-      <Form of={registerForm} class="register__form" onSubmit={handleSubmit}>
+    <div class="signup">
+      <h1 class="page__heading">Signup</h1>
+      <Form of={signupForm} class="signup__form" onSubmit={handleSubmit}>
         <Field
-          of={registerForm}
+          of={signupForm}
           name="name"
           validate={[required("a full name is required.")]}>
           {field => (
             <>
               <input
                 {...field.props}
-                class="register__input"
+                class="signup__input"
                 type="text"
                 placeholder="name"
-                onchange={event => handleFormInput(event, setRegisterFormData)}
+                onchange={event => handleFormInput(event, setSignupFormData)}
                 required
               />
-              {field.error && <p class="register__error">{field.error}</p>}
+              {field.error && <p class="signup__error">{field.error}</p>}
             </>
           )}
         </Field>
         <Field
-          of={registerForm}
+          of={signupForm}
           name="email"
           validate={[
             required("an email is required."),
@@ -100,35 +101,35 @@ const Register: Component = () => {
             <>
               <input
                 {...field.props}
-                class="register__input"
+                class="signup__input"
                 type="email"
                 placeholder="email"
-                onchange={event => handleFormInput(event, setRegisterFormData)}
+                onchange={event => handleFormInput(event, setSignupFormData)}
                 required
               />
-              {field.error && <p class="register__error">{field.error}</p>}
+              {field.error && <p class="signup__error">{field.error}</p>}
             </>
           )}
         </Field>
         <Field
-          of={registerForm}
+          of={signupForm}
           name="password"
           validate={[required("a password is required.")]}>
           {field => (
             <>
               <input
                 {...field.props}
-                class="register__input"
+                class="signup__input"
                 type="password"
                 placeholder="password"
-                onchange={event => handleFormInput(event, setRegisterFormData)}
+                onchange={event => handleFormInput(event, setSignupFormData)}
                 required
               />
-              {field.error && <p class="register__error">{field.error}</p>}
+              {field.error && <p class="signup__error">{field.error}</p>}
             </>
           )}
         </Field>
-        <button class="register__button">register</button>
+        <button class="signup__button">sign up</button>
       </Form>
 
       <p class="login__text">
@@ -138,4 +139,4 @@ const Register: Component = () => {
   )
 }
 
-export default Register
+export default Signup

@@ -1,23 +1,25 @@
-export const register = "http://localhost:8080/api/auth/v1/signup"
+export const signup = `${import.meta.env.VITE_SERVER_DOMAIN}/api/auth/v1/signup`
 
-export const login = "http://localhost:8080/api/auth/v1/login"
+export const login = `${import.meta.env.VITE_SERVER_DOMAIN}/api/auth/v1/login`
 
-export const profile = "http://localhost:8080/profile"
+export const profile = `${import.meta.env.VITE_SERVER_DOMAIN}/profile`
 
 export const uploadImage = (propertyId: string) =>
-  `http://localhost:8080/upload?propertyId=${propertyId}`
+  `${import.meta.env.VITE_SERVER_DOMAIN}/upload?propertyId=${propertyId}`
 
-export const listing = "http://localhost:8080/property"
+export const listing = `${import.meta.env.VITE_SERVER_DOMAIN}/property`
 
-export const getListings = "http://localhost:8080/api/homes/v1/listing"
+export const getListings = `${
+  import.meta.env.VITE_SERVER_DOMAIN
+}/api/homes/v1/listing`
 
-export const saveListing = "http://localhost:8080/like"
+export const saveListing = `${import.meta.env.VITE_SERVER_DOMAIN}/like`
 
-export const unsaveListing = "http://localhost:8080/unlike"
+export const unsaveListing = `${import.meta.env.VITE_SERVER_DOMAIN}/unlike`
 
-export const getSavedListing = "http://localhost:8080/likes"
+export const getSavedListings = `${import.meta.env.VITE_SERVER_DOMAIN}/likes`
 
 export const getListingDetails = (propertyId: string) =>
-  `http://localhost:8080/api/homes/v1/property/${propertyId}`
+  `${import.meta.env.VITE_SERVER_DOMAIN}/api/homes/v1/property/${propertyId}`
 
-export const deleteImage = "http://localhost:8080/image"
+export const deleteImage = `${import.meta.env.VITE_SERVER_DOMAIN}/image`

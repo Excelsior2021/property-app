@@ -88,7 +88,7 @@ const Login: Component = () => {
       </Form>
 
       <p class="login__text">
-        Don't have an account? <A href="/register">Register here</A>
+        Don't have an account? <A href="/sign-up">Sign up here</A>
       </p>
     </div>
   )

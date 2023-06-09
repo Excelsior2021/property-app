@@ -4,6 +4,7 @@ import { createForm, Field, Form } from "@modular-forms/solid"
 import { newListingFormData } from "../NewListing/NewListing"
 import { accessToken } from "../../store/store"
 import "./UploadImages.scss"
+import { listing, uploadImage } from "../../api/api-endpoints"
 
 type uploadImagesForm = {
   upload: File
@@ -11,7 +12,7 @@ type uploadImagesForm = {
 
 const uploadImages: Component = () => {
   const uploadImagesForm = createForm<uploadImagesForm>()
-  const [propertyID, setPropertyID] = createSignal(null)
+  const [propertyId, setPropertyId] = createSignal(null)
   const navigate = useNavigate()
   let fileRef
 
@@ -25,7 +26,7 @@ const uploadImages: Component = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:8080/property", {
+      const res = await fetch(listing, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,24 +34,22 @@ const uploadImages: Component = () => {
         },
         body: JSON.stringify(newListingFormData()),
       })
-      setPropertyID(await res.json())
+      const data = await res.json()
+      setPropertyId(data.propertyId)
     } catch (error) {
       console.log(error)
     }
 
     try {
-      const res = await fetch(
-        `http://localhost:8080/upload?propertyId=${propertyID()}`,
-        {
+      if (propertyId()) {
+        const res = await fetch(uploadImage(propertyId()!), {
           method: "POST",
           body: formData,
           headers: {
             Authorization: `Bearer ${accessToken()}`,
           },
-        }
-      )
-
-      console.log(await res)
+        })
+      }
     } catch (error) {
       console.log(error)
     }

@@ -1,13 +1,14 @@
 import { Component, createSignal, createEffect, For } from "solid-js"
 import ListingItem from "../../components/ListingItem/ListingItem"
 import { accessToken, loggedIn } from "../../store/store"
+import { getSavedListings } from "../../api/api-endpoints"
 
 const SavedListings: Component = () => {
   const [savedListings, setSavedListings] = createSignal([])
 
   if (loggedIn()) {
     createEffect(async () => {
-      const res = await fetch("http://localhost:8080/likes", {
+      const res = await fetch(getSavedListings, {
         headers: {
           Authorization: `Bearer ${accessToken()}`,
         },

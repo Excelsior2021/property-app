@@ -1,7 +1,7 @@
 @use "../../partials/variables" as *;
 @use "../../partials/mixins" as *;
 
-.register {
+.signup {
   @include media-tablet {
     max-width: 500px;
     margin: auto;

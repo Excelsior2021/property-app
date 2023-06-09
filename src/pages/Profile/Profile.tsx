@@ -2,11 +2,12 @@ import { Component, createEffect } from "solid-js"
 import { A } from "@solidjs/router"
 import { accessToken, loggedIn, setUserData } from "../../store/store"
 import { userData } from "../../store/store"
+import { profile } from "../../api/api-endpoints"
 import "./Profile.scss"
 
 const Profile: Component = () => {
   createEffect(async () => {
-    const res = await fetch("http://localhost:8080/profile", {
+    const res = await fetch(profile, {
       headers: {
         Authorization: `Bearer ${accessToken()}`,
       },

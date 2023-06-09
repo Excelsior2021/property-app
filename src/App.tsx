@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar"
 import Discover from "./pages/Discover/Discover"
 import SavedListings from "./pages/SavedListings/SavedListings"
 import Login from "./pages/Login/Login"
-import Register from "./pages/Register/Register"
+import Signup from "./pages/Signup/Signup"
 import Profile from "./pages/Profile/Profile"
 import Listing from "./pages/Listing/Listing"
 import NewListing from "./pages/NewListing/NewListing"
@@ -22,7 +22,7 @@ const App: Component = () => {
           <Route path="/" component={() => <Discover />} />
           <Route path="/saved" component={() => <SavedListings />} />
           <Route path="/login" component={() => <Login />} />
-          <Route path="/register" component={() => <Register />} />
+          <Route path="/sign-up" component={() => <Signup />} />
           <Route path="/profile" component={() => <Profile />} />
           <Route path="/listing/:id" component={() => <Listing />} />
           <Route path="/my-listings" component={() => <MyListings />} />
