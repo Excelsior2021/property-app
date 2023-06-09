@@ -24,7 +24,7 @@ const Header: Component = () => {
             />
           </Match>
           <Match when={location.pathname === "/saved"}>
-            <h1 class="header__heading">saved properties</h1>
+            <h1 class="header__heading">saved listings</h1>
           </Match>
           <Match when={location.pathname === "/login"}>
             <h1 class="header__heading">log in</h1>

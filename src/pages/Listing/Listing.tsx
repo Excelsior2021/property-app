@@ -2,6 +2,7 @@ import { Component, Show, createEffect, createSignal } from "solid-js"
 import { useParams } from "@solidjs/router"
 import { accessToken } from "../../store/store"
 import ImageContainer from "../../components/ImageContainer/ImageContainer"
+import { getListingDetails } from "../../api/api-endpoints"
 import "./Listing.scss"
 
 const Listing: Component = () => {
@@ -10,15 +11,12 @@ const Listing: Component = () => {
   const params = useParams()
 
   createEffect(async () => {
-    const res = await fetch(
-      `http://localhost:8080/api/homes/v1/property/${params.id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken()}`,
-        },
-      }
-    )
+    const res = await fetch(getListingDetails(params.id), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken()}`,
+      },
+    })
     const data = await res.json()
     console.log(data)
     setListingImages(data.images)

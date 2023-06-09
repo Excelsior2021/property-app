@@ -1,4 +1,4 @@
-import { Component, createEffect } from "solid-js"
+import { Component } from "solid-js"
 import { Routes, Route } from "@solidjs/router"
 import Header from "./components/Header/Header"
 import Navbar from "./components/Navbar/Navbar"
@@ -14,8 +14,6 @@ import UploadImages from "./pages/UploadImages/UploadImages"
 import "./App.scss"
 
 const App: Component = () => {
-  createEffect(() => {})
-
   return (
     <div class="app">
       <Header />

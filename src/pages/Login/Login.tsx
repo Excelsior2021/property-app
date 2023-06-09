@@ -3,6 +3,7 @@ import { A, useNavigate } from "@solidjs/router"
 import { createForm, Field, Form, required, email } from "@modular-forms/solid"
 import { setLoggedIn, accessToken, setAccessToken } from "../../store/store"
 import { handleFormInput } from "../../utils/utils"
+import { login } from "../../api/api-endpoints"
 import "./Login.scss"
 
 type LoginForm = {
@@ -20,7 +21,7 @@ const Login: Component = () => {
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch("http://localhost:8080/api/auth/v1/login", {
+      const res = await fetch(login, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

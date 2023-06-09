@@ -1,29 +1,59 @@
-import { Component } from "solid-js"
+import { Component, createSignal, createEffect } from "solid-js"
 import { useNavigate } from "@solidjs/router"
 import ImageContainer from "../ImageContainer/ImageContainer"
 import PropertyDetails from "../PropertyDetails/PropertyDetails"
-import { accessToken } from "../../store/store"
+import { accessToken, loggedIn } from "../../store/store"
 import { listingType } from "../../types/general"
 import "./ListingItem.scss"
+import { saveListing, unsaveListing } from "../../api/api-endpoints"
 
-interface PropertyItemProps {
+interface ListingItemProps {
   listing: listingType
+  saved: boolean
 }
 
-const PropertyItem: Component<PropertyItemProps> = props => {
+const ListingItem: Component<ListingItemProps> = props => {
   const navigate = useNavigate()
 
-  const handleSave = async (event, listing) => {
+  const handleClickOnSave = (event, listing) => {
     event.stopPropagation()
 
-    const date = new Date().toISOString()
-    console.log(listing)
-    console.log(date)
+    if (loggedIn()) {
+      if (props.saved) {
+        handleUnsave(listing)
+      } else {
+        handleSave(listing)
+      }
+    } else {
+      navigate("./login")
+    }
+  }
+
+  const handleUnsave = async listing => {
     const {
       property: { email, id },
     } = listing
 
-    const res = await fetch("http://localhost:8080/like", {
+    const res = await fetch(unsaveListing, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken()}`,
+      },
+      body: JSON.stringify({
+        userId: email,
+        propertyId: id,
+      }),
+    })
+  }
+
+  const handleSave = async listing => {
+    const date = new Date().toISOString()
+    const {
+      property: { email, id },
+    } = listing
+
+    const res = await fetch(saveListing, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,15 +65,6 @@ const PropertyItem: Component<PropertyItemProps> = props => {
         createdAt: date,
       }),
     })
-
-    console.log(await res)
-
-    const res2 = await fetch("http://localhost:8080/likes", {
-      headers: {
-        Authorization: `Bearer ${accessToken()}`,
-      },
-    })
-    console.log(await res2.json())
   }
 
   const handleNavigate = () => {
@@ -56,9 +77,9 @@ const PropertyItem: Component<PropertyItemProps> = props => {
 
       <img
         class="listing-item__icon"
-        src="./icons/saved.svg"
+        src={props.saved ? "./icons/saved-active.svg" : "./icons/saved.svg"}
         alt="save property"
-        onclick={event => handleSave(event, props.listing)}
+        onclick={event => handleClickOnSave(event, props.listing)}
       />
 
       <div class="listing-item__details">
@@ -70,4 +91,4 @@ const PropertyItem: Component<PropertyItemProps> = props => {
   )
 }
 
-export default PropertyItem
+export default ListingItem
