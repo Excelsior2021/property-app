@@ -50,6 +50,7 @@ const uploadImages: Component = () => {
           },
         })
       }
+      navigate("/my-listings")
     } catch (error) {
       console.log(error)
     }

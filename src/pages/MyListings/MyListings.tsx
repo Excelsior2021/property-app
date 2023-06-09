@@ -23,7 +23,6 @@ const MyListings: Component = () => {
 
   return (
     <div>
-      <h1 class="my-listings__title">my listings</h1>
       <For each={listings()}>
         {listing => <ListingItem listing={listing} />}
       </For>
