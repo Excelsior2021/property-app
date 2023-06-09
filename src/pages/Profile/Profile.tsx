@@ -14,7 +14,6 @@ const Profile: Component = () => {
     })
 
     const data = await res.json()
-    console.log(data)
     setUserData(prev => ({
       ...prev,
       name: data.name,

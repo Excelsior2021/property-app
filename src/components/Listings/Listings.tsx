@@ -1,22 +1,25 @@
-import { Component, createEffect, createSignal, For } from "solid-js"
+import { Component, For } from "solid-js"
 import ListingItem from "../ListingItem/ListingItem"
-import { getListings } from "../../api/api-endpoints"
+import { listingType } from "../../types/general"
+import { savedListingsIds } from "../../store/store"
 import "./Listings.scss"
 
-const Listings: Component = () => {
-  const [listings, setListings] = createSignal(null)
+interface listingsProps {
+  listings: listingType[]
+}
 
-  createEffect(async () => {
-    const res = await fetch(getListings)
-    setListings(await res.json())
-  }, [])
-
-  const handle = () => {}
-
+const Listings: Component<listingsProps> = props => {
   return (
     <ul class="listings">
-      <For each={listings()}>
-        {listing => <ListingItem listing={listing} />}
+      <For each={props.listings}>
+        {listing => {
+          return (
+            <ListingItem
+              listing={listing}
+              saved={savedListingsIds().includes(listing.property.id)}
+            />
+          )
+        }}
       </For>
     </ul>
   )

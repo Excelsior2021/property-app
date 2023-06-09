@@ -6,6 +6,7 @@ import { accessToken, loggedIn } from "../../store/store"
 import { listingType } from "../../types/general"
 import "./ListingItem.scss"
 import { saveListing, unsaveListing } from "../../api/api-endpoints"
+import { fetchSavedListingsIds } from "../../api/api"
 
 interface ListingItemProps {
   listing: listingType
@@ -45,6 +46,7 @@ const ListingItem: Component<ListingItemProps> = props => {
         propertyId: id,
       }),
     })
+    fetchSavedListingsIds()
   }
 
   const handleSave = async listing => {
@@ -65,6 +67,7 @@ const ListingItem: Component<ListingItemProps> = props => {
         createdAt: date,
       }),
     })
+    fetchSavedListingsIds()
   }
 
   const handleNavigate = () => {

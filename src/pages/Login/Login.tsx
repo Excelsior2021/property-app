@@ -5,6 +5,7 @@ import { setLoggedIn, accessToken, setAccessToken } from "../../store/store"
 import { handleFormInput } from "../../utils/utils"
 import { login } from "../../api/api-endpoints"
 import "./Login.scss"
+import { fetchSavedListingsIds } from "../../api/api"
 
 type LoginForm = {
   email: string
@@ -31,10 +32,10 @@ const Login: Component = () => {
       })
 
       const data = await res.json()
-      console.log(data.accessToken)
       setAccessToken(data.accessToken)
       setLoggedIn(true)
       naviagte("/profile")
+      fetchSavedListingsIds()
     } catch (error) {
       console.log(error)
     }

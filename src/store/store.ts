@@ -7,3 +7,5 @@ export const [userData, setUserData] = createSignal({
 })
 
 export const [accessToken, setAccessToken] = createSignal(null)
+
+export const [savedListingsIds, setSavedListingsIds] = createSignal([])

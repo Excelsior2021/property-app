@@ -3,9 +3,10 @@ import { accessToken } from "../../store/store"
 import ListingItem from "../../components/ListingItem/ListingItem"
 import { listing } from "../../api/api-endpoints"
 import "./MyListings.scss"
+import Listings from "../../components/Listings/Listings"
 
 const MyListings: Component = () => {
-  const [listings, setListings] = createSignal(null)
+  const [listings, setListings] = createSignal([])
 
   const fetchListings = async () => {
     const res = await fetch(listing, {
@@ -15,18 +16,15 @@ const MyListings: Component = () => {
     })
 
     const data = await res.json()
-    console.log(data)
     setListings(data)
   }
 
   fetchListings()
 
   return (
-    <div>
-      <For each={listings()}>
-        {listing => <ListingItem listing={listing} />}
-      </For>
-    </div>
+    <ul class="my-listings">
+      <Listings listings={listings()} />
+    </ul>
   )
 }
 

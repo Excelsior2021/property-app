@@ -1,7 +1,7 @@
 import { Component, createSignal, createEffect, For } from "solid-js"
-import ListingItem from "../../components/ListingItem/ListingItem"
 import { accessToken, loggedIn } from "../../store/store"
 import { getSavedListings } from "../../api/api-endpoints"
+import Listings from "../../components/Listings/Listings"
 
 const SavedListings: Component = () => {
   const [savedListings, setSavedListings] = createSignal([])
@@ -14,7 +14,6 @@ const SavedListings: Component = () => {
         },
       })
       const data = await res.json()
-      console.log(data)
       setSavedListings(data)
     })
 
@@ -22,9 +21,7 @@ const SavedListings: Component = () => {
       <div class="saved-listings">
         <h1 class="page__heading">Saved Properties</h1>
         <ul class="saved-listings__list">
-          <For each={savedListings()}>
-            {listing => <ListingItem listing={listing} saved={true} />}
-          </For>
+          <Listings listings={savedListings()} />
         </ul>
       </div>
     )
