@@ -11,9 +11,15 @@ import Listing from "./pages/Listing/Listing"
 import NewListing from "./pages/NewListing/NewListing"
 import MyListings from "./pages/MyListings/MyListings"
 import UploadImages from "./pages/UploadImages/UploadImages"
+import { setAccessToken, setLoggedIn } from "./store/store"
 import "./App.scss"
 
 const App: Component = () => {
+  const accessToken = localStorage.getItem("accessToken")
+  if (accessToken) {
+    setAccessToken(accessToken)
+    setLoggedIn(true)
+  }
   return (
     <div class="app">
       <Header />

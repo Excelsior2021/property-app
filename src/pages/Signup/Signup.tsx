@@ -48,6 +48,7 @@ const Signup: Component = () => {
         })
 
         const data = await res.json()
+        localStorage.setItem("accessToken", data.accessToken)
         setAccessToken(data.accessToken)
 
         const userDataRes = await fetch(profile, {

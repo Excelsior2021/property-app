@@ -6,6 +6,6 @@ export const [userData, setUserData] = createSignal({
   name: "",
 })
 
-export const [accessToken, setAccessToken] = createSignal(null)
+export const [accessToken, setAccessToken] = createSignal("")
 
 export const [savedListingsIds, setSavedListingsIds] = createSignal([])

@@ -32,6 +32,7 @@ const Login: Component = () => {
       })
 
       const data = await res.json()
+      localStorage.setItem("accessToken", data.accessToken)
       setAccessToken(data.accessToken)
       setLoggedIn(true)
       naviagte("/profile")
