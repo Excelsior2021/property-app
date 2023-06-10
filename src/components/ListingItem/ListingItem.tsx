@@ -11,6 +11,7 @@ import { fetchSavedListingsIds } from "../../api/api"
 interface ListingItemProps {
   listing: listingType
   saved: boolean
+  edit: boolean
 }
 
 const ListingItem: Component<ListingItemProps> = props => {
@@ -70,20 +71,41 @@ const ListingItem: Component<ListingItemProps> = props => {
     fetchSavedListingsIds()
   }
 
-  const handleNavigate = () => {
-    navigate(`/listing/${props.listing.property.id}`)
+  const handleNavigate = (page: string) => {
+    switch (page) {
+      case "details":
+        navigate(`/listing/${props.listing.property.id}`)
+        break
+      case "edit":
+        navigate(`/listing/${props.listing.property.id}`)
+        break
+      default:
+        null
+    }
   }
 
   return (
-    <li class="listing-item" onclick={handleNavigate}>
+    <li class="listing-item" onclick={() => handleNavigate("details")}>
       <ImageContainer images={props.listing.images} />
 
       <img
-        class="listing-item__icon"
+        class="listing-item__icon listing-item__icon--save"
         src={props.saved ? "./icons/saved-active.svg" : "./icons/saved.svg"}
-        alt="save property"
+        alt="save listing"
         onclick={event => handleClickOnSave(event, props.listing)}
       />
+
+      {props.edit && (
+        <div
+          class="listing-item__edit-container"
+          onclick={() => handleNavigate("edit")}>
+          <img
+            src="./icons/edit.svg"
+            alt="edit listing"
+            class="listing-item__icon listing-item__icon--edit"
+          />
+        </div>
+      )}
 
       <div class="listing-item__details">
         <PropertyDetails

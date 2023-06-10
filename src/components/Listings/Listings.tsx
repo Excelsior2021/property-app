@@ -6,6 +6,7 @@ import "./Listings.scss"
 
 interface listingsProps {
   listings: listingType[]
+  edit?: boolean
 }
 
 const Listings: Component<listingsProps> = props => {
@@ -17,6 +18,7 @@ const Listings: Component<listingsProps> = props => {
             <ListingItem
               listing={listing}
               saved={savedListingsIds().includes(listing.property.id)}
+              edit={props.edit ? true : false}
             />
           )
         }}

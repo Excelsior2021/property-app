@@ -1,10 +1,14 @@
 import { Component, createSignal } from "solid-js"
 import { useNavigate } from "@solidjs/router"
 import { createForm, Field, Form } from "@modular-forms/solid"
-import { newListingFormData } from "../NewListing/NewListing"
+import {
+  initialNewListingFormData,
+  newListingFormData,
+  setNewListingData,
+} from "../NewListing/NewListing"
 import { accessToken } from "../../store/store"
-import "./UploadImages.scss"
 import { listing, uploadImage } from "../../api/api-endpoints"
+import "./UploadImages.scss"
 
 type uploadImagesForm = {
   upload: File
@@ -50,6 +54,7 @@ const uploadImages: Component = () => {
           },
         })
       }
+      setNewListingData(initialNewListingFormData)
       navigate("/my-listings")
     } catch (error) {
       console.log(error)

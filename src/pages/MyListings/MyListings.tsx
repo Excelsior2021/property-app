@@ -23,7 +23,7 @@ const MyListings: Component = () => {
 
   return (
     <ul class="my-listings">
-      <Listings listings={listings()} />
+      <Listings listings={listings()} edit={true} />
     </ul>
   )
 }

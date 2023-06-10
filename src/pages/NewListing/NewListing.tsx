@@ -13,7 +13,7 @@ type newListingForm = {
   phone: number
 }
 
-const initialNewListingFormData = {
+export const initialNewListingFormData = {
   title: "",
   description: "",
   price: undefined,
