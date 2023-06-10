@@ -8,18 +8,21 @@ import Login from "./pages/Login/Login"
 import Signup from "./pages/Signup/Signup"
 import Profile from "./pages/Profile/Profile"
 import Listing from "./pages/Listing/Listing"
-import NewListing from "./pages/NewListing/NewListing"
+import NewListing from "./pages/ListingForm/ListingForm"
 import MyListings from "./pages/MyListings/MyListings"
 import UploadImages from "./pages/UploadImages/UploadImages"
 import { setAccessToken, setLoggedIn } from "./store/store"
 import "./App.scss"
+import { fetchSavedListingsIds } from "./api/api"
 
 const App: Component = () => {
   const accessToken = localStorage.getItem("accessToken")
   if (accessToken) {
     setAccessToken(accessToken)
     setLoggedIn(true)
+    fetchSavedListingsIds()
   }
+
   return (
     <div class="app">
       <Header />

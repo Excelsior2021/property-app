@@ -1,11 +1,10 @@
 import { Component, createSignal } from "solid-js"
 import { createForm, Field, Form, required } from "@modular-forms/solid"
 import { useNavigate } from "@solidjs/router"
-import { accessToken } from "../../store/store"
 import { handleFormInput } from "../../utils/utils"
-import "./NewListing.scss"
+import "./ListingForm.scss"
 
-type newListingForm = {
+type listingForm = {
   title: string
   description: string
   price: number
@@ -13,7 +12,7 @@ type newListingForm = {
   phone: number
 }
 
-export const initialNewListingFormData = {
+export const initialListingFormData = {
   title: "",
   description: "",
   price: undefined,
@@ -21,12 +20,12 @@ export const initialNewListingFormData = {
   phone: undefined,
 }
 
-export const [newListingFormData, setNewListingData] = createSignal(
-  initialNewListingFormData
+export const [listingFormData, setListingFormData] = createSignal(
+  initialListingFormData
 )
 
-const NewListing: Component = () => {
-  const newListingForm = createForm<newListingForm>()
+const ListingForm: Component = () => {
+  const listingForm = createForm<listingForm>()
 
   const naviagte = useNavigate()
 
@@ -35,112 +34,109 @@ const NewListing: Component = () => {
   }
 
   return (
-    <div class="new-listing">
+    <div class="listing-form">
       <h1 class="page__heading">New Listing</h1>
 
-      <Form
-        of={newListingForm}
-        class="new-listing__form"
-        onSubmit={handleSubmit}>
+      <Form of={listingForm} class="listing-form__form" onSubmit={handleSubmit}>
         <Field
-          of={newListingForm}
+          of={listingForm}
           name="title"
           validate={[required("please provide a title")]}>
           {field => (
             <>
               <input
                 {...field.props}
-                class="new-listing__input"
+                class="listing-form__input"
                 type="text"
                 placeholder="title"
-                value={newListingFormData().title}
-                onchange={event => handleFormInput(event, setNewListingData)}
+                value={listingFormData().title}
+                onchange={event => handleFormInput(event, setListingFormData)}
                 required
               />
-              {field.error && <p class="new-listing__error">{field.error}</p>}
+              {field.error && <p class="listing-form__error">{field.error}</p>}
             </>
           )}
         </Field>
         <Field
-          of={newListingForm}
+          of={listingForm}
           name="price"
           validate={[required("please provide a price")]}>
           {field => (
             <>
               <input
                 {...field.props}
-                class="new-listing__input"
+                class="listing-form__input"
                 type="number"
                 placeholder="price"
-                value={newListingFormData().price}
-                onchange={event => handleFormInput(event, setNewListingData)}
+                value={listingFormData().price}
+                onchange={event => handleFormInput(event, setListingFormData)}
                 required
               />
-              {field.error && <p class="new-listing__error">{field.error}</p>}
+              {field.error && <p class="listing-form__error">{field.error}</p>}
             </>
           )}
         </Field>
         <Field
-          of={newListingForm}
+          of={listingForm}
           name="description"
           validate={[required("please provide a description")]}>
           {field => (
             <>
               <textarea
                 {...field.props}
-                class="new-listing__input"
+                class="listing-form__input"
                 placeholder="description"
-                value={newListingFormData().description}
-                onchange={event => handleFormInput(event, setNewListingData)}
+                value={listingFormData().description}
+                onchange={event => handleFormInput(event, setListingFormData)}
                 required
                 cols="30"
                 rows="10"></textarea>
-              {field.error && <p class="new-listing__error">{field.error}</p>}
+              {field.error && <p class="listing-form__error">{field.error}</p>}
             </>
           )}
         </Field>
         <Field
-          of={newListingForm}
+          of={listingForm}
           name="location"
           validate={[required("please provide a location")]}>
           {field => (
             <>
               <input
                 {...field.props}
-                class="new-listing__input"
+                class="listing-form__input"
                 type="text"
                 placeholder="location"
-                value={newListingFormData().location}
-                onchange={event => handleFormInput(event, setNewListingData)}
+                value={listingFormData().location}
+                onchange={event => handleFormInput(event, setListingFormData)}
                 required
               />
-              {field.error && <p class="new-listing__error">{field.error}</p>}
+              {field.error && <p class="listing-form__error">{field.error}</p>}
             </>
           )}
         </Field>
         <Field
-          of={newListingForm}
+          of={listingForm}
           name="phone"
           validate={[required("please provide a contact number")]}>
           {field => (
             <>
               <input
                 {...field.props}
-                class="new-listing__input"
+                class="listing-form__input"
                 type="tel"
                 placeholder="contact number"
-                value={newListingFormData().phone}
-                onchange={event => handleFormInput(event, setNewListingData)}
+                value={listingFormData().phone}
+                onchange={event => handleFormInput(event, setListingFormData)}
                 required
               />
-              {field.error && <p class="new-listing__error">{field.error}</p>}
+              {field.error && <p class="listing-form__error">{field.error}</p>}
             </>
           )}
         </Field>
-        <button class="new-listing__button">next</button>
+        <button class="listing-form__button">next</button>
       </Form>
     </div>
   )
 }
 
-export default NewListing
+export default ListingForm

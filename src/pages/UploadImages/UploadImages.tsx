@@ -2,10 +2,10 @@ import { Component, createSignal } from "solid-js"
 import { useNavigate } from "@solidjs/router"
 import { createForm, Field, Form } from "@modular-forms/solid"
 import {
-  initialNewListingFormData,
-  newListingFormData,
-  setNewListingData,
-} from "../NewListing/NewListing"
+  initialListingFormData,
+  listingFormData,
+  setListingFormData,
+} from "../ListingForm/ListingForm"
 import { accessToken } from "../../store/store"
 import { listing, uploadImage } from "../../api/api-endpoints"
 import "./UploadImages.scss"
@@ -36,7 +36,7 @@ const uploadImages: Component = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken()}`,
         },
-        body: JSON.stringify(newListingFormData()),
+        body: JSON.stringify(listingFormData()),
       })
       const data = await res.json()
       setPropertyId(data.propertyId)
@@ -54,7 +54,7 @@ const uploadImages: Component = () => {
           },
         })
       }
-      setNewListingData(initialNewListingFormData)
+      setListingFormData(initialListingFormData)
       navigate("/my-listings")
     } catch (error) {
       console.log(error)

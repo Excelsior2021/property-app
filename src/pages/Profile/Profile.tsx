@@ -1,11 +1,18 @@
 import { Component, createEffect } from "solid-js"
-import { A } from "@solidjs/router"
-import { accessToken, loggedIn, setUserData } from "../../store/store"
+import { A, useNavigate } from "@solidjs/router"
+import {
+  accessToken,
+  loggedIn,
+  setLoggedIn,
+  setUserData,
+} from "../../store/store"
 import { userData } from "../../store/store"
 import { profile } from "../../api/api-endpoints"
 import "./Profile.scss"
 
 const Profile: Component = () => {
+  const navigate = useNavigate()
+
   createEffect(async () => {
     const res = await fetch(profile, {
       headers: {
@@ -19,6 +26,12 @@ const Profile: Component = () => {
       name: data.name,
     }))
   }, [])
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken")
+    setLoggedIn(false)
+    navigate("/")
+  }
 
   if (loggedIn()) {
     return (
@@ -34,8 +47,13 @@ const Profile: Component = () => {
         <A class="profile__link" href="/my-listings">
           my listings
         </A>
+        <button class="profile__button" onclick={handleLogout}>
+          logout
+        </button>
       </div>
     )
+  } else {
+    return <p>Please login to view your profile.</p>
   }
 }
 
