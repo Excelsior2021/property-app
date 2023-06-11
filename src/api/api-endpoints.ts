@@ -13,9 +13,9 @@ export const getListings = `${
   import.meta.env.VITE_SERVER_DOMAIN
 }/api/homes/v1/listing`
 
-export const saveListing = `${import.meta.env.VITE_SERVER_DOMAIN}/like`
+export const saveListing = `${import.meta.env.VITE_SERVER_DOMAIN}/save`
 
-export const unsaveListing = `${import.meta.env.VITE_SERVER_DOMAIN}/unlike`
+export const unsaveListing = `${import.meta.env.VITE_SERVER_DOMAIN}/unsave`
 
 export const getSavedListings = `${import.meta.env.VITE_SERVER_DOMAIN}/likes`
 

@@ -35,8 +35,6 @@ const ListingForm: Component = () => {
 
   return (
     <div class="listing-form">
-      <h1 class="page__heading">New Listing</h1>
-
       <Form of={listingForm} class="listing-form__form" onSubmit={handleSubmit}>
         <Field
           of={listingForm}

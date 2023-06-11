@@ -8,7 +8,8 @@ import Login from "./pages/Login/Login"
 import Signup from "./pages/Signup/Signup"
 import Profile from "./pages/Profile/Profile"
 import Listing from "./pages/Listing/Listing"
-import NewListing from "./pages/ListingForm/ListingForm"
+import NewListing from "./pages/NewListing/NewListing"
+import EditListing from "./pages/EditListing/EditListing"
 import MyListings from "./pages/MyListings/MyListings"
 import UploadImages from "./pages/UploadImages/UploadImages"
 import { setAccessToken, setLoggedIn } from "./store/store"
@@ -36,6 +37,7 @@ const App: Component = () => {
           <Route path="/listing/:id" component={() => <Listing />} />
           <Route path="/my-listings" component={() => <MyListings />} />
           <Route path="/new-listing" component={() => <NewListing />} />
+          <Route path="/edit-listing" component={() => <EditListing />} />
           <Route path="/upload-images" component={() => <UploadImages />} />
         </Routes>
       </main>

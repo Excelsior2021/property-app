@@ -5,7 +5,7 @@ import {
   initialListingFormData,
   listingFormData,
   setListingFormData,
-} from "../ListingForm/ListingForm"
+} from "../../components/ListingForm/ListingForm"
 import { accessToken } from "../../store/store"
 import { listing, uploadImage } from "../../api/api-endpoints"
 import "./UploadImages.scss"
