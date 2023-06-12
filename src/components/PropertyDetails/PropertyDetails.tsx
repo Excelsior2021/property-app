@@ -1,9 +1,9 @@
 import { Component } from "solid-js"
-import { propertyDetailsType } from "../../types/general"
+import { listingDetailsType } from "../../types/general"
 import "./PropertyDetails.scss"
 
 interface PropertyDetailsProps {
-  propertyDetails: propertyDetailsType
+  propertyDetails: listingDetailsType
 }
 
 const PropertyDetails: Component<PropertyDetailsProps> = props => {

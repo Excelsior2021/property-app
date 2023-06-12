@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js"
+import { Accessor, Setter, createSignal } from "solid-js"
 
 export const [loggedIn, setLoggedIn] = createSignal(false)
 

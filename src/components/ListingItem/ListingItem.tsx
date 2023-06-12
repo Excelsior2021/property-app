@@ -71,13 +71,17 @@ const ListingItem: Component<ListingItemProps> = props => {
     fetchSavedListingsIds()
   }
 
-  const handleNavigate = (page: string) => {
+  const handleNavigate = (event: Event, page: string) => {
+    event.stopPropagation()
+
     switch (page) {
       case "details":
         navigate(`/listing/${props.listing.property.id}`)
         break
       case "edit":
-        navigate(`/listing/${props.listing.property.id}`)
+        navigate(`/edit-listing/${props.listing.property.id}`, {
+          state: { listing: props.listing },
+        })
         break
       default:
         null
@@ -85,7 +89,9 @@ const ListingItem: Component<ListingItemProps> = props => {
   }
 
   return (
-    <li class="listing-item" onclick={() => handleNavigate("details")}>
+    <li
+      class="listing-item"
+      onclick={event => handleNavigate(event, "details")}>
       <ImageContainer images={props.listing.images} />
 
       <img
@@ -98,7 +104,7 @@ const ListingItem: Component<ListingItemProps> = props => {
       {props.edit && (
         <div
           class="listing-item__edit-container"
-          onclick={() => handleNavigate("edit")}>
+          onclick={event => handleNavigate(event, "edit")}>
           <img
             src="./icons/edit.svg"
             alt="edit listing"

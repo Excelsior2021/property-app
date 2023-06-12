@@ -1,6 +1,13 @@
 import { Component, createSignal } from "solid-js"
 import { A, useNavigate } from "@solidjs/router"
-import { createForm, Field, Form, required, email } from "@modular-forms/solid"
+import {
+  createForm,
+  Field,
+  Form,
+  required,
+  email,
+  custom,
+} from "@modular-forms/solid"
 import {
   setLoggedIn,
   setUserData,
@@ -15,6 +22,7 @@ type signupForm = {
   name: string
   email: string
   password: string
+  retypePassword: string
 }
 
 const Signup: Component = () => {
@@ -24,6 +32,8 @@ const Signup: Component = () => {
     email: "",
     password: "",
   })
+  const [retypePassword, setRetypePassword] = createSignal("")
+  const [serverError, setServerError] = createSignal(false)
   const navigate = useNavigate()
 
   const handleSubmit = async () => {
@@ -38,31 +48,38 @@ const Signup: Component = () => {
         body: JSON.stringify(signupFormData()),
       })
 
-      if (res.status === 201) {
-        const res = await fetch(login, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(signupFormData()),
-        })
+      switch (res.status) {
+        case 201:
+          const res = await fetch(login, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(signupFormData()),
+          })
 
-        const data = await res.json()
-        localStorage.setItem("accessToken", data.accessToken)
-        setAccessToken(data.accessToken)
+          const data = await res.json()
+          localStorage.setItem("accessToken", data.accessToken)
+          setAccessToken(data.accessToken)
 
-        const userDataRes = await fetch(profile, {
-          headers: {
-            Authorization: `Bearer ${accessToken()}`,
-          },
-        })
+          const userDataRes = await fetch(profile, {
+            headers: {
+              Authorization: `Bearer ${accessToken()}`,
+            },
+          })
 
-        const userData = await userDataRes.json()
+          const userData = await userDataRes.json()
 
-        setLoggedIn(true)
-        setUserData(userData)
+          setLoggedIn(true)
+          setUserData(userData)
 
-        navigate("/profile")
+          navigate("/profile")
+          break
+        case 409:
+          setServerError(true)
+          break
+        default:
+          break
       }
     } catch (error) {
       console.log(error)
@@ -84,7 +101,9 @@ const Signup: Component = () => {
                 class="signup__input"
                 type="text"
                 placeholder="name"
-                onchange={event => handleFormInput(event, setSignupFormData)}
+                onchange={event =>
+                  handleFormInput(event, setSignupFormData, setServerError)
+                }
                 required
               />
               {field.error && <p class="signup__error">{field.error}</p>}
@@ -105,7 +124,9 @@ const Signup: Component = () => {
                 class="signup__input"
                 type="email"
                 placeholder="email"
-                onchange={event => handleFormInput(event, setSignupFormData)}
+                onchange={event =>
+                  handleFormInput(event, setSignupFormData, setServerError)
+                }
                 required
               />
               {field.error && <p class="signup__error">{field.error}</p>}
@@ -123,7 +144,33 @@ const Signup: Component = () => {
                 class="signup__input"
                 type="password"
                 placeholder="password"
-                onchange={event => handleFormInput(event, setSignupFormData)}
+                onchange={event =>
+                  handleFormInput(event, setSignupFormData, setServerError)
+                }
+                required
+              />
+              {field.error && <p class="signup__error">{field.error}</p>}
+            </>
+          )}
+        </Field>
+        <Field
+          of={signupForm}
+          name="retypePassword"
+          validate={[
+            custom(
+              () => signupFormData().password === retypePassword(),
+              "passwords do not match."
+            ),
+            required("please retype your password."),
+          ]}>
+          {field => (
+            <>
+              <input
+                {...field.props}
+                class="signup__input"
+                type="password"
+                placeholder="retype password"
+                onchange={event => setRetypePassword(event.currentTarget.value)}
                 required
               />
               {field.error && <p class="signup__error">{field.error}</p>}
@@ -133,7 +180,15 @@ const Signup: Component = () => {
         <button class="signup__button">sign up</button>
       </Form>
 
-      <p class="login__text">
+      <div class="signup__server-errors">
+        {serverError() && (
+          <p class="signup__server-error signup__error">
+            Email address already registered.
+          </p>
+        )}
+      </div>
+
+      <p class="signup__text">
         Already have an account? <A href="/login">Log in here</A>
       </p>
     </div>

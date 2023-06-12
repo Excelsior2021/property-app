@@ -1,3 +1,5 @@
+import { Setter } from "solid-js"
+
 export interface imageObjType {
   id: string
   path: string
@@ -5,8 +7,8 @@ export interface imageObjType {
 }
 
 export interface propertyType {
-  id: number
-  propertyDetails: propertyDetailsType
+  id: string
+  propertyDetails: listingDetailsType
 }
 
 export interface listingType {
@@ -15,10 +17,18 @@ export interface listingType {
   email: string
 }
 
-export interface propertyDetailsType {
+export interface listingDetailsType {
   title: string
   price: number
   description: string
   location: string
   phone: string
 }
+
+export type handleFormInputType = (
+  event: Event & {
+    currentTarget: HTMLInputElement
+  },
+  setter: Setter<{}>,
+  setServerError: Setter<boolean>
+) => void

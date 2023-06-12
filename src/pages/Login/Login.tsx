@@ -18,6 +18,7 @@ const Login: Component = () => {
     email: "",
     password: "",
   })
+  const [serverError, setServerError] = createSignal(false)
   const naviagte = useNavigate()
 
   const handleSubmit = async () => {
@@ -31,12 +32,21 @@ const Login: Component = () => {
         body: JSON.stringify(loginFormData()),
       })
 
-      const data = await res.json()
-      localStorage.setItem("accessToken", data.accessToken)
-      setAccessToken(data.accessToken)
-      setLoggedIn(true)
-      naviagte("/profile")
-      fetchSavedListingsIds()
+      switch (res.status) {
+        case 200:
+          const data = await res.json()
+          localStorage.setItem("accessToken", data.accessToken)
+          setAccessToken(data.accessToken)
+          setLoggedIn(true)
+          naviagte("/profile")
+          fetchSavedListingsIds()
+          break
+        case 400:
+          setServerError(true)
+          break
+        default:
+          break
+      }
     } catch (error) {
       console.log(error)
     }
@@ -61,7 +71,9 @@ const Login: Component = () => {
                 class="login__input"
                 type="email"
                 placeholder="email"
-                onchange={event => handleFormInput(event, setLoginFormData)}
+                onchange={event =>
+                  handleFormInput(event, setLoginFormData, setServerError)
+                }
                 required
               />
               {field.error && <p class="login__error">{field.error}</p>}
@@ -79,7 +91,9 @@ const Login: Component = () => {
                 class="login__input"
                 type="password"
                 placeholder="password"
-                onchange={event => handleFormInput(event, setLoginFormData)}
+                onchange={event =>
+                  handleFormInput(event, setLoginFormData, setServerError)
+                }
                 required
               />
               {field.error && <p class="login__error">{field.error}</p>}
@@ -88,6 +102,14 @@ const Login: Component = () => {
         </Field>
         <button class="login__button login__button--login">log in</button>
       </Form>
+
+      <div class="login__server-errors">
+        {serverError() && (
+          <p class="login__server-error login__error">
+            Email or password incorrect. Please check and try again.
+          </p>
+        )}
+      </div>
 
       <p class="login__text">
         Don't have an account? <A href="/sign-up">Sign up here</A>

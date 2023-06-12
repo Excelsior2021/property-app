@@ -23,4 +23,8 @@
   &__error {
     @include error-form;
   }
+
+  &__server-error {
+    margin: $margin-server-error;
+  }
 }

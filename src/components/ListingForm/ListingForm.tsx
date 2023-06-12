@@ -2,7 +2,12 @@ import { Component, createSignal } from "solid-js"
 import { createForm, Field, Form, required } from "@modular-forms/solid"
 import { useNavigate } from "@solidjs/router"
 import { handleFormInput } from "../../utils/utils"
+import { listingDetailsType } from "../../types/general"
 import "./ListingForm.scss"
+
+interface listingFormProps {
+  listingDetails: listingDetailsType
+}
 
 type listingForm = {
   title: string
@@ -24,9 +29,9 @@ export const [listingFormData, setListingFormData] = createSignal(
   initialListingFormData
 )
 
-const ListingForm: Component = () => {
+const ListingForm: Component<listingFormProps> = props => {
   const listingForm = createForm<listingForm>()
-
+  const [serverError, setServerError] = createSignal(false)
   const naviagte = useNavigate()
 
   const handleSubmit = async () => {
@@ -47,8 +52,10 @@ const ListingForm: Component = () => {
                 class="listing-form__input"
                 type="text"
                 placeholder="title"
-                value={listingFormData().title}
-                onchange={event => handleFormInput(event, setListingFormData)}
+                value={props.listingDetails.title}
+                onchange={event =>
+                  handleFormInput(event, setListingFormData, setServerError)
+                }
                 required
               />
               {field.error && <p class="listing-form__error">{field.error}</p>}
@@ -66,8 +73,10 @@ const ListingForm: Component = () => {
                 class="listing-form__input"
                 type="number"
                 placeholder="price"
-                value={listingFormData().price}
-                onchange={event => handleFormInput(event, setListingFormData)}
+                value={props.listingDetails.price}
+                onchange={event =>
+                  handleFormInput(event, setListingFormData, setServerError)
+                }
                 required
               />
               {field.error && <p class="listing-form__error">{field.error}</p>}
@@ -84,8 +93,10 @@ const ListingForm: Component = () => {
                 {...field.props}
                 class="listing-form__input"
                 placeholder="description"
-                value={listingFormData().description}
-                onchange={event => handleFormInput(event, setListingFormData)}
+                value={props.listingDetails.description}
+                onchange={event =>
+                  handleFormInput(event, setListingFormData, setServerError)
+                }
                 required
                 cols="30"
                 rows="10"></textarea>
@@ -104,8 +115,10 @@ const ListingForm: Component = () => {
                 class="listing-form__input"
                 type="text"
                 placeholder="location"
-                value={listingFormData().location}
-                onchange={event => handleFormInput(event, setListingFormData)}
+                value={props.listingDetails.location}
+                onchange={event =>
+                  handleFormInput(event, setListingFormData, setServerError)
+                }
                 required
               />
               {field.error && <p class="listing-form__error">{field.error}</p>}
@@ -123,8 +136,10 @@ const ListingForm: Component = () => {
                 class="listing-form__input"
                 type="tel"
                 placeholder="contact number"
-                value={listingFormData().phone}
-                onchange={event => handleFormInput(event, setListingFormData)}
+                value={props.listingDetails.phone}
+                onchange={event =>
+                  handleFormInput(event, setListingFormData, setServerError)
+                }
                 required
               />
               {field.error && <p class="listing-form__error">{field.error}</p>}

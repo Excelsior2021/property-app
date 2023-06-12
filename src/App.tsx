@@ -37,7 +37,7 @@ const App: Component = () => {
           <Route path="/listing/:id" component={() => <Listing />} />
           <Route path="/my-listings" component={() => <MyListings />} />
           <Route path="/new-listing" component={() => <NewListing />} />
-          <Route path="/edit-listing" component={() => <EditListing />} />
+          <Route path="/edit-listing/:id" component={() => <EditListing />} />
           <Route path="/upload-images" component={() => <UploadImages />} />
         </Routes>
       </main>
