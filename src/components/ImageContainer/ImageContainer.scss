@@ -21,7 +21,6 @@
 
   &__img {
     display: block;
-    flex-shrink: 0;
     width: 100%;
     aspect-ratio: 10/9; //No IE support
     object-fit: cover;

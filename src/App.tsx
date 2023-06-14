@@ -13,8 +13,9 @@ import EditListing from "./pages/EditListing/EditListing"
 import MyListings from "./pages/MyListings/MyListings"
 import UploadImages from "./pages/UploadImages/UploadImages"
 import { setAccessToken, setLoggedIn } from "./store/store"
-import "./App.scss"
 import { fetchSavedListingsIds } from "./api/api"
+import ImageItem from "./components/ImageItem/ImageItem"
+import "./App.scss"
 
 const App: Component = () => {
   const accessToken = localStorage.getItem("accessToken")
@@ -39,6 +40,7 @@ const App: Component = () => {
           <Route path="/new-listing" component={() => <NewListing />} />
           <Route path="/edit-listing/:id" component={() => <EditListing />} />
           <Route path="/upload-images" component={() => <UploadImages />} />
+          <Route path="/image" component={() => <ImageItem />} />
         </Routes>
       </main>
       <Navbar />

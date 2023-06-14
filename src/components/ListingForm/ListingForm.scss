@@ -17,4 +17,17 @@
   &__error {
     @include error-form;
   }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__button {
+    margin: 8px 0;
+
+    &--save {
+      background-color: rgb(0, 176, 0);
+    }
+  }
 }

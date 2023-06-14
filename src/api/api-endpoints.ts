@@ -9,6 +9,9 @@ export const uploadImage = (propertyId: string) =>
 
 export const listing = `${import.meta.env.VITE_SERVER_DOMAIN}/property`
 
+export const editListing = (propertyId: string) =>
+  `${import.meta.env.VITE_SERVER_DOMAIN}/property?propertyId=${propertyId}`
+
 export const getListings = `${
   import.meta.env.VITE_SERVER_DOMAIN
 }/api/homes/v1/listing`

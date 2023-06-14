@@ -1,12 +1,15 @@
-import { Component, createSignal } from "solid-js"
+import { Component, createEffect, createSignal } from "solid-js"
 import { createForm, Field, Form, required } from "@modular-forms/solid"
-import { useNavigate } from "@solidjs/router"
+import { useNavigate, useParams } from "@solidjs/router"
 import { handleFormInput } from "../../utils/utils"
 import { listingDetailsType } from "../../types/general"
+import { editListing } from "../../api/api-endpoints"
+import { accessToken } from "../../store/store"
 import "./ListingForm.scss"
 
 interface listingFormProps {
   listingDetails: listingDetailsType
+  page: string
 }
 
 type listingForm = {
@@ -14,15 +17,15 @@ type listingForm = {
   description: string
   price: number
   location: string
-  phone: number
+  phone: string
 }
 
 export const initialListingFormData = {
   title: "",
   description: "",
-  price: undefined,
+  price: NaN,
   location: "",
-  phone: undefined,
+  phone: "",
 }
 
 export const [listingFormData, setListingFormData] = createSignal(
@@ -33,14 +36,50 @@ const ListingForm: Component<listingFormProps> = props => {
   const listingForm = createForm<listingForm>()
   const [serverError, setServerError] = createSignal(false)
   const naviagte = useNavigate()
+  const params = useParams()
 
-  const handleSubmit = async () => {
-    naviagte("/upload-images")
+  createEffect(() => {
+    if (props.page === "edit") {
+      for (const property in initialListingFormData) {
+        setListingFormData(prevState => ({
+          ...prevState,
+          [property]: props.listingDetails[property],
+        }))
+      }
+    }
+  })
+
+  const handleFormSubmission = () => {
+    if (props.page === "new") {
+      naviagte("/upload-images")
+    }
+    if (props.page === "edit") {
+      handleSave()
+    }
+  }
+
+  const handleSave = async () => {
+    try {
+      const res = await fetch(editListing(params.id), {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken()}`,
+        },
+        body: JSON.stringify(listingFormData()),
+      })
+      naviagte("/my-listings")
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
     <div class="listing-form">
-      <Form of={listingForm} class="listing-form__form" onSubmit={handleSubmit}>
+      <Form
+        of={listingForm}
+        class="listing-form__form"
+        onSubmit={handleFormSubmission}>
         <Field
           of={listingForm}
           name="title"
@@ -146,7 +185,21 @@ const ListingForm: Component<listingFormProps> = props => {
             </>
           )}
         </Field>
-        <button class="listing-form__button">next</button>
+        <div class="listing-form__actions">
+          {props.page === "new" && (
+            <button class="listing-form__button">next</button>
+          )}
+          {props.page === "edit" && (
+            <>
+              <button class="listing-form__button">manage images</button>
+              <button
+                class="listing-form__button listing-form__button--save"
+                onclick={handleSave}>
+                save changes
+              </button>
+            </>
+          )}
+        </div>
       </Form>
     </div>
   )

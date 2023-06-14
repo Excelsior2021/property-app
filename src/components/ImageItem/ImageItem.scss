@@ -1,0 +1,39 @@
+.image-item {
+  display: flex;
+  border: 2px solid grey;
+  border-radius: 8px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0;
+  height: 100px;
+
+  &__img-container {
+    display: flex;
+    align-items: center;
+    flex-basis: 50%;
+    height: inherit;
+    border-right: 2px solid grey;
+    border-radius: inherit;
+    background-color: black;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: inherit;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+
+  &__actions {
+    flex-basis: 2;
+  }
+
+  &__icon {
+    display: block;
+    width: 30px;
+    margin-right: 10px;
+    filter: invert(16%) sepia(81%) saturate(7233%) hue-rotate(358deg)
+      brightness(107%) contrast(118%);
+  }
+}

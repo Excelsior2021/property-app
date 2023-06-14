@@ -1,4 +1,4 @@
-import { Component, createSignal } from "solid-js"
+import { Component, createSignal, createEffect } from "solid-js"
 import { useNavigate } from "@solidjs/router"
 import { createForm, Field, Form } from "@modular-forms/solid"
 import {
@@ -8,6 +8,7 @@ import {
 } from "../../components/ListingForm/ListingForm"
 import { accessToken } from "../../store/store"
 import { listing, uploadImage } from "../../api/api-endpoints"
+import ImageItem from "../../components/ImageItem/ImageItem"
 import "./UploadImages.scss"
 
 type uploadImagesForm = {
@@ -17,12 +18,19 @@ type uploadImagesForm = {
 const uploadImages: Component = () => {
   const uploadImagesForm = createForm<uploadImagesForm>()
   const [propertyId, setPropertyId] = createSignal(null)
+  const [uploadedImages, setUploadedImages] = createSignal([])
   const navigate = useNavigate()
   let fileRef
 
-  const uploadImages = () => handleUpload(fileRef.files)
+  const handleUpload = () => {
+    for (const file of fileRef.files) {
+      setUploadedImages(prevState => [...prevState, file])
+    }
+  }
 
-  const handleUpload = async files => {
+  const uploadImages = () => handleSubmit(fileRef.files)
+
+  const handleSubmit = async files => {
     const formData = new FormData()
 
     for (const file of files) {
@@ -78,16 +86,22 @@ const uploadImages: Component = () => {
               accept="image/jpeg, image/png, image/jpg"
               multiple
               ref={fileRef}
+              onchange={handleUpload}
             />
           )}
         </Field>
+        <div>
+          <For each={uploadedImages()}>
+            {image => <ImageItem image={image} />}
+          </For>
+        </div>
         <div class="upload-images__actions">
           <button
             class="upload-images__button"
             onclick={() => navigate("/new-listing")}>
             back
           </button>
-          <button class="upload-images__button" onsubmit={handleUpload}>
+          <button class="upload-images__button" onsubmit={handleSubmit}>
             submit
           </button>
         </div>

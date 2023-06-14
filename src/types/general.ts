@@ -27,7 +27,7 @@ export interface listingDetailsType {
 
 export type handleFormInputType = (
   event: Event & {
-    currentTarget: HTMLInputElement
+    currentTarget: HTMLInputElement | HTMLTextAreaElement
   },
   setter: Setter<{}>,
   setServerError: Setter<boolean>

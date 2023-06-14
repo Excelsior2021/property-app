@@ -14,7 +14,7 @@ const Header: Component = () => {
 
         <Switch>
           <Match when={location.pathname === "/"}>
-            <img class="header__icon" src="./icons/discover.svg" alt="search" />
+            <img class="header__icon" src="/icons/discover.svg" alt="search" />
             <input
               class="header__search"
               type="text"
