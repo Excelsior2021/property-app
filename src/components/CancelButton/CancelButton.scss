@@ -1,0 +1,7 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+
+.cancel-button {
+  @include button-form;
+  background-color: red;
+}

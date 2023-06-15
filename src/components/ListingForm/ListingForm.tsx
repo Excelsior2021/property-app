@@ -6,6 +6,7 @@ import { listingDetailsType } from "../../types/general"
 import { editListing } from "../../api/api-endpoints"
 import { accessToken } from "../../store/store"
 import "./ListingForm.scss"
+import CancelButton from "../CancelButton/CancelButton"
 
 interface listingFormProps {
   listingDetails: listingDetailsType
@@ -35,8 +36,10 @@ export const [listingFormData, setListingFormData] = createSignal(
 const ListingForm: Component<listingFormProps> = props => {
   const listingForm = createForm<listingForm>()
   const [serverError, setServerError] = createSignal(false)
-  const naviagte = useNavigate()
+  const navigate = useNavigate()
   const params = useParams()
+  const subActionsClass = "listing-form__actions--sub"
+  const cancelButtonClass = "listing-form__button--cancel"
 
   createEffect(() => {
     if (props.page === "edit") {
@@ -50,8 +53,9 @@ const ListingForm: Component<listingFormProps> = props => {
   })
 
   const handleFormSubmission = () => {
+    console.log("submitted")
     if (props.page === "new") {
-      naviagte("/upload-images")
+      navigate("/upload-images")
     }
     if (props.page === "edit") {
       handleSave()
@@ -68,10 +72,25 @@ const ListingForm: Component<listingFormProps> = props => {
         },
         body: JSON.stringify(listingFormData()),
       })
-      naviagte("/my-listings")
+      navigate("/my-listings")
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const handleCancel = () => {
+    if (props.page === "new") {
+      setListingFormData(initialListingFormData)
+      navigate("/profile")
+    }
+    if (props.page === "edit") {
+      setListingFormData(initialListingFormData)
+      navigate("/my-listings")
+    }
+  }
+
+  const handleManageImages = () => {
+    navigate("/")
   }
 
   return (
@@ -187,16 +206,32 @@ const ListingForm: Component<listingFormProps> = props => {
         </Field>
         <div class="listing-form__actions">
           {props.page === "new" && (
-            <button class="listing-form__button">next</button>
+            <div class={subActionsClass}>
+              <button class="listing-form__button">next</button>
+              <CancelButton
+                handleCancel={handleCancel}
+                styles={cancelButtonClass}
+              />
+            </div>
           )}
           {props.page === "edit" && (
             <>
-              <button class="listing-form__button">manage images</button>
               <button
-                class="listing-form__button listing-form__button--save"
-                onclick={handleSave}>
-                save changes
+                class="listing-form__button listing-form__button--manage"
+                onclick={handleManageImages}>
+                manage images
               </button>
+              <div class={subActionsClass}>
+                <button
+                  class="listing-form__button listing-form__button--save"
+                  onclick={handleSave}>
+                  save changes
+                </button>
+                <CancelButton
+                  handleCancel={handleCancel}
+                  styles={cancelButtonClass}
+                />
+              </div>
             </>
           )}
         </div>

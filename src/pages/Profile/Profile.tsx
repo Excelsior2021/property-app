@@ -8,6 +8,10 @@ import {
 } from "../../store/store"
 import { userData } from "../../store/store"
 import { profile } from "../../api/api-endpoints"
+import {
+  initialListingFormData,
+  setListingFormData,
+} from "../../components/ListingForm/ListingForm"
 import "./Profile.scss"
 
 const Profile: Component = () => {
@@ -41,7 +45,10 @@ const Profile: Component = () => {
         </h2>
         <p class="profile__text">What would you like to do?</p>
 
-        <A class="profile__link" href="/new-listing">
+        <A
+          class="profile__link"
+          href="/new-listing"
+          onclick={() => setListingFormData(initialListingFormData)}>
           new listing
         </A>
         <A class="profile__link" href="/my-listings">

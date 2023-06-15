@@ -10,24 +10,31 @@
     @include form-field;
   }
 
+  &__actions {
+    &--sub {
+      display: flex;
+      column-gap: 16px;
+    }
+  }
+
   &__button {
     @include button-form;
-  }
+    flex-basis: 50%;
 
-  &__error {
-    @include error-form;
-  }
-
-  &__actions {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__button {
-    margin: 8px 0;
+    &--manage {
+      width: 100%;
+    }
 
     &--save {
       background-color: rgb(0, 176, 0);
     }
+
+    &--cancel {
+      flex-basis: 50%;
+    }
+  }
+
+  &__error {
+    @include error-form;
   }
 }
