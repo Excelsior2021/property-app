@@ -48,6 +48,9 @@ const Header: Component = () => {
           <Match when={location.pathname.includes(routes.editListing)}>
             <h1 class="header__heading">edit listing</h1>
           </Match>
+          <Match when={location.pathname.includes(routes.manageImages)}>
+            <h1 class="header__heading">manage images</h1>
+          </Match>
         </Switch>
 
         <nav class="header__nav">

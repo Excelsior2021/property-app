@@ -16,6 +16,7 @@ import {
 } from "../../store/store"
 import { handleFormInput } from "../../utils/utils"
 import { login, profile, signup } from "../../api/api-endpoints"
+import routes from "../../utils/client-routes"
 import "./Signup.scss"
 
 type signupForm = {
@@ -73,7 +74,7 @@ const Signup: Component = () => {
           setLoggedIn(true)
           setUserData(userData)
 
-          navigate("/profile")
+          navigate(routes.profile)
           break
         case 409:
           setServerError(true)

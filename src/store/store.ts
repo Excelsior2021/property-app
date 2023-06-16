@@ -11,3 +11,5 @@ export const [userData, setUserData] = createSignal({
 export const [accessToken, setAccessToken] = createSignal("")
 
 export const [savedListingsIds, setSavedListingsIds] = createSignal(stringArray)
+
+export const [currentListing, setCurrentListing] = createSignal({})

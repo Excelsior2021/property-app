@@ -1,6 +1,6 @@
 import { Component } from "solid-js"
-import "./EditImages.scss"
 import ManageImages from "../../components/ManageImages/ManageImages"
+import "./EditImages.scss"
 
 const EditImages: Component = () => {
   return (

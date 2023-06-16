@@ -2,6 +2,7 @@ import { Component } from "solid-js"
 import { useLocation } from "@solidjs/router"
 import ListingForm from "../../components/ListingForm/ListingForm"
 import "./EditListing.scss"
+import { currentListing } from "../../store/store"
 
 const EditListing: Component = () => {
   const location = useLocation()
@@ -9,8 +10,8 @@ const EditListing: Component = () => {
   return (
     <div class="edit-listing">
       <ListingForm
-        listingDetails={location.state!.listing.property.propertyDetails}
-        listingId={location.state!.listing.property.id}
+        listingDetails={currentListing().property.propertyDetails}
+        listingId={currentListing().property.id}
         page="edit"
       />
     </div>

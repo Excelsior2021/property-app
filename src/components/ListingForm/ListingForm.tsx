@@ -55,13 +55,8 @@ const ListingForm: Component<listingFormProps> = props => {
   })
 
   const handleFormSubmission = () => {
-    console.log("submitted")
-    if (props.page === "new") {
-      navigate(routes.uploadImages)
-    }
-    if (props.page === "edit") {
-      handleSave()
-    }
+    if (props.page === "new") navigate(routes.uploadImages)
+    if (props.page === "edit") handleSave()
   }
 
   const handleSave = async () => {
@@ -81,14 +76,8 @@ const ListingForm: Component<listingFormProps> = props => {
   }
 
   const handleCancel = () => {
-    if (props.page === "new") {
-      setListingFormData(initialListingFormData)
-      navigate(routes.profile)
-    }
-    if (props.page === "edit") {
-      setListingFormData(initialListingFormData)
-      navigate(routes.myListings)
-    }
+    if (props.page === "new") navigate(routes.profile)
+    if (props.page === "edit") navigate(routes.myListings)
   }
 
   return (
@@ -217,7 +206,7 @@ const ListingForm: Component<listingFormProps> = props => {
               <button
                 class="listing-form__button listing-form__button--manage"
                 onclick={() =>
-                  navigate(`${routes.manageImages}${props.listingId}`)
+                  navigate(`${routes.manageImages}/${props.listingId}`)
                 }>
                 manage images
               </button>

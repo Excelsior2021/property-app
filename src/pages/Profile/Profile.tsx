@@ -12,6 +12,7 @@ import {
   initialListingFormData,
   setListingFormData,
 } from "../../components/ListingForm/ListingForm"
+import routes from "../../utils/client-routes"
 import "./Profile.scss"
 
 const Profile: Component = () => {
@@ -34,7 +35,7 @@ const Profile: Component = () => {
   const handleLogout = () => {
     localStorage.removeItem("accessToken")
     setLoggedIn(false)
-    navigate("/")
+    navigate(routes.discover)
   }
 
   if (loggedIn()) {

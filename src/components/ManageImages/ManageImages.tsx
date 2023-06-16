@@ -1,14 +1,11 @@
-import { Component, createSignal, For } from "solid-js"
+import { Component, createSignal, createEffect, For } from "solid-js"
 import { useNavigate } from "@solidjs/router"
 import { createForm, Field, Form } from "@modular-forms/solid"
-import {
-  initialListingFormData,
-  listingFormData,
-  setListingFormData,
-} from "../ListingForm/ListingForm"
-import { accessToken } from "../../store/store"
+import { listingFormData } from "../ListingForm/ListingForm"
+import { accessToken, currentListing } from "../../store/store"
 import { listing, uploadImage } from "../../api/api-endpoints"
 import ImageItem from "../ImageItem/ImageItem"
+import routes from "../../utils/client-routes"
 import "./ManageImages.scss"
 
 interface manageImagesProps {
@@ -23,8 +20,18 @@ const ManageImages: Component<manageImagesProps> = props => {
   const manageImagesForm = createForm<manageImagesForm>()
   const [propertyId, setPropertyId] = createSignal(null)
   const [uploadedImages, setUploadedImages] = createSignal([])
+  const [storedImages, setStoredImages] = createSignal([])
   const navigate = useNavigate()
   let fileRef
+
+  createEffect(() => {
+    if (props.page === "edit") {
+      const { images } = currentListing()
+
+      for (const image of images)
+        setStoredImages(prevState => [...prevState, image])
+    }
+  })
 
   const handleUpload = () => {
     for (const file of fileRef.files) {
@@ -66,11 +73,17 @@ const ManageImages: Component<manageImagesProps> = props => {
           },
         })
       }
-      setListingFormData(initialListingFormData)
-      navigate("/my-listings")
+
+      navigate(routes.myListings)
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const handleReturn = () => {
+    if (props.page === "new") navigate(routes.newListing)
+    if (props.page === "edit")
+      navigate(`${routes.editListing}/${currentListing().property.id}`)
   }
 
   return (
@@ -93,15 +106,18 @@ const ManageImages: Component<manageImagesProps> = props => {
             />
           )}
         </Field>
-        <div>
+        <div class="manage-images__stored">
+          <For each={storedImages()}>
+            {image => <ImageItem image={image} type="stored" />}
+          </For>
+        </div>
+        <div class="manage-images__uploaded">
           <For each={uploadedImages()}>
-            {image => <ImageItem image={image} />}
+            {image => <ImageItem image={image} type="uploaded" />}
           </For>
         </div>
         <div class="manage-images__actions">
-          <button
-            class="manage-images__button"
-            onclick={() => navigate("/new-listing")}>
+          <button class="manage-images__button" onclick={handleReturn}>
             back
           </button>
           <button class="manage-images__button" onsubmit={handleSubmit}>

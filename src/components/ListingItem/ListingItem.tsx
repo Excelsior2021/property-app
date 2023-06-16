@@ -2,7 +2,7 @@ import { Component, createSignal, createEffect } from "solid-js"
 import { useNavigate } from "@solidjs/router"
 import ImageContainer from "../ImageContainer/ImageContainer"
 import PropertyDetails from "../PropertyDetails/PropertyDetails"
-import { accessToken, loggedIn } from "../../store/store"
+import { accessToken, loggedIn, setCurrentListing } from "../../store/store"
 import { listingType } from "../../types/general"
 import { saveListing, unsaveListing } from "../../api/api-endpoints"
 import { fetchSavedListingsIds } from "../../api/api"
@@ -77,10 +77,11 @@ const ListingItem: Component<ListingItemProps> = props => {
 
     switch (requestPage) {
       case "details":
-        navigate(`${routes.listing}${props.listing.property.id}`)
+        navigate(`${routes.listing}/${props.listing.property.id}`)
         break
       case "edit":
-        navigate(`${routes.editListing}${props.listing.property.id}`, {
+        setCurrentListing(props.listing)
+        navigate(`${routes.editListing}/${props.listing.property.id}`, {
           state: { listing: props.listing },
         })
         break

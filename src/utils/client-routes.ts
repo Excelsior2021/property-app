@@ -18,7 +18,7 @@ const editListing = "/edit-listing"
 
 const uploadImages = "/upload-images"
 
-const manageImages = "manage-images"
+const manageImages = "/manage-images"
 
 export default {
   discover,
