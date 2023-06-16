@@ -4,9 +4,10 @@ import ImageContainer from "../ImageContainer/ImageContainer"
 import PropertyDetails from "../PropertyDetails/PropertyDetails"
 import { accessToken, loggedIn } from "../../store/store"
 import { listingType } from "../../types/general"
-import "./ListingItem.scss"
 import { saveListing, unsaveListing } from "../../api/api-endpoints"
 import { fetchSavedListingsIds } from "../../api/api"
+import routes from "../../utils/client-routes"
+import "./ListingItem.scss"
 
 interface ListingItemProps {
   listing: listingType
@@ -27,7 +28,7 @@ const ListingItem: Component<ListingItemProps> = props => {
         handleSave(listing)
       }
     } else {
-      navigate("./login")
+      navigate(routes.login)
     }
   }
 
@@ -71,15 +72,15 @@ const ListingItem: Component<ListingItemProps> = props => {
     fetchSavedListingsIds()
   }
 
-  const handleNavigate = (event: Event, page: string) => {
+  const handleNavigate = (event: Event, requestPage: string) => {
     event.stopPropagation()
 
-    switch (page) {
+    switch (requestPage) {
       case "details":
-        navigate(`/listing/${props.listing.property.id}`)
+        navigate(`${routes.listing}${props.listing.property.id}`)
         break
       case "edit":
-        navigate(`/edit-listing/${props.listing.property.id}`, {
+        navigate(`${routes.editListing}${props.listing.property.id}`, {
           state: { listing: props.listing },
         })
         break
@@ -96,7 +97,7 @@ const ListingItem: Component<ListingItemProps> = props => {
 
       <img
         class="listing-item__icon listing-item__icon--save"
-        src={props.saved ? "./icons/saved-active.svg" : "./icons/saved.svg"}
+        src={props.saved ? "/icons/saved-active.svg" : "/icons/saved.svg"}
         alt="save listing"
         onclick={event => handleClickOnSave(event, props.listing)}
       />
@@ -106,7 +107,7 @@ const ListingItem: Component<ListingItemProps> = props => {
           class="listing-item__edit-container"
           onclick={event => handleNavigate(event, "edit")}>
           <img
-            src="./icons/edit.svg"
+            src="/icons/edit.svg"
             alt="edit listing"
             class="listing-item__icon listing-item__icon--edit"
           />

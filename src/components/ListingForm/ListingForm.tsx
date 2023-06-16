@@ -5,11 +5,13 @@ import { handleFormInput } from "../../utils/utils"
 import { listingDetailsType } from "../../types/general"
 import { editListing } from "../../api/api-endpoints"
 import { accessToken } from "../../store/store"
-import "./ListingForm.scss"
 import CancelButton from "../CancelButton/CancelButton"
+import routes from "../../utils/client-routes"
+import "./ListingForm.scss"
 
 interface listingFormProps {
   listingDetails: listingDetailsType
+  listingId?: string
   page: string
 }
 
@@ -55,7 +57,7 @@ const ListingForm: Component<listingFormProps> = props => {
   const handleFormSubmission = () => {
     console.log("submitted")
     if (props.page === "new") {
-      navigate("/upload-images")
+      navigate(routes.uploadImages)
     }
     if (props.page === "edit") {
       handleSave()
@@ -72,7 +74,7 @@ const ListingForm: Component<listingFormProps> = props => {
         },
         body: JSON.stringify(listingFormData()),
       })
-      navigate("/my-listings")
+      navigate(routes.myListings)
     } catch (error) {
       console.log(error)
     }
@@ -81,16 +83,12 @@ const ListingForm: Component<listingFormProps> = props => {
   const handleCancel = () => {
     if (props.page === "new") {
       setListingFormData(initialListingFormData)
-      navigate("/profile")
+      navigate(routes.profile)
     }
     if (props.page === "edit") {
       setListingFormData(initialListingFormData)
-      navigate("/my-listings")
+      navigate(routes.myListings)
     }
-  }
-
-  const handleManageImages = () => {
-    navigate("/")
   }
 
   return (
@@ -218,7 +216,9 @@ const ListingForm: Component<listingFormProps> = props => {
             <>
               <button
                 class="listing-form__button listing-form__button--manage"
-                onclick={handleManageImages}>
+                onclick={() =>
+                  navigate(`${routes.manageImages}${props.listingId}`)
+                }>
                 manage images
               </button>
               <div class={subActionsClass}>

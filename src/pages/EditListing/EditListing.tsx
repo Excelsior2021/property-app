@@ -10,6 +10,7 @@ const EditListing: Component = () => {
     <div class="edit-listing">
       <ListingForm
         listingDetails={location.state!.listing.property.propertyDetails}
+        listingId={location.state!.listing.property.id}
         page="edit"
       />
     </div>

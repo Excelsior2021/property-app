@@ -1,29 +1,30 @@
 import { Component, For, createSignal, createEffect } from "solid-js"
 import { A } from "@solidjs/router"
-import "./Navbar.scss"
 import { loggedIn } from "../../store/store"
+import routes from "../../utils/client-routes"
+import "./Navbar.scss"
 
 export const navbarItems = [
   {
     name: "discover",
-    link: "/",
-    icon: "./icons/discover.svg",
+    link: routes.discover,
+    icon: "/icons/discover.svg",
   },
   {
     name: "saved",
-    link: "/saved",
-    icon: "./icons/saved.svg",
+    link: routes.savedListings,
+    icon: "/icons/saved.svg",
   },
   {
     name: "login",
-    link: "/login",
-    icon: "./icons/account.svg",
+    link: routes.login,
+    icon: "/icons/account.svg",
     login: true,
   },
   {
     name: "profile",
-    link: "/profile",
-    icon: "./icons/account.svg",
+    link: routes.profile,
+    icon: "/icons/account.svg",
     profile: true,
   },
 ]

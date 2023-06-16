@@ -2,6 +2,7 @@ import { Component, Switch, Match, For } from "solid-js"
 import { useLocation, A } from "@solidjs/router"
 import { navbarItems } from "../Navbar/Navbar"
 import { loggedIn } from "../../store/store"
+import routes from "../../utils/client-routes"
 import "./Header.scss"
 
 const Header: Component = () => {
@@ -13,7 +14,7 @@ const Header: Component = () => {
         <div class="header__logo">lifeStyle</div>
 
         <Switch>
-          <Match when={location.pathname === "/"}>
+          <Match when={location.pathname === routes.discover}>
             <img class="header__icon" src="/icons/discover.svg" alt="search" />
             <input
               class="header__search"
@@ -23,23 +24,29 @@ const Header: Component = () => {
               placeholder="where do you want to live?"
             />
           </Match>
-          <Match when={location.pathname === "/saved"}>
+          <Match when={location.pathname === routes.savedListings}>
             <h1 class="header__heading">saved listings</h1>
           </Match>
-          <Match when={location.pathname === "/login"}>
+          <Match when={location.pathname === routes.login}>
             <h1 class="header__heading">log in</h1>
           </Match>
-          <Match when={location.pathname === "/sign-up"}>
+          <Match when={location.pathname === routes.signup}>
             <h1 class="header__heading">sign up</h1>
           </Match>
-          <Match when={location.pathname === "/new-listing"}>
+          <Match when={location.pathname === routes.profile}>
+            <h1 class="header__heading">my profile</h1>
+          </Match>
+          <Match when={location.pathname === routes.myListings}>
+            <h1 class="header__heading">my listings</h1>
+          </Match>
+          <Match when={location.pathname === routes.newListing}>
             <h1 class="header__heading">new listing</h1>
           </Match>
-          <Match when={location.pathname === "/edit-listing"}>
-            <h1 class="header__heading">edit listing</h1>
+          <Match when={location.pathname === routes.uploadImages}>
+            <h1 class="header__heading">upload images</h1>
           </Match>
-          <Match when={location.pathname === "/my-listings"}>
-            <h1 class="header__heading">my listings</h1>
+          <Match when={location.pathname.includes(routes.editListing)}>
+            <h1 class="header__heading">edit listing</h1>
           </Match>
         </Switch>
 

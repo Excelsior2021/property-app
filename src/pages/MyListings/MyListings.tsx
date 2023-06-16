@@ -1,9 +1,8 @@
 import { Component, createSignal, For } from "solid-js"
 import { accessToken } from "../../store/store"
-import ListingItem from "../../components/ListingItem/ListingItem"
+import Listings from "../../components/Listings/Listings"
 import { listing } from "../../api/api-endpoints"
 import "./MyListings.scss"
-import Listings from "../../components/Listings/Listings"
 
 const MyListings: Component = () => {
   const [listings, setListings] = createSignal([])

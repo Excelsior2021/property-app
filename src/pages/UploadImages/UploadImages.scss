@@ -2,21 +2,4 @@
 @use "../../partials/mixins" as *;
 
 .upload-images {
-  &__form {
-    @include form;
-  }
-
-  &__input {
-    margin: 24px auto;
-  }
-
-  &__actions {
-    display: flex;
-    column-gap: 1rem;
-  }
-
-  &__button {
-    @include button-form;
-    width: 100%;
-  }
 }

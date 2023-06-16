@@ -15,6 +15,8 @@ import UploadImages from "./pages/UploadImages/UploadImages"
 import { setAccessToken, setLoggedIn } from "./store/store"
 import { fetchSavedListingsIds } from "./api/api"
 import ImageItem from "./components/ImageItem/ImageItem"
+import EditImages from "./pages/EditImages/EditImages"
+import routes from "./utils/client-routes"
 import "./App.scss"
 
 const App: Component = () => {
@@ -30,16 +32,29 @@ const App: Component = () => {
       <Header />
       <main class="main">
         <Routes>
-          <Route path="/" component={() => <Discover />} />
-          <Route path="/saved" component={() => <SavedListings />} />
-          <Route path="/login" component={() => <Login />} />
-          <Route path="/sign-up" component={() => <Signup />} />
-          <Route path="/profile" component={() => <Profile />} />
-          <Route path="/listing/:id" component={() => <Listing />} />
-          <Route path="/my-listings" component={() => <MyListings />} />
-          <Route path="/new-listing" component={() => <NewListing />} />
-          <Route path="/edit-listing/:id" component={() => <EditListing />} />
-          <Route path="/upload-images" component={() => <UploadImages />} />
+          <Route path={routes.discover} component={() => <Discover />} />
+          <Route
+            path={routes.savedListings}
+            component={() => <SavedListings />}
+          />
+          <Route path={routes.login} component={() => <Login />} />
+          <Route path={routes.signup} component={() => <Signup />} />
+          <Route path={routes.profile} component={() => <Profile />} />
+          <Route path={`${routes.listing}/:id`} component={() => <Listing />} />
+          <Route path={routes.myListings} component={() => <MyListings />} />
+          <Route path={routes.newListing} component={() => <NewListing />} />
+          <Route
+            path={`${routes.editListing}/:id`}
+            component={() => <EditListing />}
+          />
+          <Route
+            path={routes.uploadImages}
+            component={() => <UploadImages />}
+          />
+          <Route
+            path={`${routes.manageImages}/:id`}
+            component={() => <EditImages />}
+          />
           <Route path="/image" component={() => <ImageItem />} />
         </Routes>
       </main>
