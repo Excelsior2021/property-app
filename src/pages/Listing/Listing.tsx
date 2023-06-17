@@ -18,7 +18,6 @@ const Listing: Component = () => {
       },
     })
     const data = await res.json()
-    console.log(data)
     setListingImages(data.images)
     setListingDetails(data.property.propertyDetails)
   })

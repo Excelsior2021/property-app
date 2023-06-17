@@ -1,7 +1,16 @@
 import { Component, createEffect } from "solid-js"
 import { deleteImage } from "../../api/api-endpoints"
-import { accessToken, currentListing } from "../../store/store"
+import {
+  accessToken,
+  currentListing,
+  setCurrentListing,
+} from "../../store/store"
 import "./ImageItem.scss"
+import {
+  setStoredImages,
+  setUploadedImages,
+} from "../ManageImages/ManageImages"
+import { getListing } from "../../api/api"
 
 interface imageItemProps {
   image: any
@@ -10,29 +19,41 @@ interface imageItemProps {
 
 const ImageItem: Component<imageItemProps> = props => {
   let src
-  if (props.type === "uploaded") src = URL.createObjectURL(props.image)
-  if (props.type === "stored") src = props.image.path
-  const {
-    property: { id },
-  } = currentListing()
+  let propertyId: string
+  if (props.type === "uploaded") src = URL.createObjectURL(props.image.file)
+  if (props.type === "stored") {
+    src = props.image.path
+    propertyId = currentListing().property.id
+  }
 
   const handleDelete = async () => {
-    try {
-      const res = await fetch(deleteImage, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken()}`,
-        },
-        body: JSON.stringify({
-          imageId: props.image.id,
-          propertyId: id,
-        }),
-      })
+    if (props.type === "uploaded") {
+      setUploadedImages(prevState =>
+        prevState.filter(image => image.id !== props.image.id)
+      )
+    }
 
-      console.log(await res)
-    } catch (error) {
-      console.log(error)
+    if (props.type === "stored") {
+      try {
+        const res = await fetch(deleteImage, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken()}`,
+          },
+          body: JSON.stringify({
+            imageId: props.image.id,
+            propertyId: propertyId,
+          }),
+        })
+
+        const updatedListing = await getListing(propertyId)
+        setStoredImages([])
+        setUploadedImages([])
+        setCurrentListing(updatedListing)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 

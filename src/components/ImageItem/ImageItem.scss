@@ -1,6 +1,5 @@
 .image-item {
   display: flex;
-  border: 1.5px solid grey;
   border-radius: 8px;
   justify-content: space-between;
   align-items: center;
@@ -21,13 +20,16 @@
     width: 100%;
     height: inherit;
     object-fit: cover;
-    border-radius: inherit;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-top-left-radius: inherit;
   }
 
   &__actions {
-    flex-basis: 2;
+    display: flex;
+    justify-content: flex-end;
+    flex-basis: 50%;
+    border: 1px solid grey;
+    height: inherit;
+    border-bottom-right-radius: inherit;
   }
 
   &__icon {
