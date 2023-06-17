@@ -49,3 +49,9 @@
   color: red;
   margin-top: -16px;
 }
+
+@mixin text-fallback {
+  font-size: $text-fallback;
+  text-align: center;
+  margin-top: 100px;
+}

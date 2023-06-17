@@ -1,0 +1,8 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+
+.saved-listings {
+  &__fallback-text {
+    @include text-fallback;
+  }
+}

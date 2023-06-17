@@ -21,7 +21,7 @@ const Header: Component = () => {
               type="text"
               name="search"
               id="search"
-              placeholder="where do you want to live?"
+              placeholder="what are you looking for?"
             />
           </Match>
           <Match when={location.pathname === routes.savedListings}>

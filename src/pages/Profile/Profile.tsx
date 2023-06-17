@@ -45,17 +45,18 @@ const Profile: Component = () => {
           Hello {userData().name ? userData().name : "user"},
         </h2>
         <p class="profile__text">What would you like to do?</p>
-
         <A
           class="profile__link"
-          href="/new-listing"
+          href={routes.newListing}
           onclick={() => setListingFormData(initialListingFormData)}>
           new listing
         </A>
-        <A class="profile__link" href="/my-listings">
+        <A class="profile__link" href={routes.myListings}>
           my listings
         </A>
-        <button class="profile__button" onclick={handleLogout}>
+        <button
+          class="profile__button profile__button--logout"
+          onclick={handleLogout}>
           logout
         </button>
       </div>

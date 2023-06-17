@@ -1,4 +1,4 @@
-import { Component, createSignal, For } from "solid-js"
+import { Component, createEffect, createSignal, Show } from "solid-js"
 import { accessToken } from "../../store/store"
 import Listings from "../../components/Listings/Listings"
 import { listing } from "../../api/api-endpoints"
@@ -7,7 +7,7 @@ import "./MyListings.scss"
 const MyListings: Component = () => {
   const [listings, setListings] = createSignal([])
 
-  const fetchListings = async () => {
+  createEffect(async () => {
     const res = await fetch(listing, {
       headers: {
         Authorization: `Bearer ${accessToken()}`,
@@ -16,14 +16,22 @@ const MyListings: Component = () => {
 
     const data = await res.json()
     setListings(data)
-  }
+  })
 
-  fetchListings()
+  const fallback = (
+    <p class="my-listings__fallback-text">
+      You do not have any listings. Would you like to create one?
+    </p>
+  )
 
   return (
-    <ul class="my-listings">
-      <Listings listings={listings()} edit={true} />
-    </ul>
+    <div class="my-listings">
+      <Show when={listings().length > 0} fallback={fallback}>
+        <ul class="my-listings__list">
+          <Listings listings={listings()} edit={true} />
+        </ul>
+      </Show>
+    </div>
   )
 }
 

@@ -1,8 +1,8 @@
 @use "../../partials/variables" as *;
 @use "../../partials/mixins" as *;
 
-.my-listings {
-  &__fallback-text {
+.discover {
+  &__no-data {
     @include text-fallback;
   }
 }

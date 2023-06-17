@@ -1,7 +1,8 @@
-import { Component, createSignal, createEffect, For } from "solid-js"
+import { Component, createSignal, createEffect, Show } from "solid-js"
 import { accessToken, loggedIn } from "../../store/store"
 import { getSavedListings } from "../../api/api-endpoints"
 import Listings from "../../components/Listings/Listings"
+import "./SavedListings.scss"
 
 const SavedListings: Component = () => {
   const [savedListings, setSavedListings] = createSignal([])
@@ -16,24 +17,31 @@ const SavedListings: Component = () => {
       const data = await res.json()
       setSavedListings(data)
     })
-
-    return (
-      <div class="saved-listings">
-        <h1 class="page__heading">Saved Properties</h1>
-        <ul class="saved-listings__list">
-          <Listings listings={savedListings()} />
-        </ul>
-      </div>
-    )
-  } else {
-    return (
-      <>
-        <p class="saved-listings__text">
-          Please login to see your saved listings.
-        </p>
-      </>
-    )
   }
+
+  const loginFallback = (
+    <p class="saved-listings__fallback-text">
+      Please login to see your saved listings
+    </p>
+  )
+
+  const noDataFallback = (
+    <p class="saved-listings__fallback-text">
+      You have not saved any listings. Go and discover some :)
+    </p>
+  )
+
+  return (
+    <div class="saved-listings">
+      <Show when={loggedIn()} fallback={loginFallback}>
+        <Show when={savedListings().length > 0} fallback={noDataFallback}>
+          <ul class="saved-listings__list">
+            <Listings listings={savedListings()} />
+          </ul>
+        </Show>
+      </Show>
+    </div>
+  )
 }
 
 export default SavedListings
