@@ -27,9 +27,7 @@ const MyListings: Component = () => {
   return (
     <div class="my-listings">
       <Show when={listings().length > 0} fallback={fallback}>
-        <ul class="my-listings__list">
-          <Listings listings={listings()} edit={true} />
-        </ul>
+        <Listings listings={listings()} edit={true} />
       </Show>
     </div>
   )

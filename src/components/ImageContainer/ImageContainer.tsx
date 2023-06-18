@@ -4,6 +4,8 @@ import "./ImageContainer.scss"
 
 interface ImageContainerProps {
   images: imageObjType[]
+  handleNavigate: (event: Event, requestPage: string) => void
+  edit: boolean
 }
 
 const ImageContainer: Component<ImageContainerProps> = props => {
@@ -28,6 +30,18 @@ const ImageContainer: Component<ImageContainerProps> = props => {
           </For>
         </div>
       ) : null}
+
+      {props.edit && (
+        <div
+          class="image-container__edit-container"
+          onclick={event => props.handleNavigate(event, "edit")}>
+          <img
+            src="/icons/edit.svg"
+            alt="edit listing"
+            class="image-container__icon image-container__icon--edit"
+          />
+        </div>
+      )}
     </div>
   )
 }

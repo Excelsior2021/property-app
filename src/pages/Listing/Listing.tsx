@@ -4,6 +4,7 @@ import { accessToken } from "../../store/store"
 import ImageContainer from "../../components/ImageContainer/ImageContainer"
 import { getListingDetails } from "../../api/api-endpoints"
 import "./Listing.scss"
+import ListingDetails from "../../components/ListingDetails/ListingDetails"
 
 const Listing: Component = () => {
   const [listingImages, setListingImages] = createSignal(null)
@@ -29,12 +30,7 @@ const Listing: Component = () => {
 
         <ImageContainer images={listingImages()} />
 
-        <div class="listing__details">
-          <p class="listing__location">{listingDetails().location}</p>
-          <p class="listing__price">Gh₵{listingDetails().price} p/m</p>
-          <p class="listing__description">{listingDetails().description}</p>
-          <p class="listing__phone">{listingDetails().phone}</p>
-        </div>
+        <ListingDetails listingDetails={listingDetails()} />
       </Show>
     </div>
   )

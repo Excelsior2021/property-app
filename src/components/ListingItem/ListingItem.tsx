@@ -1,7 +1,7 @@
-import { Component, createSignal, createEffect } from "solid-js"
+import { Component } from "solid-js"
 import { useNavigate } from "@solidjs/router"
 import ImageContainer from "../ImageContainer/ImageContainer"
-import PropertyDetails from "../PropertyDetails/PropertyDetails"
+import ListingItemDetails from "../ListingItemDetails/ListingItemDetails"
 import { accessToken, loggedIn, setCurrentListing } from "../../store/store"
 import { listingType } from "../../types/general"
 import { saveListing, unsaveListing } from "../../api/api-endpoints"
@@ -94,7 +94,11 @@ const ListingItem: Component<ListingItemProps> = props => {
     <li
       class="listing-item"
       onclick={event => handleNavigate(event, "details")}>
-      <ImageContainer images={props.listing.images} />
+      <ImageContainer
+        images={props.listing.images}
+        handleNavigate={handleNavigate}
+        edit={props.edit}
+      />
 
       <img
         class="listing-item__icon listing-item__icon--save"
@@ -103,21 +107,9 @@ const ListingItem: Component<ListingItemProps> = props => {
         onclick={event => handleClickOnSave(event, props.listing)}
       />
 
-      {props.edit && (
-        <div
-          class="listing-item__edit-container"
-          onclick={event => handleNavigate(event, "edit")}>
-          <img
-            src="/icons/edit.svg"
-            alt="edit listing"
-            class="listing-item__icon listing-item__icon--edit"
-          />
-        </div>
-      )}
-
       <div class="listing-item__details">
-        <PropertyDetails
-          propertyDetails={props.listing.property.propertyDetails}
+        <ListingItemDetails
+          listingDetails={props.listing.property.propertyDetails}
         />
       </div>
     </li>
