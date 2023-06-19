@@ -8,13 +8,13 @@ export interface imageObjType {
 
 export interface propertyType {
   id: string
+  email: string
   propertyDetails: listingDetailsType
 }
 
 export interface listingType {
   images: imageObjType[]
   property: propertyType
-  email: string
 }
 
 export interface listingDetailsType {

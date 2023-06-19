@@ -1,7 +1,7 @@
 import { Component, Show, createResource } from "solid-js"
 import Listings from "../../components/Listings/Listings"
-import { getListings } from "../../api/api-endpoints"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
+import { getListings } from "../../api/api-endpoints"
 import "./Discover.scss"
 
 const Discover: Component = () => {

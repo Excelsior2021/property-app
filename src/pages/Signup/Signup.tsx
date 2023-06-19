@@ -8,6 +8,7 @@ import {
   email,
   custom,
 } from "@modular-forms/solid"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import {
   setLoggedIn,
   setUserData,
@@ -18,7 +19,6 @@ import { handleFormInput } from "../../utils/utils"
 import { login, profile, signup } from "../../api/api-endpoints"
 import routes from "../../utils/client-routes"
 import "./Signup.scss"
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 
 type signupForm = {
   name: string

@@ -4,8 +4,8 @@ import "./ImageContainer.scss"
 
 interface ImageContainerProps {
   images: imageObjType[]
-  handleNavigate: (event: Event, requestPage: string) => void
-  edit: boolean
+  handleNavigate?: (event: Event, requestPage: string) => void
+  edit?: boolean
 }
 
 const ImageContainer: Component<ImageContainerProps> = props => {

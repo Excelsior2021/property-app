@@ -55,7 +55,6 @@ const App: Component = () => {
             path={`${routes.manageImages}/:id`}
             component={() => <EditImages />}
           />
-          <Route path="/image" component={() => <ImageItem />} />
         </Routes>
       </main>
       <Navbar />

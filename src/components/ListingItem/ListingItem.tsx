@@ -18,7 +18,7 @@ interface ListingItemProps {
 const ListingItem: Component<ListingItemProps> = props => {
   const navigate = useNavigate()
 
-  const handleClickOnSave = (event, listing) => {
+  const handleClickOnSave = (event: Event, listing: listingType) => {
     event.stopPropagation()
 
     if (loggedIn()) {
@@ -32,7 +32,7 @@ const ListingItem: Component<ListingItemProps> = props => {
     }
   }
 
-  const handleUnsave = async listing => {
+  const handleUnsave = async (listing: listingType) => {
     const {
       property: { email, id },
     } = listing
@@ -51,7 +51,7 @@ const ListingItem: Component<ListingItemProps> = props => {
     fetchSavedListingsIds()
   }
 
-  const handleSave = async listing => {
+  const handleSave = async (listing: listingType) => {
     const date = new Date().toISOString()
     const {
       property: { email, id },

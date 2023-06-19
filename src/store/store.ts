@@ -12,4 +12,4 @@ export const [accessToken, setAccessToken] = createSignal("")
 
 export const [savedListingsIds, setSavedListingsIds] = createSignal(stringArray)
 
-export const [currentListing, setCurrentListing] = createSignal({})
+export const [currentListing, setCurrentListing] = createSignal(null)
