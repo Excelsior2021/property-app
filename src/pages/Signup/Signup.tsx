@@ -1,4 +1,4 @@
-import { Component, createSignal } from "solid-js"
+import { Component, createResource, createSignal, Show } from "solid-js"
 import { A, useNavigate } from "@solidjs/router"
 import {
   createForm,
@@ -18,6 +18,7 @@ import { handleFormInput } from "../../utils/utils"
 import { login, profile, signup } from "../../api/api-endpoints"
 import routes from "../../utils/client-routes"
 import "./Signup.scss"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 
 type signupForm = {
   name: string
@@ -35,11 +36,10 @@ const Signup: Component = () => {
   })
   const [retypePassword, setRetypePassword] = createSignal("")
   const [serverError, setServerError] = createSignal(false)
+  const [submitted, setSubmitted] = createSignal(false)
   const navigate = useNavigate()
 
   const handleSubmit = async () => {
-    console.log(signupFormData())
-
     try {
       const res = await fetch(signup, {
         method: "POST",
@@ -87,111 +87,121 @@ const Signup: Component = () => {
     }
   }
 
+  const [signedUp] = createResource(submitted, handleSubmit)
+
   return (
     <div class="signup">
-      <h1 class="page__heading">Signup</h1>
-      <Form of={signupForm} class="signup__form" onSubmit={handleSubmit}>
-        <Field
+      <Show when={!signedUp.loading} fallback={<LoadingSpinner />}>
+        <Form
           of={signupForm}
-          name="name"
-          validate={[required("a full name is required.")]}>
-          {field => (
-            <>
-              <input
-                {...field.props}
-                class="signup__input"
-                type="text"
-                placeholder="name"
-                onchange={event =>
-                  handleFormInput(event, setSignupFormData, setServerError)
-                }
-                required
-              />
-              {field.error && <p class="signup__error">{field.error}</p>}
-            </>
-          )}
-        </Field>
-        <Field
-          of={signupForm}
-          name="email"
-          validate={[
-            required("an email is required."),
-            email("please enter a valid email address"),
-          ]}>
-          {field => (
-            <>
-              <input
-                {...field.props}
-                class="signup__input"
-                type="email"
-                placeholder="email"
-                onchange={event =>
-                  handleFormInput(event, setSignupFormData, setServerError)
-                }
-                required
-              />
-              {field.error && <p class="signup__error">{field.error}</p>}
-            </>
-          )}
-        </Field>
-        <Field
-          of={signupForm}
-          name="password"
-          validate={[required("a password is required.")]}>
-          {field => (
-            <>
-              <input
-                {...field.props}
-                class="signup__input"
-                type="password"
-                placeholder="password"
-                onchange={event =>
-                  handleFormInput(event, setSignupFormData, setServerError)
-                }
-                required
-              />
-              {field.error && <p class="signup__error">{field.error}</p>}
-            </>
-          )}
-        </Field>
-        <Field
-          of={signupForm}
-          name="retypePassword"
-          validate={[
-            custom(
-              () => signupFormData().password === retypePassword(),
-              "passwords do not match."
-            ),
-            required("please retype your password."),
-          ]}>
-          {field => (
-            <>
-              <input
-                {...field.props}
-                class="signup__input"
-                type="password"
-                placeholder="retype password"
-                onchange={event => setRetypePassword(event.currentTarget.value)}
-                required
-              />
-              {field.error && <p class="signup__error">{field.error}</p>}
-            </>
-          )}
-        </Field>
-        <button class="signup__button">sign up</button>
-      </Form>
+          class="signup__form"
+          onSubmit={() => {
+            setSubmitted(true)
+          }}>
+          <Field
+            of={signupForm}
+            name="name"
+            validate={[required("a full name is required.")]}>
+            {field => (
+              <>
+                <input
+                  {...field.props}
+                  class="signup__input"
+                  type="text"
+                  placeholder="name"
+                  onchange={event =>
+                    handleFormInput(event, setSignupFormData, setServerError)
+                  }
+                  required
+                />
+                {field.error && <p class="signup__error">{field.error}</p>}
+              </>
+            )}
+          </Field>
+          <Field
+            of={signupForm}
+            name="email"
+            validate={[
+              required("an email is required."),
+              email("please enter a valid email address"),
+            ]}>
+            {field => (
+              <>
+                <input
+                  {...field.props}
+                  class="signup__input"
+                  type="email"
+                  placeholder="email"
+                  onchange={event =>
+                    handleFormInput(event, setSignupFormData, setServerError)
+                  }
+                  required
+                />
+                {field.error && <p class="signup__error">{field.error}</p>}
+              </>
+            )}
+          </Field>
+          <Field
+            of={signupForm}
+            name="password"
+            validate={[required("a password is required.")]}>
+            {field => (
+              <>
+                <input
+                  {...field.props}
+                  class="signup__input"
+                  type="password"
+                  placeholder="password"
+                  onchange={event =>
+                    handleFormInput(event, setSignupFormData, setServerError)
+                  }
+                  required
+                />
+                {field.error && <p class="signup__error">{field.error}</p>}
+              </>
+            )}
+          </Field>
+          <Field
+            of={signupForm}
+            name="retypePassword"
+            validate={[
+              custom(
+                () => signupFormData().password === retypePassword(),
+                "passwords do not match."
+              ),
+              required("please retype your password."),
+            ]}>
+            {field => (
+              <>
+                <input
+                  {...field.props}
+                  class="signup__input"
+                  type="password"
+                  placeholder="retype password"
+                  onchange={event =>
+                    setRetypePassword(event.currentTarget.value)
+                  }
+                  required
+                />
+                {field.error && <p class="signup__error">{field.error}</p>}
+              </>
+            )}
+          </Field>
+          <button class="signup__button">sign up</button>
+        </Form>
 
-      <div class="signup__server-errors">
-        {serverError() && (
-          <p class="signup__server-error signup__error">
-            Email address already registered.
-          </p>
-        )}
-      </div>
+        <div class="signup__server-errors">
+          {serverError() && (
+            <p class="signup__server-error signup__error">
+              Email address already registered.
+            </p>
+          )}
+        </div>
 
-      <p class="signup__text">
-        Already have an account? <A href="/login">Log in here</A>
-      </p>
+        <p class="signup__text">
+          Already have an account? <A href="/login">Log in here</A>
+        </p>
+      </Show>
     </div>
   )
 }

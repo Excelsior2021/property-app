@@ -1,4 +1,11 @@
-import { Component, createSignal, createEffect, For } from "solid-js"
+import {
+  Component,
+  createSignal,
+  createEffect,
+  For,
+  createResource,
+  Show,
+} from "solid-js"
 import { useNavigate, useParams } from "@solidjs/router"
 import { createForm, Field, Form } from "@modular-forms/solid"
 import { listingFormData } from "../ListingForm/ListingForm"
@@ -8,6 +15,7 @@ import ImageItem from "../ImageItem/ImageItem"
 import routes from "../../utils/client-routes"
 import { v4 as uuid } from "uuid"
 import "./ManageImages.scss"
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner"
 
 interface manageImagesProps {
   page: string
@@ -23,6 +31,7 @@ export const [storedImages, setStoredImages] = createSignal([])
 const ManageImages: Component<manageImagesProps> = props => {
   const manageImagesForm = createForm<manageImagesForm>()
   const [propertyId, setPropertyId] = createSignal(null)
+  const [submitted, setSubmitted] = createSignal(false)
   const navigate = useNavigate()
   const params = useParams()
   let fileRef
@@ -107,49 +116,55 @@ const ManageImages: Component<manageImagesProps> = props => {
       navigate(`${routes.editListing}/${currentListing().property.id}`)
   }
 
+  const [submittedListing] = createResource(submitted, handleSubmit)
+
   return (
     <div class="manage-images">
-      <Form
-        of={manageImagesForm}
-        class="manage-images__form"
-        onSubmit={handleSubmit}>
-        <Field of={manageImagesForm} name="upload">
-          {field => (
-            <input
-              {...field.props}
-              id="upload"
-              class="manage-images__input"
-              type="file"
-              accept="image/jpeg, image/png, image/jpg"
-              multiple
-              ref={fileRef}
-              onchange={handleUpload}
-            />
-          )}
-        </Field>
-        <div class="manage-images__stored">
-          {storedImages().length > 0 && (
-            <h2 class="manage-images__heading">existing images</h2>
-          )}
-          <For each={storedImages()}>
-            {image => <ImageItem image={image} type="stored" />}
-          </For>
-        </div>
-        <div class="manage-images__uploaded">
-          {uploadedImages().length > 0 && (
-            <h2 class="manage-images__heading">new images</h2>
-          )}
-          <For each={uploadedImages()}>
-            {image => <ImageItem image={image} type="uploaded" />}
-          </For>
-        </div>
-        <div class="manage-images__actions">
-          <button class="manage-images__button" onclick={handleReturn}>
-            back
-          </button>
-          <button class="manage-images__button">submit</button>
-        </div>
-      </Form>
+      <Show when={!submittedListing.loading} fallback={<LoadingSpinner />}>
+        <Form
+          of={manageImagesForm}
+          class="manage-images__form"
+          onSubmit={() => {
+            setSubmitted(true)
+          }}>
+          <Field of={manageImagesForm} name="upload">
+            {field => (
+              <input
+                {...field.props}
+                id="upload"
+                class="manage-images__input"
+                type="file"
+                accept="image/jpeg, image/png, image/jpg"
+                multiple
+                ref={fileRef}
+                onchange={handleUpload}
+              />
+            )}
+          </Field>
+          <div class="manage-images__stored">
+            {storedImages().length > 0 && (
+              <h2 class="manage-images__heading">existing images</h2>
+            )}
+            <For each={storedImages()}>
+              {image => <ImageItem image={image} type="stored" />}
+            </For>
+          </div>
+          <div class="manage-images__uploaded">
+            {uploadedImages().length > 0 && (
+              <h2 class="manage-images__heading">new images</h2>
+            )}
+            <For each={uploadedImages()}>
+              {image => <ImageItem image={image} type="uploaded" />}
+            </For>
+          </div>
+          <div class="manage-images__actions">
+            <button class="manage-images__button" onclick={handleReturn}>
+              back
+            </button>
+            <button class="manage-images__button">submit</button>
+          </div>
+        </Form>
+      </Show>
     </div>
   )
 }

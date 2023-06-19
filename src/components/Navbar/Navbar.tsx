@@ -31,47 +31,45 @@ export const navbarItems = [
 
 const Navbar: Component = () => {
   const [showNavbar, setShowNavbar] = createSignal(true)
-  const [scrollY, setScrollY] = createSignal(window.pageYOffset)
-  const [newScrollY, setNewScrollY] = createSignal(window.pageYOffset)
+  const [scrollY, setScrollY] = createSignal(window.scrollY)
+  const [newScrollY, setNewScrollY] = createSignal(window.scrollY)
 
   window.addEventListener("scroll", () => setNewScrollY(window.scrollY))
 
   createEffect(() => {
     if (newScrollY() > scrollY()) {
       setShowNavbar(false)
-      setScrollY(window.scrollY - 1)
-    } else {
+      setScrollY(newScrollY() - 1)
+    } else if (newScrollY() < scrollY()) {
       setShowNavbar(true)
-      setScrollY(window.scrollY + 1)
+      setScrollY(newScrollY() + 1)
     }
   })
 
   return (
-    <>
-      <nav class={showNavbar() ? "navbar" : "navbar navbar--scroll-down"}>
-        <ul class="navbar__list">
-          <For each={navbarItems}>
-            {item => (
-              <li
-                class={
-                  loggedIn() && item.profile
-                    ? "navbar__item"
-                    : loggedIn() && item.login
-                    ? "navbar__hide"
-                    : !loggedIn() && item.profile
-                    ? `navbar__hide`
-                    : "navbar__item"
-                }>
-                <A class="navbar__link" href={item.link}>
-                  <img class="navbar__icon" src={item.icon} alt={item.name} />
-                  <span class="navbar__text">{item.name}</span>
-                </A>
-              </li>
-            )}
-          </For>
-        </ul>
-      </nav>
-    </>
+    <nav class={showNavbar() ? "navbar" : "navbar navbar--hide"}>
+      <ul class="navbar__list">
+        <For each={navbarItems}>
+          {item => (
+            <li
+              class={
+                loggedIn() && item.profile
+                  ? "navbar__item"
+                  : loggedIn() && item.login
+                  ? "navbar__hide"
+                  : !loggedIn() && item.profile
+                  ? `navbar__hide`
+                  : "navbar__item"
+              }>
+              <A class="navbar__link" href={item.link}>
+                <img class="navbar__icon" src={item.icon} alt={item.name} />
+                <span class="navbar__text">{item.name}</span>
+              </A>
+            </li>
+          )}
+        </For>
+      </ul>
+    </nav>
   )
 }
 

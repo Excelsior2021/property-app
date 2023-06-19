@@ -1,19 +1,34 @@
-import { Component } from "solid-js"
-import { useLocation } from "@solidjs/router"
+import { Component, createEffect, createSignal } from "solid-js"
+import { useParams } from "@solidjs/router"
 import ListingForm from "../../components/ListingForm/ListingForm"
+import { accessToken } from "../../store/store"
+import { getListingDetails } from "../../api/api-endpoints"
 import "./EditListing.scss"
-import { currentListing } from "../../store/store"
 
 const EditListing: Component = () => {
-  const location = useLocation()
+  const [listing, setListing] = createSignal(null)
+  const params = useParams()
+
+  createEffect(async () => {
+    const res = await fetch(getListingDetails(params.id), {
+      headers: {
+        Authorization: `Bearer ${accessToken()}`,
+      },
+    })
+
+    const data = await res.json()
+    setListing(data)
+  })
 
   return (
     <div class="edit-listing">
-      <ListingForm
-        listingDetails={currentListing().property.propertyDetails}
-        listingId={currentListing().property.id}
-        page="edit"
-      />
+      {listing() && (
+        <ListingForm
+          listingDetails={listing().property.propertyDetails}
+          listingId={listing().property.id}
+          page="edit"
+        />
+      )}
     </div>
   )
 }

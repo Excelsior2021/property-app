@@ -1,22 +1,26 @@
-import { Component, createSignal, createEffect, Show } from "solid-js"
+import { Component, Show, createResource } from "solid-js"
 import Listings from "../../components/Listings/Listings"
 import { getListings } from "../../api/api-endpoints"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import "./Discover.scss"
 
 const Discover: Component = () => {
-  const [listings, setListings] = createSignal([])
-
-  createEffect(async () => {
+  const fetchListings = async () => {
     const res = await fetch(getListings)
-    setListings(await res.json())
-  })
+    return await res.json()
+  }
+
+  const [listings] = createResource(fetchListings)
 
   const fallback = <p class="discover__no-data">There aren't any listings :(</p>
 
   return (
     <div class="discover">
-      <Show when={listings().length > 0} fallback={fallback}></Show>
-      <Listings listings={listings()} />
+      <Show when={!listings.loading} fallback={<LoadingSpinner />}>
+        <Show when={listings().length > 0} fallback={fallback}>
+          <Listings listings={listings()} />
+        </Show>
+      </Show>
     </div>
   )
 }

@@ -1,23 +1,23 @@
-import { Component, createSignal, createEffect, Show } from "solid-js"
+import { Component, Show, createResource } from "solid-js"
 import { accessToken, loggedIn } from "../../store/store"
 import { getSavedListings } from "../../api/api-endpoints"
 import Listings from "../../components/Listings/Listings"
 import "./SavedListings.scss"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 
 const SavedListings: Component = () => {
-  const [savedListings, setSavedListings] = createSignal([])
-
-  if (loggedIn()) {
-    createEffect(async () => {
+  const fetchListings = async () => {
+    if (loggedIn()) {
       const res = await fetch(getSavedListings, {
         headers: {
           Authorization: `Bearer ${accessToken()}`,
         },
       })
-      const data = await res.json()
-      setSavedListings(data)
-    })
+      return await res.json()
+    }
   }
+
+  const [savedListings] = createResource(fetchListings)
 
   const loginFallback = (
     <p class="saved-listings__fallback-text">
@@ -34,10 +34,10 @@ const SavedListings: Component = () => {
   return (
     <div class="saved-listings">
       <Show when={loggedIn()} fallback={loginFallback}>
-        <Show when={savedListings().length > 0} fallback={noDataFallback}>
-          <ul class="saved-listings__list">
+        <Show when={!savedListings.loading} fallback={<LoadingSpinner />}>
+          <Show when={savedListings().length > 0} fallback={noDataFallback}>
             <Listings listings={savedListings()} />
-          </ul>
+          </Show>
         </Show>
       </Show>
     </div>
