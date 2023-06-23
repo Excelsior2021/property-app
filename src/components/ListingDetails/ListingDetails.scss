@@ -1,3 +1,5 @@
+@use "../../partials/mixins" as *;
+
 .listing-details {
   display: flex;
   flex-direction: column;
@@ -11,5 +13,11 @@
   &__contact {
     text-transform: capitalize;
     font-weight: bold;
+  }
+
+  &__button {
+    &--contact {
+      @include button-form;
+    }
   }
 }

@@ -16,7 +16,7 @@ export const navbarItems = [
     icon: "/icons/saved.svg",
   },
   {
-    name: "login",
+    name: "log in",
     link: routes.login,
     icon: "/icons/account.svg",
     login: true,

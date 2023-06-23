@@ -26,4 +26,8 @@
       margin-bottom: $margin-form-error;
     }
   }
+
+  &__link {
+    @include link-form;
+  }
 }

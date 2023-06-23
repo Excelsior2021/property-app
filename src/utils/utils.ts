@@ -1,5 +1,5 @@
 import { handleFormInputType } from "../types/general"
-import { setErrorMessage, setLoggedIn } from "../store/store"
+import { setErrorMessage, setLoggedIn, setModal } from "../store/store"
 import routes from "./client-routes"
 
 export const handleFormInput: handleFormInputType = (event, setFormData) => {
@@ -39,4 +39,10 @@ export const handleServerError = res => {
     setErrorMessage("There was a server error. Please try again later.")
     throw new Error()
   }
+}
+
+export const disableModal = () => {
+  const body = document.getElementById("body")
+  setModal(false)
+  body.style.overflow = "auto"
 }

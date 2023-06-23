@@ -1,7 +1,7 @@
 import { Component, Switch, Match, For } from "solid-js"
 import { useLocation, A } from "@solidjs/router"
 import { navbarItems } from "../Navbar/Navbar"
-import { loggedIn } from "../../store/store"
+import { loggedIn, setModal } from "../../store/store"
 import routes from "../../utils/client-routes"
 import "./Header.scss"
 
@@ -11,7 +11,9 @@ const Header: Component = () => {
   return (
     <header class="header">
       <div class="header__container">
-        <div class="header__logo">lifeStyle</div>
+        <div class="header__logo" onclick={() => setModal(true)}>
+          lifeStyle
+        </div>
 
         <Switch>
           <Match when={location.pathname === routes.discover}>

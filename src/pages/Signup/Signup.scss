@@ -22,9 +22,14 @@
 
   &__error {
     @include error-form;
+
+    &--form {
+      margin-bottom: $margin-form-error;
+    }
   }
 
-  &__server-error {
-    margin-bottom: $margin-form-error;
+  &__link {
+    @include link-form;
+    color: salmon;
   }
 }

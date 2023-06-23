@@ -1,4 +1,5 @@
 import { Component } from "solid-js"
+import { useNavigate } from "@solidjs/router"
 import { deleteImage } from "../../api/api-endpoints"
 import {
   accessToken,
@@ -11,6 +12,7 @@ import {
 } from "../ManageImages/ManageImages"
 import { fetchListingDetails } from "../../api/api"
 import { handleServerError } from "../../utils/utils"
+import routes from "../../utils/client-routes"
 import "./ImageItem.scss"
 
 interface imageItemProps {
@@ -21,6 +23,7 @@ interface imageItemProps {
 const ImageItem: Component<imageItemProps> = props => {
   let src
   let propertyId: string
+  const navigate = useNavigate()
   if (props.type === "uploaded") src = URL.createObjectURL(props.image.file)
   if (props.type === "stored") {
     src = props.image.path
@@ -41,7 +44,7 @@ const ImageItem: Component<imageItemProps> = props => {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken()}`,
+            Authorization: `Bearer ${null}`,
           },
           body: JSON.stringify({
             imageId: props.image.id,
@@ -56,7 +59,8 @@ const ImageItem: Component<imageItemProps> = props => {
           setCurrentListing(updatedListing)
         } else throw new Error()
       } catch (error) {
-        handleServerError(res)
+        const { route } = handleServerError(res)
+        if (route) navigate(routes.login)
       }
     }
   }

@@ -1,3 +1,11 @@
-.main {
-  padding: 24px;
+.app {
+  &__modal {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  &__main {
+    padding: 24px;
+  }
 }

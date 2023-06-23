@@ -1,4 +1,4 @@
-import { Component } from "solid-js"
+import { Component, createSignal } from "solid-js"
 import { Routes, Route } from "@solidjs/router"
 import Header from "./components/Header/Header"
 import Navbar from "./components/Navbar/Navbar"
@@ -13,7 +13,13 @@ import EditListing from "./pages/EditListing/EditListing"
 import MyListings from "./pages/MyListings/MyListings"
 import UploadImages from "./pages/UploadImages/UploadImages"
 import EditImages from "./pages/EditImages/EditImages"
-import { setAccessToken, setLoggedIn } from "./store/store"
+import Modal from "./components/Modal/Modal"
+import {
+  modal,
+  modalOverlayData,
+  setAccessToken,
+  setLoggedIn,
+} from "./store/store"
 import { fetchSavedListingsIds } from "./api/api"
 import routes from "./utils/client-routes"
 import "./App.scss"
@@ -28,8 +34,11 @@ const App: Component = () => {
 
   return (
     <div class="app">
+      <div class="app__modal">
+        {modal() && <Modal data={modalOverlayData()} />}
+      </div>
       <Header />
-      <main class="main">
+      <main class="app__main">
         <Routes>
           <Route path={routes.discover} component={() => <Discover />} />
           <Route

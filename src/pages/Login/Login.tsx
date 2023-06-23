@@ -119,7 +119,10 @@ const Login: Component = () => {
         </p>
 
         <p class="login__text">
-          Don't have an account? <A href="/sign-up">Sign up here</A>
+          Don't have an account?{" "}
+          <A class="login__link" href="/sign-up">
+            Sign up here
+          </A>
         </p>
       </Show>
     </div>

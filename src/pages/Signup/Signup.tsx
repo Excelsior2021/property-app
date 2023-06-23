@@ -170,12 +170,15 @@ const Signup: Component = () => {
           <button class="signup__button">sign up</button>
         </Form>
 
-        <div class="signup__server-errors">
+        <div class="signup__error signup__error--from">
           {errorMessage() && errorMessage()}
         </div>
 
         <p class="signup__text">
-          Already have an account? <A href="/login">Log in here</A>
+          Already have an account?{" "}
+          <A class="signup__link" href="/login">
+            Log in here
+          </A>
         </p>
       </Show>
     </div>
