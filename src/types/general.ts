@@ -29,6 +29,5 @@ export type handleFormInputType = (
   event: Event & {
     currentTarget: HTMLInputElement | HTMLTextAreaElement
   },
-  setter: Setter<{}>,
-  setServerError: Setter<boolean>
+  setter: Setter<{}>
 ) => void

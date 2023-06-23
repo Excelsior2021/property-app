@@ -1,18 +1,25 @@
 import { Component, createResource, Show } from "solid-js"
-import { accessToken } from "../../store/store"
 import Listings from "../../components/Listings/Listings"
-import { listing } from "../../api/api-endpoints"
-import "./MyListings.scss"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
+import { accessToken } from "../../store/store"
+import { listing } from "../../api/api-endpoints"
+import { handleServerError } from "../../utils/utils"
+import "./MyListings.scss"
 
 const MyListings: Component = () => {
   const fetchListings = async () => {
-    const res = await fetch(listing, {
-      headers: {
-        Authorization: `Bearer ${accessToken()}`,
-      },
-    })
-    return await res.json()
+    let res
+    try {
+      res = await fetch(listing, {
+        headers: {
+          Authorization: `Bearer ${accessToken()}`,
+        },
+      })
+      if (res.status === 200) return await res.json()
+      else throw new Error()
+    } catch (error) {
+      handleServerError(res)
+    }
   }
   const [listings] = createResource(fetchListings)
 

@@ -1,19 +1,26 @@
-import { Component, Show, createResource } from "solid-js"
-import { accessToken, loggedIn } from "../../store/store"
+import { Component, Show, createResource, createSignal } from "solid-js"
+import { accessToken, errorMessage, loggedIn } from "../../store/store"
 import { getSavedListings } from "../../api/api-endpoints"
 import Listings from "../../components/Listings/Listings"
-import "./SavedListings.scss"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
+import ServerError from "../../components/ServerError/ServerError"
+import "./SavedListings.scss"
+import { handleServerError } from "../../utils/utils"
 
 const SavedListings: Component = () => {
   const fetchListings = async () => {
-    if (loggedIn()) {
-      const res = await fetch(getSavedListings, {
-        headers: {
-          Authorization: `Bearer ${accessToken()}`,
-        },
-      })
-      return await res.json()
+    let res
+    try {
+      if (loggedIn()) {
+        res = await fetch(getSavedListings, {
+          headers: {
+            Authorization: `Bearer ${accessToken()}`,
+          },
+        })
+        return await res.json()
+      }
+    } catch (error) {
+      handleServerError(res)
     }
   }
 
@@ -34,11 +41,13 @@ const SavedListings: Component = () => {
   return (
     <div class="saved-listings">
       <Show when={loggedIn()} fallback={loginFallback}>
-        <Show when={!savedListings.loading} fallback={<LoadingSpinner />}>
-          <Show when={savedListings().length > 0} fallback={noDataFallback}>
-            <Listings listings={savedListings()} />
+        <ServerError data={savedListings} error={errorMessage()}>
+          <Show when={!savedListings.loading} fallback={<LoadingSpinner />}>
+            <Show when={savedListings().length > 0} fallback={noDataFallback}>
+              <Listings listings={savedListings()} />
+            </Show>
           </Show>
-        </Show>
+        </ServerError>
       </Show>
     </div>
   )

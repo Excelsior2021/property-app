@@ -13,3 +13,5 @@ export const [accessToken, setAccessToken] = createSignal("")
 export const [savedListingsIds, setSavedListingsIds] = createSignal(stringArray)
 
 export const [currentListing, setCurrentListing] = createSignal(null)
+
+export const [errorMessage, setErrorMessage] = createSignal("")

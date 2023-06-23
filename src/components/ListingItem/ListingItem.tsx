@@ -2,10 +2,9 @@ import { Component } from "solid-js"
 import { useNavigate } from "@solidjs/router"
 import ImageContainer from "../ImageContainer/ImageContainer"
 import ListingItemDetails from "../ListingItemDetails/ListingItemDetails"
-import { accessToken, loggedIn, setCurrentListing } from "../../store/store"
+import { loggedIn, setCurrentListing } from "../../store/store"
 import { listingType } from "../../types/general"
-import { saveListing, unsaveListing } from "../../api/api-endpoints"
-import { fetchSavedListingsIds } from "../../api/api"
+import { handleSave } from "../../api/api"
 import routes from "../../utils/client-routes"
 import "./ListingItem.scss"
 
@@ -23,53 +22,13 @@ const ListingItem: Component<ListingItemProps> = props => {
 
     if (loggedIn()) {
       if (props.saved) {
-        handleUnsave(listing)
+        handleSave(listing, false)
       } else {
-        handleSave(listing)
+        handleSave(listing, true)
       }
     } else {
       navigate(routes.login)
     }
-  }
-
-  const handleUnsave = async (listing: listingType) => {
-    const {
-      property: { email, id },
-    } = listing
-
-    const res = await fetch(unsaveListing, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken()}`,
-      },
-      body: JSON.stringify({
-        userId: email,
-        propertyId: id,
-      }),
-    })
-    fetchSavedListingsIds()
-  }
-
-  const handleSave = async (listing: listingType) => {
-    const date = new Date().toISOString()
-    const {
-      property: { email, id },
-    } = listing
-
-    const res = await fetch(saveListing, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken()}`,
-      },
-      body: JSON.stringify({
-        userId: email,
-        propertyId: id,
-        createdAt: date,
-      }),
-    })
-    fetchSavedListingsIds()
   }
 
   const handleNavigate = (event: Event, requestPage: string) => {
@@ -86,7 +45,7 @@ const ListingItem: Component<ListingItemProps> = props => {
         })
         break
       default:
-        null
+        break
     }
   }
 

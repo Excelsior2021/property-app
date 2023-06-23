@@ -1,23 +1,25 @@
 import { Component, createEffect, createSignal } from "solid-js"
 import { useParams } from "@solidjs/router"
 import ListingForm from "../../components/ListingForm/ListingForm"
-import { accessToken } from "../../store/store"
 import { getListingDetails } from "../../api/api-endpoints"
 import "./EditListing.scss"
+import { handleServerError } from "../../utils/utils"
 
 const EditListing: Component = () => {
   const [listing, setListing] = createSignal(null)
   const params = useParams()
 
   createEffect(async () => {
-    const res = await fetch(getListingDetails(params.id), {
-      headers: {
-        Authorization: `Bearer ${accessToken()}`,
-      },
-    })
-
-    const data = await res.json()
-    setListing(data)
+    let res
+    try {
+      const res = await fetch(getListingDetails(params.id))
+      if (res.status === 200) {
+        const data = await res.json()
+        setListing(data)
+      } else throw new Error()
+    } catch (error) {
+      handleServerError(res)
+    }
   })
 
   return (

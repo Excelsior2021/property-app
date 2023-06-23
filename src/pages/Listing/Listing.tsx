@@ -3,25 +3,12 @@ import { useParams } from "@solidjs/router"
 import ImageContainer from "../../components/ImageContainer/ImageContainer"
 import ListingDetails from "../../components/ListingDetails/ListingDetails"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
-import { accessToken } from "../../store/store"
-import { getListingDetails } from "../../api/api-endpoints"
+import { fetchListingDetails } from "../../api/api"
 import "./Listing.scss"
 
 const Listing: Component = () => {
   const params = useParams()
-
-  const fetchListing = async () => {
-    const res = await fetch(getListingDetails(params.id), {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken()}`,
-      },
-    })
-
-    return await res.json()
-  }
-
-  const [listing] = createResource(fetchListing)
+  const [listing] = createResource(() => fetchListingDetails(params.id))
 
   return (
     <div class="listing">

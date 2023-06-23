@@ -1,16 +1,17 @@
-import { Component, createEffect } from "solid-js"
+import { Component } from "solid-js"
 import { deleteImage } from "../../api/api-endpoints"
 import {
   accessToken,
   currentListing,
   setCurrentListing,
 } from "../../store/store"
-import "./ImageItem.scss"
 import {
   setStoredImages,
   setUploadedImages,
 } from "../ManageImages/ManageImages"
-import { getListing } from "../../api/api"
+import { fetchListingDetails } from "../../api/api"
+import { handleServerError } from "../../utils/utils"
+import "./ImageItem.scss"
 
 interface imageItemProps {
   image: any
@@ -34,8 +35,9 @@ const ImageItem: Component<imageItemProps> = props => {
     }
 
     if (props.type === "stored") {
+      let res
       try {
-        const res = await fetch(deleteImage, {
+        res = await fetch(deleteImage, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -47,12 +49,14 @@ const ImageItem: Component<imageItemProps> = props => {
           }),
         })
 
-        const updatedListing = await getListing(propertyId)
-        setStoredImages([])
-        setUploadedImages([])
-        setCurrentListing(updatedListing)
+        if (res.status === 201) {
+          const updatedListing = await fetchListingDetails(propertyId)
+          setStoredImages([])
+          setUploadedImages([])
+          setCurrentListing(updatedListing)
+        } else throw new Error()
       } catch (error) {
-        console.log(error)
+        handleServerError(res)
       }
     }
   }

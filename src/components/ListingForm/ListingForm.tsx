@@ -1,7 +1,7 @@
 import { Component, createEffect, createSignal } from "solid-js"
-import { createForm, Field, Form, required } from "@modular-forms/solid"
+import { createForm, required } from "@modular-forms/solid"
 import { useNavigate, useParams } from "@solidjs/router"
-import { handleFormInput } from "../../utils/utils"
+import { handleFormInput, handleServerError } from "../../utils/utils"
 import { listingDetailsType } from "../../types/general"
 import { editListing } from "../../api/api-endpoints"
 import { accessToken } from "../../store/store"
@@ -36,8 +36,7 @@ export const [listingFormData, setListingFormData] = createSignal(
 )
 
 const ListingForm: Component<listingFormProps> = props => {
-  const listingForm = createForm<listingForm>()
-  const [serverError, setServerError] = createSignal(false)
+  const [listingForm, { Field, Form }] = createForm<listingForm>()
   const navigate = useNavigate()
   const params = useParams()
   const subActionsClass = "listing-form__actions--sub"
@@ -60,8 +59,9 @@ const ListingForm: Component<listingFormProps> = props => {
   }
 
   const handleSave = async () => {
+    let res
     try {
-      const res = await fetch(editListing(params.id), {
+      res = await fetch(editListing(params.id), {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -69,9 +69,11 @@ const ListingForm: Component<listingFormProps> = props => {
         },
         body: JSON.stringify(listingFormData()),
       })
-      navigate(routes.myListings)
+      if (res.status === 201) navigate(routes.myListings)
+      else throw new Error()
     } catch (error) {
-      console.log(error)
+      const { route } = handleServerError(res)
+      if (route) navigate(route)
     }
   }
 
@@ -82,47 +84,34 @@ const ListingForm: Component<listingFormProps> = props => {
 
   return (
     <div class="listing-form">
-      <Form
-        of={listingForm}
-        class="listing-form__form"
-        onSubmit={handleFormSubmission}>
-        <Field
-          of={listingForm}
-          name="title"
-          validate={[required("please provide a title")]}>
-          {field => (
+      <Form class="listing-form__form" onSubmit={handleFormSubmission}>
+        <Field name="title" validate={[required("please provide a title")]}>
+          {(field, fieldProps) => (
             <>
               <input
-                {...field.props}
+                {...fieldProps}
                 class="listing-form__input"
                 type="text"
                 placeholder="title"
                 value={props.listingDetails.title}
-                onchange={event =>
-                  handleFormInput(event, setListingFormData, setServerError)
-                }
+                onchange={event => handleFormInput(event, setListingFormData)}
                 required
               />
               {field.error && <p class="listing-form__error">{field.error}</p>}
             </>
           )}
         </Field>
-        <Field
-          of={listingForm}
-          name="price"
-          validate={[required("please provide a price")]}>
-          {field => (
+        <Field name="price" validate={[required("please provide a price")]}>
+          {(field, fieldProps) => (
             <>
               <input
-                {...field.props}
+                {...fieldProps}
                 class="listing-form__input"
                 type="number"
                 placeholder="price"
                 min="1"
                 value={props.listingDetails.price}
-                onchange={event =>
-                  handleFormInput(event, setListingFormData, setServerError)
-                }
+                onchange={event => handleFormInput(event, setListingFormData)}
                 required
               />
               {field.error && <p class="listing-form__error">{field.error}</p>}
@@ -130,19 +119,16 @@ const ListingForm: Component<listingFormProps> = props => {
           )}
         </Field>
         <Field
-          of={listingForm}
           name="description"
           validate={[required("please provide a description")]}>
-          {field => (
+          {(field, fieldProps) => (
             <>
               <textarea
-                {...field.props}
+                {...fieldProps}
                 class="listing-form__input"
                 placeholder="description"
                 value={props.listingDetails.description}
-                onchange={event =>
-                  handleFormInput(event, setListingFormData, setServerError)
-                }
+                onchange={event => handleFormInput(event, setListingFormData)}
                 required
                 cols="30"
                 rows="10"></textarea>
@@ -151,20 +137,17 @@ const ListingForm: Component<listingFormProps> = props => {
           )}
         </Field>
         <Field
-          of={listingForm}
           name="location"
           validate={[required("please provide a location")]}>
-          {field => (
+          {(field, fieldProps) => (
             <>
               <input
-                {...field.props}
+                {...fieldProps}
                 class="listing-form__input"
                 type="text"
                 placeholder="location"
                 value={props.listingDetails.location}
-                onchange={event =>
-                  handleFormInput(event, setListingFormData, setServerError)
-                }
+                onchange={event => handleFormInput(event, setListingFormData)}
                 required
               />
               {field.error && <p class="listing-form__error">{field.error}</p>}
@@ -172,20 +155,17 @@ const ListingForm: Component<listingFormProps> = props => {
           )}
         </Field>
         <Field
-          of={listingForm}
           name="phone"
           validate={[required("please provide a contact number")]}>
-          {field => (
+          {(field, fieldProps) => (
             <>
               <input
-                {...field.props}
+                {...fieldProps}
                 class="listing-form__input"
                 type="tel"
                 placeholder="contact number"
                 value={props.listingDetails.phone}
-                onchange={event =>
-                  handleFormInput(event, setListingFormData, setServerError)
-                }
+                onchange={event => handleFormInput(event, setListingFormData)}
                 required
               />
               {field.error && <p class="listing-form__error">{field.error}</p>}

@@ -1,21 +1,15 @@
 import { Component, createResource, createSignal, Show } from "solid-js"
 import { A, useNavigate } from "@solidjs/router"
-import {
-  createForm,
-  Field,
-  Form,
-  required,
-  email,
-  custom,
-} from "@modular-forms/solid"
+import { createForm, required, email, custom } from "@modular-forms/solid"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import {
   setLoggedIn,
   setUserData,
   accessToken,
   setAccessToken,
+  errorMessage,
 } from "../../store/store"
-import { handleFormInput } from "../../utils/utils"
+import { handleFormInput, handleServerError } from "../../utils/utils"
 import { login, profile, signup } from "../../api/api-endpoints"
 import routes from "../../utils/client-routes"
 import "./Signup.scss"
@@ -28,20 +22,20 @@ type signupForm = {
 }
 
 const Signup: Component = () => {
-  const signupForm = createForm<signupForm>()
+  const [signupForm, { Field, Form }] = createForm<signupForm>()
   const [signupFormData, setSignupFormData] = createSignal({
     name: "",
     email: "",
     password: "",
   })
   const [retypePassword, setRetypePassword] = createSignal("")
-  const [serverError, setServerError] = createSignal(false)
-  const [submitted, setSubmitted] = createSignal(false)
+  const [submitted, setSubmitted] = createSignal(0)
   const navigate = useNavigate()
 
   const handleSubmit = async () => {
+    let res
     try {
-      const res = await fetch(signup, {
+      res = await fetch(signup, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,9 +43,10 @@ const Signup: Component = () => {
         body: JSON.stringify(signupFormData()),
       })
 
-      switch (res.status) {
-        case 201:
-          const res = await fetch(login, {
+      if (res.status === 201) {
+        let res
+        try {
+          res = await fetch(login, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -59,31 +54,29 @@ const Signup: Component = () => {
             body: JSON.stringify(signupFormData()),
           })
 
-          const data = await res.json()
-          localStorage.setItem("accessToken", data.accessToken)
-          setAccessToken(data.accessToken)
+          if (res.status === 200) {
+            const data = await res.json()
+            localStorage.setItem("accessToken", data.accessToken)
+            setAccessToken(data.accessToken)
 
-          const userDataRes = await fetch(profile, {
-            headers: {
-              Authorization: `Bearer ${accessToken()}`,
-            },
-          })
+            const userDataRes = await fetch(profile, {
+              headers: {
+                Authorization: `Bearer ${accessToken()}`,
+              },
+            })
 
-          const userData = await userDataRes.json()
+            const userData = await userDataRes.json()
 
-          setLoggedIn(true)
-          setUserData(userData)
-
-          navigate(routes.profile)
-          break
-        case 409:
-          setServerError(true)
-          break
-        default:
-          break
+            setLoggedIn(true)
+            setUserData(userData)
+            navigate(routes.profile)
+          }
+        } catch (error) {
+          handleServerError(res)
+        }
       }
     } catch (error) {
-      console.log(error)
+      handleServerError(res)
     }
   }
 
@@ -93,25 +86,19 @@ const Signup: Component = () => {
     <div class="signup">
       <Show when={!signedUp.loading} fallback={<LoadingSpinner />}>
         <Form
-          of={signupForm}
           class="signup__form"
           onSubmit={() => {
-            setSubmitted(true)
+            setSubmitted(prev => prev + 1)
           }}>
-          <Field
-            of={signupForm}
-            name="name"
-            validate={[required("a full name is required.")]}>
-            {field => (
+          <Field name="name" validate={[required("a full name is required.")]}>
+            {(field, props) => (
               <>
                 <input
-                  {...field.props}
+                  {...props}
                   class="signup__input"
                   type="text"
                   placeholder="name"
-                  onchange={event =>
-                    handleFormInput(event, setSignupFormData, setServerError)
-                  }
+                  onchange={event => handleFormInput(event, setSignupFormData)}
                   required
                 />
                 {field.error && <p class="signup__error">{field.error}</p>}
@@ -119,22 +106,19 @@ const Signup: Component = () => {
             )}
           </Field>
           <Field
-            of={signupForm}
             name="email"
             validate={[
               required("an email is required."),
               email("please enter a valid email address"),
             ]}>
-            {field => (
+            {(field, props) => (
               <>
                 <input
-                  {...field.props}
+                  {...props}
                   class="signup__input"
                   type="email"
                   placeholder="email"
-                  onchange={event =>
-                    handleFormInput(event, setSignupFormData, setServerError)
-                  }
+                  onchange={event => handleFormInput(event, setSignupFormData)}
                   required
                 />
                 {field.error && <p class="signup__error">{field.error}</p>}
@@ -142,19 +126,16 @@ const Signup: Component = () => {
             )}
           </Field>
           <Field
-            of={signupForm}
             name="password"
             validate={[required("a password is required.")]}>
-            {field => (
+            {(field, props) => (
               <>
                 <input
-                  {...field.props}
+                  {...props}
                   class="signup__input"
                   type="password"
                   placeholder="password"
-                  onchange={event =>
-                    handleFormInput(event, setSignupFormData, setServerError)
-                  }
+                  onchange={event => handleFormInput(event, setSignupFormData)}
                   required
                 />
                 {field.error && <p class="signup__error">{field.error}</p>}
@@ -162,7 +143,6 @@ const Signup: Component = () => {
             )}
           </Field>
           <Field
-            of={signupForm}
             name="retypePassword"
             validate={[
               custom(
@@ -171,10 +151,10 @@ const Signup: Component = () => {
               ),
               required("please retype your password."),
             ]}>
-            {field => (
+            {(field, props) => (
               <>
                 <input
-                  {...field.props}
+                  {...props}
                   class="signup__input"
                   type="password"
                   placeholder="retype password"
@@ -191,11 +171,7 @@ const Signup: Component = () => {
         </Form>
 
         <div class="signup__server-errors">
-          {serverError() && (
-            <p class="signup__server-error signup__error">
-              Email address already registered.
-            </p>
-          )}
+          {errorMessage() && errorMessage()}
         </div>
 
         <p class="signup__text">

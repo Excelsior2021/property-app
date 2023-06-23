@@ -7,15 +7,16 @@ import {
   Show,
 } from "solid-js"
 import { useNavigate, useParams } from "@solidjs/router"
-import { createForm, Field, Form } from "@modular-forms/solid"
+import { createForm } from "@modular-forms/solid"
 import { listingFormData } from "../ListingForm/ListingForm"
-import { accessToken, currentListing } from "../../store/store"
+import { accessToken, currentListing, errorMessage } from "../../store/store"
 import { editListing, listing, uploadImage } from "../../api/api-endpoints"
 import ImageItem from "../ImageItem/ImageItem"
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner"
 import routes from "../../utils/client-routes"
 import { v4 as uuid } from "uuid"
+import { handleServerError } from "../../utils/utils"
 import "./ManageImages.scss"
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner"
 
 interface manageImagesProps {
   page: string
@@ -29,22 +30,22 @@ export const [uploadedImages, setUploadedImages] = createSignal([])
 export const [storedImages, setStoredImages] = createSignal([])
 
 const ManageImages: Component<manageImagesProps> = props => {
-  const manageImagesForm = createForm<manageImagesForm>()
+  const [manageImagesForm, { Field, Form }] = createForm<manageImagesForm>()
   const [propertyId, setPropertyId] = createSignal(null)
   const [submitted, setSubmitted] = createSignal(false)
   const navigate = useNavigate()
   const params = useParams()
   let fileRef
-  let propertyDetailsMethod: string
-  let submitEndpoint: string
+  let apiMethod: string
+  let apiRoute: string
 
   if (props.page === "new") {
-    propertyDetailsMethod = "POST"
-    submitEndpoint = listing
+    apiMethod = "POST"
+    apiRoute = listing
   }
   if (props.page === "edit") {
-    propertyDetailsMethod = "PATCH"
-    submitEndpoint = editListing(params.id)
+    apiMethod = "PATCH"
+    apiRoute = editListing(params.id)
   }
 
   createEffect(() => {
@@ -67,14 +68,15 @@ const ManageImages: Component<manageImagesProps> = props => {
 
   const handleSubmit = async () => {
     const formData = new FormData()
+    let res
 
     for (const file of uploadedImages()) {
       formData.append("images", file.file)
     }
 
     try {
-      const res = await fetch(submitEndpoint, {
-        method: propertyDetailsMethod,
+      res = await fetch(apiRoute, {
+        method: apiMethod,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken()}`,
@@ -82,12 +84,15 @@ const ManageImages: Component<manageImagesProps> = props => {
         body: JSON.stringify(listingFormData()),
       })
 
-      if (props.page === "new") {
-        const data = await res.json()
-        setPropertyId(data.propertyId)
-      }
+      if (res.status === 201) {
+        if (props.page === "new") {
+          const data = await res.json()
+          setPropertyId(data.propertyId)
+        }
+      } else throw new Error()
     } catch (error) {
-      console.log(error)
+      const { route } = handleServerError(res)
+      if (route) navigate(route)
     }
 
     try {
@@ -95,7 +100,7 @@ const ManageImages: Component<manageImagesProps> = props => {
         (propertyId() && props.page === "new") ||
         (propertyId() && props.page === "edit" && uploadedImages().length > 0)
       ) {
-        const res = await fetch(uploadImage(propertyId()!), {
+        res = await fetch(uploadImage(propertyId()!), {
           method: "POST",
           body: formData,
           headers: {
@@ -104,9 +109,11 @@ const ManageImages: Component<manageImagesProps> = props => {
         })
       }
 
-      navigate(routes.myListings)
+      if (res.status === 201) navigate(routes.myListings)
+      else throw new Error()
     } catch (error) {
-      console.log(error)
+      const { route } = handleServerError(res)
+      if (route) navigate(route)
     }
   }
 
@@ -122,15 +129,14 @@ const ManageImages: Component<manageImagesProps> = props => {
     <div class="manage-images">
       <Show when={!submittedListing.loading} fallback={<LoadingSpinner />}>
         <Form
-          of={manageImagesForm}
           class="manage-images__form"
           onSubmit={() => {
             setSubmitted(true)
           }}>
-          <Field of={manageImagesForm} name="upload">
-            {field => (
+          <Field name="upload">
+            {(field, props) => (
               <input
-                {...field.props}
+                {...props}
                 id="upload"
                 class="manage-images__input"
                 type="file"
