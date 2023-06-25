@@ -22,34 +22,6 @@
     }
   }
 
-  &__icon {
-    position: absolute;
-    width: 20px;
-    top: 52px;
-    left: 10px;
-
-    @include media-tablet {
-      top: 32px;
-      left: 110px;
-    }
-  }
-
-  &__search {
-    width: 100%;
-    border-radius: 20px;
-    margin-bottom: 16px;
-    outline: none;
-    border: 1px solid lightgrey;
-    padding: 1rem;
-    padding-left: 3.5rem;
-
-    @include media-tablet {
-      margin: 0;
-      margin-right: 24px;
-      max-width: 768px;
-    }
-  }
-
   &__logo {
     padding: 12px;
   }
@@ -85,7 +57,6 @@
   }
 
   &__link {
-    width: 65px;
     text-decoration: none;
     color: black;
     display: flex;

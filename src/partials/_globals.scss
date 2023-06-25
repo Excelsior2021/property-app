@@ -17,6 +17,10 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1.6rem;
   min-height: calc(100vh + 6px);
+
+  @include media-tablet {
+    min-height: auto;
+  }
 }
 
 .page__heading {

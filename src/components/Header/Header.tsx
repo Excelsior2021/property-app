@@ -1,5 +1,6 @@
 import { Component, Switch, Match, For } from "solid-js"
 import { useLocation, A } from "@solidjs/router"
+import Search from "../Search/Search"
 import { navbarItems } from "../Navbar/Navbar"
 import { loggedIn } from "../../store/store"
 import routes from "../../utils/client-routes"
@@ -15,14 +16,7 @@ const Header: Component = () => {
 
         <Switch>
           <Match when={location.pathname === routes.discover}>
-            <img class="header__icon" src="/icons/discover.svg" alt="search" />
-            <input
-              class="header__search"
-              type="text"
-              name="search"
-              id="search"
-              placeholder="what are you looking for?"
-            />
+            <Search />
           </Match>
           <Match when={location.pathname === routes.savedListings}>
             <h1 class="header__heading">saved listings</h1>
