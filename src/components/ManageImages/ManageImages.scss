@@ -4,6 +4,10 @@
 .manage-images {
   &__form {
     @include form;
+
+    @include media-tablet {
+      @include form-max-width;
+    }
   }
 
   &__input {

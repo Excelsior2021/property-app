@@ -32,12 +32,12 @@ const Profile: Component = () => {
       })
 
       if (res.status === 200) {
-        const data = await res.json()
-        setUserData(prev => ({
-          ...prev,
-          name: data.name,
-        }))
-        return data
+        const { name, email } = await res.json()
+        setUserData({
+          name: name,
+          email: email,
+        })
+        return { name, email }
       }
     } catch (error) {
       handleServerError(res)
@@ -63,20 +63,22 @@ const Profile: Component = () => {
               Hello {userData().name ? userData().name : "user"},
             </h2>
             <p class="profile__text">What would you like to do?</p>
-            <A
-              class="profile__link"
-              href={routes.newListing}
-              onclick={() => setListingFormData(initialListingFormData)}>
-              new listing
-            </A>
-            <A class="profile__link" href={routes.myListings}>
-              my listings
-            </A>
-            <button
-              class="profile__button profile__button--logout"
-              onclick={handleLogout}>
-              logout
-            </button>
+            <div class="profile__actions">
+              <A
+                class="profile__link"
+                href={routes.newListing}
+                onclick={() => setListingFormData(initialListingFormData)}>
+                new listing
+              </A>
+              <A class="profile__link" href={routes.myListings}>
+                my listings
+              </A>
+              <button
+                class="profile__button profile__button--logout"
+                onclick={handleLogout}>
+                logout
+              </button>
+            </div>
           </Show>
         </ServerError>
       </Show>

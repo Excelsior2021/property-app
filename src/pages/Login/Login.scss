@@ -3,8 +3,7 @@
 
 .login {
   @include media-tablet {
-    max-width: 500px;
-    margin: auto;
+    @include form-max-width;
   }
 
   &__form {

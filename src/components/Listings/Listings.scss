@@ -2,12 +2,18 @@
 
 .listings {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   row-gap: 36px;
-  column-gap: 24px;
   max-width: 1280px;
+
+  @include media-two-column {
+    flex-direction: row;
+    column-gap: 24px;
+    flex-wrap: wrap;
+  }
 
   @include media-tablet {
     margin: 24px auto;
+    flex-direction: row;
   }
 }

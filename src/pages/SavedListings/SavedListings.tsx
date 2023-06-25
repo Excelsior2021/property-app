@@ -28,7 +28,7 @@ const SavedListings: Component = () => {
 
   const loginFallback = (
     <p class="saved-listings__fallback-text">
-      Please login to see your saved listings
+      Please log in to see your saved listings
     </p>
   )
 

@@ -1,11 +1,11 @@
 import { Component, Show } from "solid-js"
-import { listingDetailsType } from "../../types/general"
+import { propertyType } from "../../types/general"
 import ListingItemDetails from "../ListingItemDetails/ListingItemDetails"
 import { loggedIn, setModal, setModalOverlayData } from "../../store/store"
 import "./ListingDetails.scss"
 
 interface listingDetailsProps {
-  listingDetails: listingDetailsType
+  listingProperty: propertyType
 }
 
 const ListingDetailsContactButton = (
@@ -24,14 +24,17 @@ const ListingDetailsContactButton = (
 
 const ListingDetails: Component<listingDetailsProps> = props => (
   <div class="listing-details">
-    <ListingItemDetails listingDetails={props.listingDetails} />
+    <ListingItemDetails
+      listingDetails={props.listingProperty.propertyDetails}
+    />
     <p class="listing-details__description">
-      {props.listingDetails.description}
+      {props.listingProperty.propertyDetails.description}
     </p>
     <Show when={loggedIn()} fallback={ListingDetailsContactButton}>
       <p class="listing-details__contact">
-        contact number: {props.listingDetails.phone}
+        contact number: {props.listingProperty.propertyDetails.phone}
       </p>
+      <p class="listing-details__email">email: {props.listingProperty.email}</p>
     </Show>
   </div>
 )

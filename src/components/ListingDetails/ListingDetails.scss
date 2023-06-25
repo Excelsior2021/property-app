@@ -10,9 +10,10 @@
     margin: 16px 0;
   }
 
-  &__contact {
-    text-transform: capitalize;
-    font-weight: bold;
+  &__contact,
+  &__email {
+    font-size: 1.8rem;
+    font-weight: 500;
   }
 
   &__button {
