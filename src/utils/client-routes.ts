@@ -20,6 +20,8 @@ const uploadImages = "/upload-images"
 
 const manageImages = "/manage-images"
 
+const searchResults = "/search"
+
 export default {
   discover,
   savedListings,
@@ -32,4 +34,5 @@ export default {
   editListing,
   uploadImages,
   manageImages,
+  searchResults,
 }

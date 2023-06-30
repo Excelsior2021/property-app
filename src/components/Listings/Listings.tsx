@@ -17,7 +17,7 @@ const Listings: Component<listingsProps> = props => {
           return (
             <ListingItem
               listing={listing}
-              saved={savedListingsIds().includes(listing.property.id)}
+              saved={savedListingsIds().includes(listing.listing.id)}
               edit={props.edit ? true : false}
             />
           )

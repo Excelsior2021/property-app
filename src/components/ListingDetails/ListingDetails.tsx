@@ -1,11 +1,11 @@
 import { Component, Show } from "solid-js"
-import { propertyType } from "../../types/general"
+import { listingDataType } from "../../types/general"
 import ListingItemDetails from "../ListingItemDetails/ListingItemDetails"
 import { loggedIn, setModal, setModalOverlayData } from "../../store/store"
 import "./ListingDetails.scss"
 
 interface listingDetailsProps {
-  listingProperty: propertyType
+  listing: listingDataType
 }
 
 const ListingDetailsContactButton = (
@@ -22,21 +22,19 @@ const ListingDetailsContactButton = (
   </button>
 )
 
-const ListingDetails: Component<listingDetailsProps> = props => (
-  <div class="listing-details">
-    <ListingItemDetails
-      listingDetails={props.listingProperty.propertyDetails}
-    />
-    <p class="listing-details__description">
-      {props.listingProperty.propertyDetails.description}
-    </p>
-    <Show when={loggedIn()} fallback={ListingDetailsContactButton}>
-      <p class="listing-details__contact">
-        contact number: {props.listingProperty.propertyDetails.phone}
-      </p>
-      <p class="listing-details__email">email: {props.listingProperty.email}</p>
-    </Show>
-  </div>
-)
+const ListingDetails: Component<listingDetailsProps> = props => {
+  return (
+    <div class="listing-details">
+      <ListingItemDetails listing={props.listing} />
+      <p class="listing-details__description">{props.listing.description}</p>
+      <Show when={loggedIn()} fallback={ListingDetailsContactButton}>
+        <p class="listing-details__contact">
+          contact number: {props.listing.phone}
+        </p>
+        <p class="listing-details__email">email: {props.listing.email}</p>
+      </Show>
+    </div>
+  )
+}
 
 export default ListingDetails

@@ -1,4 +1,4 @@
-import { Component, Show, createEffect, createResource } from "solid-js"
+import { Component, Show, createResource } from "solid-js"
 import { useParams } from "@solidjs/router"
 import ImageContainer from "../../components/ImageContainer/ImageContainer"
 import ListingDetails from "../../components/ListingDetails/ListingDetails"
@@ -10,14 +10,12 @@ const Listing: Component = () => {
   const params = useParams()
   const [listing] = createResource(() => fetchListingDetails(params.id))
 
-  createEffect(() => console.log(listing()))
-
   return (
     <div class="listing">
       <Show when={!listing.loading} fallback={<LoadingSpinner />}>
-        <p class="listing__title">{listing().property.propertyDetails.title}</p>
+        <p class="listing__title">{listing().listing.title}</p>
         <ImageContainer images={listing().images} />
-        <ListingDetails listingProperty={listing().property} />
+        <ListingDetails listing={listing().listing} />
       </Show>
     </div>
   )

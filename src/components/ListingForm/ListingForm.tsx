@@ -2,7 +2,7 @@ import { Component, createEffect, createSignal } from "solid-js"
 import { createForm, required } from "@modular-forms/solid"
 import { useNavigate, useParams } from "@solidjs/router"
 import { handleFormInput, handleServerError } from "../../utils/utils"
-import { listingDetailsType } from "../../types/general"
+import { listingDataType } from "../../types/general"
 import { editListing } from "../../api/api-endpoints"
 import { accessToken } from "../../store/store"
 import CancelButton from "../CancelButton/CancelButton"
@@ -10,8 +10,7 @@ import routes from "../../utils/client-routes"
 import "./ListingForm.scss"
 
 interface listingFormProps {
-  listingDetails: listingDetailsType
-  listingId?: string
+  listing: listingDataType
   page: string
 }
 
@@ -24,6 +23,8 @@ type listingForm = {
 }
 
 export const initialListingFormData = {
+  id: "",
+  email: "",
   title: "",
   description: "",
   price: NaN,
@@ -47,7 +48,7 @@ const ListingForm: Component<listingFormProps> = props => {
       for (const property in initialListingFormData) {
         setListingFormData(prevState => ({
           ...prevState,
-          [property]: props.listingDetails[property],
+          [property]: props.listing[property],
         }))
       }
     }
@@ -93,7 +94,7 @@ const ListingForm: Component<listingFormProps> = props => {
                 class="listing-form__input"
                 type="text"
                 placeholder="title"
-                value={props.listingDetails.title}
+                value={props.listing.title}
                 onchange={event => handleFormInput(event, setListingFormData)}
                 required
               />
@@ -110,7 +111,7 @@ const ListingForm: Component<listingFormProps> = props => {
                 type="number"
                 placeholder="price"
                 min="1"
-                value={props.listingDetails.price}
+                value={props.listing.price}
                 onchange={event => handleFormInput(event, setListingFormData)}
                 required
               />
@@ -127,7 +128,7 @@ const ListingForm: Component<listingFormProps> = props => {
                 {...fieldProps}
                 class="listing-form__input"
                 placeholder="description"
-                value={props.listingDetails.description}
+                value={props.listing.description}
                 onchange={event => handleFormInput(event, setListingFormData)}
                 required
                 cols="30"
@@ -146,7 +147,7 @@ const ListingForm: Component<listingFormProps> = props => {
                 class="listing-form__input"
                 type="text"
                 placeholder="location"
-                value={props.listingDetails.location}
+                value={props.listing.location}
                 onchange={event => handleFormInput(event, setListingFormData)}
                 required
               />
@@ -164,7 +165,7 @@ const ListingForm: Component<listingFormProps> = props => {
                 class="listing-form__input"
                 type="tel"
                 placeholder="contact number"
-                value={props.listingDetails.phone}
+                value={props.listing.phone}
                 onchange={event => handleFormInput(event, setListingFormData)}
                 required
               />
@@ -187,7 +188,7 @@ const ListingForm: Component<listingFormProps> = props => {
               <button
                 class="listing-form__button listing-form__button--manage"
                 onclick={() =>
-                  navigate(`${routes.manageImages}/${props.listingId}`)
+                  navigate(`${routes.manageImages}/${props.listing.id}`)
                 }>
                 manage images
               </button>

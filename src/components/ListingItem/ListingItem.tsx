@@ -36,11 +36,11 @@ const ListingItem: Component<ListingItemProps> = props => {
 
     switch (requestPage) {
       case "details":
-        navigate(`${routes.listing}/${props.listing.property.id}`)
+        navigate(`${routes.listing}/${props.listing.listing.id}`)
         break
       case "edit":
         setCurrentListing(props.listing)
-        navigate(`${routes.editListing}/${props.listing.property.id}`, {
+        navigate(`${routes.editListing}/${props.listing.listing.id}`, {
           state: { listing: props.listing },
         })
         break
@@ -67,9 +67,7 @@ const ListingItem: Component<ListingItemProps> = props => {
       />
 
       <div class="listing-item__details">
-        <ListingItemDetails
-          listingDetails={props.listing.property.propertyDetails}
-        />
+        <ListingItemDetails listing={props.listing.listing} />
       </div>
     </li>
   )

@@ -21,7 +21,7 @@ export const fetchSavedListingsIds = async () => {
       const data = await res.json()
 
       const savedListingsIds = data.map(
-        (listing: listingType) => listing.property.id
+        (listing: listingType) => listing.listing.id
       )
       setSavedListingsIds(savedListingsIds)
     } else throw new Error()
@@ -44,7 +44,7 @@ export const fetchListingDetails = async (propertyId: string) => {
 export const handleSave = async (listing: listingType, save: boolean) => {
   const date = new Date().toISOString()
   const {
-    property: { email, id },
+    listing: { email, id },
   } = listing
   const route = save ? saveListing : unsaveListing
   let res
