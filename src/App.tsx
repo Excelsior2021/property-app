@@ -13,6 +13,7 @@ import EditListing from "./pages/EditListing/EditListing"
 import MyListings from "./pages/MyListings/MyListings"
 import UploadImages from "./pages/UploadImages/UploadImages"
 import EditImages from "./pages/EditImages/EditImages"
+import SearchResults from "./pages/SearchResults/SearchResults"
 import Modal from "./components/Modal/Modal"
 import {
   modal,
@@ -62,6 +63,10 @@ const App: Component = () => {
           <Route
             path={`${routes.manageImages}/:id`}
             component={() => <EditImages />}
+          />
+          <Route
+            path={routes.searchResults}
+            component={() => <SearchResults />}
           />
         </Routes>
       </main>

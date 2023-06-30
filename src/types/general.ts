@@ -6,23 +6,19 @@ export interface imageObjType {
   propertyId: string
 }
 
-export interface propertyType {
+export interface listingDataType {
   id: string
   email: string
-  propertyDetails: listingDetailsType
-}
-
-export interface listingType {
-  images: imageObjType[]
-  property: propertyType
-}
-
-export interface listingDetailsType {
   title: string
   price: number
   description: string
   location: string
   phone: string
+}
+
+export interface listingType {
+  images: imageObjType[]
+  listing: listingDataType
 }
 
 export type handleFormInputType = (

@@ -1,20 +1,18 @@
 import { Component } from "solid-js"
-import { listingDetailsType } from "../../types/general"
+import { listingDataType } from "../../types/general"
 import "./ListingItemDetails.scss"
 
 interface ListingItemDetailsProps {
-  listingDetails: listingDetailsType
+  listing: listingDataType
 }
 
-const ListingItemDetails: Component<ListingItemDetailsProps> = props => (
-  <div class="listing-item-details">
-    <p class="listing-item-details__location">
-      {props.listingDetails.location}
-    </p>
-    <p class="listing-item-details__price">
-      Gh₵{props.listingDetails.price} p/m
-    </p>
-  </div>
-)
+const ListingItemDetails: Component<ListingItemDetailsProps> = props => {
+  return (
+    <div class="listing-item-details">
+      <p class="listing-item-details__location">{props.listing.location}</p>
+      <p class="listing-item-details__price">Gh₵{props.listing.price} p/m</p>
+    </div>
+  )
+}
 
 export default ListingItemDetails

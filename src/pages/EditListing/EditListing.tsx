@@ -2,8 +2,8 @@ import { Component, createEffect, createSignal } from "solid-js"
 import { useParams } from "@solidjs/router"
 import ListingForm from "../../components/ListingForm/ListingForm"
 import { getListingDetails } from "../../api/api-endpoints"
-import "./EditListing.scss"
 import { handleServerError } from "../../utils/utils"
+import "./EditListing.scss"
 
 const EditListing: Component = () => {
   const [listing, setListing] = createSignal(null)
@@ -24,13 +24,7 @@ const EditListing: Component = () => {
 
   return (
     <div class="edit-listing">
-      {listing() && (
-        <ListingForm
-          listingDetails={listing().property.propertyDetails}
-          listingId={listing().property.id}
-          page="edit"
-        />
-      )}
+      {listing() && <ListingForm listing={listing().listing} page="edit" />}
     </div>
   )
 }

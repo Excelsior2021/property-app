@@ -27,7 +27,7 @@ const ImageItem: Component<imageItemProps> = props => {
   if (props.type === "uploaded") src = URL.createObjectURL(props.image.file)
   if (props.type === "stored") {
     src = props.image.path
-    propertyId = currentListing().property.id
+    propertyId = currentListing().listing.id
   }
 
   const handleDelete = async () => {
@@ -44,7 +44,7 @@ const ImageItem: Component<imageItemProps> = props => {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${null}`,
+            Authorization: `Bearer ${accessToken()}`,
           },
           body: JSON.stringify({
             imageId: props.image.id,

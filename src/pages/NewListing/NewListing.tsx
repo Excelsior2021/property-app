@@ -7,7 +7,7 @@ import "./NewListing.scss"
 const NewListing: Component = () => {
   return (
     <div class="new-listing">
-      <ListingForm listingDetails={listingFormData()} page="new" />
+      <ListingForm listing={listingFormData()} page="new" />
     </div>
   )
 }
