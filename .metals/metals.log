@@ -1,219 +1,30 @@
-2023.05.14 13:16:58 INFO  Started: Metals version 0.11.12 in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property' for client Visual Studio Code 1.78.2.
-May 14, 2023 1:16:58 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
+2023.06.30 20:06:27 INFO  Started: Metals version 0.11.12 in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property' for client Visual Studio Code 1.79.2.
+Jun 30, 2023 8:06:27 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
 INFO: Flyway Community Edition 9.16.3 by Redgate
-May 14, 2023 1:16:58 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+Jun 30, 2023 8:06:27 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
 INFO: See release notes here: https://rd.gt/416ObMi
-May 14, 2023 1:16:58 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+Jun 30, 2023 8:06:27 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
 INFO: 
-May 14, 2023 1:16:58 PM org.flywaydb.core.internal.database.base.BaseDatabaseType createDatabase
+Jun 30, 2023 8:06:27 PM org.flywaydb.core.internal.database.base.BaseDatabaseType createDatabase
 INFO: Database: jdbc:h2:file:C:\Users\temid\Documents\Programming\sarpong\lifestyle-property\.metals\metals (H2 2.1)
-May 14, 2023 1:16:59 PM org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory allAppliedMigrations
+Jun 30, 2023 8:06:27 PM org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory allAppliedMigrations
 INFO: Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
-May 14, 2023 1:16:59 PM org.flywaydb.core.internal.command.DbValidate validate
-INFO: Successfully validated 4 migrations (execution time 00:00.075s)
-May 14, 2023 1:16:59 PM org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory create
+Jun 30, 2023 8:06:27 PM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 4 migrations (execution time 00:00.045s)
+Jun 30, 2023 8:06:27 PM org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory create
 INFO: Creating Schema History table "PUBLIC"."flyway_schema_history" ...
-May 14, 2023 1:16:59 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+Jun 30, 2023 8:06:27 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
 INFO: Current version of schema "PUBLIC": << Empty Schema >>
-May 14, 2023 1:16:59 PM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+Jun 30, 2023 8:06:27 PM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
 INFO: Migrating schema "PUBLIC" to version "1 - Create tables"
-May 14, 2023 1:16:59 PM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+Jun 30, 2023 8:06:27 PM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
 INFO: Migrating schema "PUBLIC" to version "2 - Server discovery"
-May 14, 2023 1:16:59 PM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+Jun 30, 2023 8:06:27 PM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
 INFO: Migrating schema "PUBLIC" to version "3 - Jar symbols"
-May 14, 2023 1:16:59 PM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
+Jun 30, 2023 8:06:27 PM org.flywaydb.core.internal.command.DbMigrate doMigrateGroup
 INFO: Migrating schema "PUBLIC" to version "4 - Fingerprints"
-May 14, 2023 1:16:59 PM org.flywaydb.core.internal.command.DbMigrate logSummary
-INFO: Successfully applied 4 migrations to schema "PUBLIC", now at version v4 (execution time 00:00.160s)
-2023.05.14 13:16:59 INFO  time: initialize in 1.34s
-2023.05.14 13:17:04 WARN  Build server is not auto-connectable.
-2023.05.14 13:17:04 WARN  no build tool detected in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
-2023.05.14 13:17:04 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\test\scala\db\repository\UserRepositoryIT.scala
-2023.05.14 13:17:04 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\test\scala\config\JdbcDatabaseSpec.scala
-2023.05.14 13:17:04 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\test\scala\db\FlywayMigratorSpec.scala
-2023.05.14 13:17:04 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\test\scala\config\JwtConfigSpec.scala
-2023.05.14 13:17:11 INFO  no build target found for C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\test\scala\db\FlywayMigratorSpec.scala. Using presentation compiler with project's scala-library version: 3.2.2
-May 14, 2023 1:17:12 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
-WARNING: Unmatched cancel notification for request id 11
-May 14, 2023 1:17:12 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
-WARNING: Unmatched cancel notification for request id 12
-2023.05.14 13:17:15 INFO  time: code lens generation in 11s
-2023.05.14 13:17:15 INFO  time: code lens generation in 2.98s
-2023.05.14 13:17:15 INFO  time: code lens generation in 3.06s
-2023.05.14 13:17:15 INFO  time: code lens generation in 11s
-2023.05.14 13:17:23 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\test\scala\services\JwtServiceSpec.scala
-2023.05.14 14:02:16 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\service\PropertiesService.scala
-May 14, 2023 2:03:55 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
-WARNING: Unmatched cancel notification for request id 78
-2023.05.14 14:03:59 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\service\PropertiesService.scala
-2023.05.14 14:22:19 INFO  Shutting down server
-2023.05.14 14:22:19 INFO  shutting down Metals
-2023.05.14 14:22:19 INFO  Exiting server
-2023.05.20 22:00:38 INFO  Started: Metals version 0.11.12 in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property' for client Visual Studio Code 1.78.2.
-May 20, 2023 10:00:38 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
-INFO: Flyway Community Edition 9.16.3 by Redgate
-May 20, 2023 10:00:38 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
-INFO: See release notes here: https://rd.gt/416ObMi
-May 20, 2023 10:00:38 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
-INFO: 
-May 20, 2023 10:00:38 PM org.flywaydb.core.internal.database.base.BaseDatabaseType createDatabase
-INFO: Database: jdbc:h2:file:C:\Users\temid\Documents\Programming\sarpong\lifestyle-property\.metals\metals (H2 2.1)
-May 20, 2023 10:00:38 PM org.flywaydb.core.internal.command.DbValidate validate
-INFO: Successfully validated 4 migrations (execution time 00:00.020s)
-May 20, 2023 10:00:38 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
-INFO: Current version of schema "PUBLIC": 4
-May 20, 2023 10:00:38 PM org.flywaydb.core.internal.command.DbMigrate logSummary
-INFO: Schema "PUBLIC" is up to date. No migration necessary.
-2023.05.20 22:00:38 INFO  time: initialize in 0.55s
-2023.05.20 22:00:40 WARN  Build server is not auto-connectable.
-2023.05.20 22:00:40 WARN  no build tool detected in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
-2023.05.20 22:00:40 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\service\PropertiesService.scala
-2023.05.20 22:00:41 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\service\PropertiesService.scala
-2023.05.20 22:00:44 INFO  no build target found for C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\service\PropertiesService.scala. Using presentation compiler with project's scala-library version: 3.2.2
-2023.05.20 22:00:46 INFO  time: code lens generation in 4.02s
-2023.05.20 22:00:46 INFO  time: code lens generation in 5.26s
-2023.05.20 22:37:37 INFO  Shutting down server
-2023.05.20 22:37:37 INFO  shutting down Metals
-2023.05.20 22:37:37 INFO  Exiting server
-2023.05.23 21:51:36 INFO  Started: Metals version 0.11.12 in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property' for client Visual Studio Code 1.78.2.
-May 23, 2023 9:51:36 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
-INFO: Flyway Community Edition 9.16.3 by Redgate
-May 23, 2023 9:51:36 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
-INFO: See release notes here: https://rd.gt/416ObMi
-May 23, 2023 9:51:36 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
-INFO: 
-May 23, 2023 9:51:36 PM org.flywaydb.core.internal.database.base.BaseDatabaseType createDatabase
-INFO: Database: jdbc:h2:file:C:\Users\temid\Documents\Programming\sarpong\lifestyle-property\.metals\metals (H2 2.1)
-May 23, 2023 9:51:36 PM org.flywaydb.core.internal.command.DbValidate validate
-INFO: Successfully validated 4 migrations (execution time 00:00.022s)
-May 23, 2023 9:51:36 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
-INFO: Current version of schema "PUBLIC": 4
-May 23, 2023 9:51:36 PM org.flywaydb.core.internal.command.DbMigrate logSummary
-INFO: Schema "PUBLIC" is up to date. No migration necessary.
-2023.05.23 21:51:36 INFO  time: initialize in 0.52s
-2023.05.23 21:51:38 WARN  Build server is not auto-connectable.
-2023.05.23 21:51:38 WARN  no build tool detected in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
-2023.05.23 21:51:38 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\project\Dependencies.scala
-2023.05.23 21:51:41 INFO  no build target found for C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\project\Dependencies.scala. Using presentation compiler with project's scala-library version: 3.2.2
-2023.05.23 21:51:43 INFO  time: code lens generation in 4.87s
-2023.05.23 21:52:05 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\model\AccessToken.scala
-2023.05.23 21:52:08 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\model\Listing.scala
-2023.05.23 21:52:09 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\model\ListingDetails.scala
-2023.05.23 21:52:13 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\model\LoginDetails.scala
-2023.05.23 21:52:17 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\model\package.scala
-2023.05.23 21:52:30 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\routes\v1\profile\ProfileRoute.scala
-2023.05.23 21:52:58 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\model\AccessToken.scala
-2023.05.23 21:52:58 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\model\Listing.scala
-2023.05.23 21:52:59 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\model\LoginDetails.scala
-2023.05.23 21:53:02 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\middleware\AuthUser.scala
-2023.05.23 21:53:16 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\src\main\scala\server\Server.scala
-2023.05.23 21:53:36 INFO  Shutting down server
-2023.05.23 21:53:36 INFO  shutting down Metals
-2023.05.23 21:53:36 INFO  Exiting server
-2023.05.29 15:55:49 INFO  Started: Metals version 0.11.12 in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property' for client Visual Studio Code 1.78.2.
-May 29, 2023 3:55:49 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
-INFO: Flyway Community Edition 9.16.3 by Redgate
-May 29, 2023 3:55:49 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
-INFO: See release notes here: https://rd.gt/416ObMi
-May 29, 2023 3:55:49 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
-INFO: 
-May 29, 2023 3:55:50 PM org.flywaydb.core.internal.database.base.BaseDatabaseType createDatabase
-INFO: Database: jdbc:h2:file:C:\Users\temid\Documents\Programming\sarpong\lifestyle-property\.metals\metals (H2 2.1)
-May 29, 2023 3:55:50 PM org.flywaydb.core.internal.command.DbValidate validate
-INFO: Successfully validated 4 migrations (execution time 00:00.047s)
-May 29, 2023 3:55:50 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
-INFO: Current version of schema "PUBLIC": 4
-May 29, 2023 3:55:50 PM org.flywaydb.core.internal.command.DbMigrate logSummary
-INFO: Schema "PUBLIC" is up to date. No migration necessary.
-2023.05.29 15:55:50 INFO  time: initialize in 1.06s
-2023.05.29 15:55:55 WARN  Build server is not auto-connectable.
-2023.05.29 15:55:55 WARN  no build tool detected in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
-2023.05.29 15:55:55 WARN  no build target for: C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\build.sbt
-2023.05.29 15:56:02 INFO  no build target found for C:\Users\temid\Documents\Programming\sarpong\coded\scalabackend\build.sbt. Using presentation compiler with project's scala-library version: 3.2.2
-2023.05.29 15:56:05 INFO  time: code lens generation in 10s
-May 29, 2023 3:57:27 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
-WARNING: Unmatched cancel notification for request id 11
-2023.05.29 16:07:32 INFO  Shutting down server
-2023.05.29 16:07:32 INFO  shutting down Metals
-2023.05.29 16:07:32 INFO  Exiting server
-2023.05.29 16:32:55 INFO  Started: Metals version 0.11.12 in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property' for client Visual Studio Code 1.78.2.
-May 29, 2023 4:32:55 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
-INFO: Flyway Community Edition 9.16.3 by Redgate
-May 29, 2023 4:32:55 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
-INFO: See release notes here: https://rd.gt/416ObMi
-May 29, 2023 4:32:55 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
-INFO: 
-May 29, 2023 4:32:56 PM org.flywaydb.core.internal.database.base.BaseDatabaseType createDatabase
-INFO: Database: jdbc:h2:file:C:\Users\temid\Documents\Programming\sarpong\lifestyle-property\.metals\metals (H2 2.1)
-May 29, 2023 4:32:56 PM org.flywaydb.core.internal.command.DbValidate validate
-INFO: Successfully validated 4 migrations (execution time 00:00.034s)
-May 29, 2023 4:32:56 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
-INFO: Current version of schema "PUBLIC": 4
-May 29, 2023 4:32:56 PM org.flywaydb.core.internal.command.DbMigrate logSummary
-INFO: Schema "PUBLIC" is up to date. No migration necessary.
-2023.05.29 16:32:56 INFO  time: initialize in 0.89s
-2023.05.29 16:32:59 WARN  Build server is not auto-connectable.
-2023.05.29 16:32:59 WARN  no build tool detected in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
-2023.05.29 17:40:57 INFO  Shutting down server
-2023.05.29 17:40:57 INFO  shutting down Metals
-2023.05.29 17:40:57 INFO  Exiting server
-2023.06.28 21:18:36 INFO  Started: Metals version 0.11.12 in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property' for client Visual Studio Code 1.79.2.
-Jun 28, 2023 9:18:36 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
-INFO: Flyway Community Edition 9.16.3 by Redgate
-Jun 28, 2023 9:18:36 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
-INFO: See release notes here: https://rd.gt/416ObMi
-Jun 28, 2023 9:18:36 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
-INFO: 
-Jun 28, 2023 9:18:36 PM org.flywaydb.core.internal.database.base.BaseDatabaseType createDatabase
-INFO: Database: jdbc:h2:file:C:\Users\temid\Documents\Programming\sarpong\lifestyle-property\.metals\metals (H2 2.1)
-Jun 28, 2023 9:18:36 PM org.flywaydb.core.internal.command.DbValidate validate
-INFO: Successfully validated 4 migrations (execution time 00:00.021s)
-Jun 28, 2023 9:18:36 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
-INFO: Current version of schema "PUBLIC": 4
-Jun 28, 2023 9:18:36 PM org.flywaydb.core.internal.command.DbMigrate logSummary
-INFO: Schema "PUBLIC" is up to date. No migration necessary.
-2023.06.28 21:18:36 INFO  time: initialize in 0.6s
-2023.06.28 21:18:38 WARN  Build server is not auto-connectable.
-2023.06.28 21:18:38 WARN  no build tool detected in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
-2023.06.28 21:29:56 INFO  Shutting down server
-2023.06.28 21:29:56 INFO  shutting down Metals
-2023.06.28 21:29:56 INFO  Exiting server
-2023.06.29 15:28:46 INFO  Started: Metals version 0.11.12 in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property' for client Visual Studio Code 1.79.2.
-Jun 29, 2023 3:28:46 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
-INFO: Flyway Community Edition 9.16.3 by Redgate
-Jun 29, 2023 3:28:46 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
-INFO: See release notes here: https://rd.gt/416ObMi
-Jun 29, 2023 3:28:46 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
-INFO: 
-Jun 29, 2023 3:28:46 PM org.flywaydb.core.internal.database.base.BaseDatabaseType createDatabase
-INFO: Database: jdbc:h2:file:C:\Users\temid\Documents\Programming\sarpong\lifestyle-property\.metals\metals (H2 2.1)
-Jun 29, 2023 3:28:46 PM org.flywaydb.core.internal.command.DbValidate validate
-INFO: Successfully validated 4 migrations (execution time 00:00.033s)
-Jun 29, 2023 3:28:46 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
-INFO: Current version of schema "PUBLIC": 4
-Jun 29, 2023 3:28:46 PM org.flywaydb.core.internal.command.DbMigrate logSummary
-INFO: Schema "PUBLIC" is up to date. No migration necessary.
-2023.06.29 15:28:46 INFO  time: initialize in 0.82s
-2023.06.29 15:28:49 WARN  Build server is not auto-connectable.
-2023.06.29 15:28:49 WARN  no build tool detected in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
-2023.06.30 11:01:26 INFO  Shutting down server
-2023.06.30 11:01:26 INFO  shutting down Metals
-2023.06.30 11:01:26 INFO  Exiting server
-2023.06.30 18:57:38 INFO  Started: Metals version 0.11.12 in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property' for client Visual Studio Code 1.79.2.
-Jun 30, 2023 6:57:38 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
-INFO: Flyway Community Edition 9.16.3 by Redgate
-Jun 30, 2023 6:57:38 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
-INFO: See release notes here: https://rd.gt/416ObMi
-Jun 30, 2023 6:57:38 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
-INFO: 
-Jun 30, 2023 6:57:38 PM org.flywaydb.core.internal.database.base.BaseDatabaseType createDatabase
-INFO: Database: jdbc:h2:file:C:\Users\temid\Documents\Programming\sarpong\lifestyle-property\.metals\metals (H2 2.1)
-Jun 30, 2023 6:57:39 PM org.flywaydb.core.internal.command.DbValidate validate
-INFO: Successfully validated 4 migrations (execution time 00:00.020s)
-Jun 30, 2023 6:57:39 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
-INFO: Current version of schema "PUBLIC": 4
-Jun 30, 2023 6:57:39 PM org.flywaydb.core.internal.command.DbMigrate logSummary
-INFO: Schema "PUBLIC" is up to date. No migration necessary.
-2023.06.30 18:57:39 INFO  time: initialize in 0.59s
-2023.06.30 18:57:41 WARN  Build server is not auto-connectable.
-2023.06.30 18:57:41 WARN  no build tool detected in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+Jun 30, 2023 8:06:27 PM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Successfully applied 4 migrations to schema "PUBLIC", now at version v4 (execution time 00:00.089s)
+2023.06.30 20:06:27 INFO  time: initialize in 0.81s
+2023.06.30 20:06:30 WARN  Build server is not auto-connectable.
+2023.06.30 20:06:30 WARN  no build tool detected in workspace 'C:\Users\temid\Documents\Programming\sarpong\lifestyle-property'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
