@@ -7,6 +7,7 @@ interface modalProps {
   data: {
     message: string
     buttonText: string
+    buttonHandler: () => void
   }
 }
 

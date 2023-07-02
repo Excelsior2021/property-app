@@ -1,3 +1,6 @@
+@use "./partials/mixins" as *;
+@use "./partials/variables" as *;
+
 .app {
   &__modal {
     position: sticky;
@@ -6,6 +9,8 @@
   }
 
   &__main {
+    margin: auto;
     padding: 24px;
+    max-width: $max-width-app;
   }
 }

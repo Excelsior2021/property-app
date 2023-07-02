@@ -2,16 +2,25 @@ import { Component } from "solid-js"
 import { useNavigate } from "@solidjs/router"
 import ImageContainer from "../ImageContainer/ImageContainer"
 import ListingItemDetails from "../ListingItemDetails/ListingItemDetails"
-import { loggedIn, setCurrentListing } from "../../store/store"
+import {
+  loggedIn,
+  setCurrentListing,
+  setModal,
+  setModalOverlayData,
+} from "../../store/store"
 import { listingType } from "../../types/general"
 import { handleSave } from "../../api/api"
 import routes from "../../utils/client-routes"
+import { handleDeleteListing } from "../../utils/utils"
 import "./ListingItem.scss"
 
 interface ListingItemProps {
   listing: listingType
   saved: boolean
   edit: boolean
+  delete: boolean
+  search: boolean
+  refetch?: () => {}
 }
 
 const ListingItem: Component<ListingItemProps> = props => {
@@ -49,6 +58,18 @@ const ListingItem: Component<ListingItemProps> = props => {
     }
   }
 
+  const handleDelete = async (event: Event) => {
+    event.stopPropagation()
+    setModal(true)
+    setModalOverlayData({
+      message:
+        "Are you sure you want to delete this listing? This can not be undone.",
+      buttonText: "delete",
+      buttonHandler: () =>
+        handleDeleteListing(props.listing.listing.id, props.refetch),
+    })
+  }
+
   return (
     <li
       class="listing-item"
@@ -56,7 +77,9 @@ const ListingItem: Component<ListingItemProps> = props => {
       <ImageContainer
         images={props.listing.images}
         handleNavigate={handleNavigate}
+        handleDelete={handleDelete}
         edit={props.edit}
+        delete={props.delete}
       />
 
       <img
@@ -67,7 +90,9 @@ const ListingItem: Component<ListingItemProps> = props => {
       />
 
       <div class="listing-item__details">
-        <ListingItemDetails listing={props.listing.listing} />
+        <ListingItemDetails
+          listing={props.search ? props.listing : props.listing.listing}
+        />
       </div>
     </li>
   )

@@ -7,6 +7,9 @@ import "./Listings.scss"
 interface listingsProps {
   listings: listingType[]
   edit?: boolean
+  delete?: boolean
+  search?: boolean
+  refetch?: () => any
 }
 
 const Listings: Component<listingsProps> = props => {
@@ -17,8 +20,13 @@ const Listings: Component<listingsProps> = props => {
           return (
             <ListingItem
               listing={listing}
-              saved={savedListingsIds().includes(listing.listing.id)}
+              saved={savedListingsIds().includes(
+                props.search ? listing.id : listing.listing.id
+              )}
               edit={props.edit ? true : false}
+              delete={props.delete ? true : false}
+              search={props.search ? true : false}
+              refetch={props.refetch}
             />
           )
         }}

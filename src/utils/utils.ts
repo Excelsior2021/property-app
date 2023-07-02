@@ -1,6 +1,12 @@
 import { handleFormInputType } from "../types/general"
-import { setErrorMessage, setLoggedIn, setModal } from "../store/store"
+import {
+  accessToken,
+  setErrorMessage,
+  setLoggedIn,
+  setModal,
+} from "../store/store"
 import routes from "./client-routes"
+import { listing } from "../api/api-endpoints"
 
 export const handleFormInput: handleFormInputType = (event, setFormData) => {
   setErrorMessage("")
@@ -45,4 +51,25 @@ export const disableModal = () => {
   const body = document.getElementById("body")
   setModal(false)
   body.style.overflow = "auto"
+}
+
+export const handleDeleteListing = async (listingId: string, refetch) => {
+  let res
+  try {
+    res = await fetch(listing, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken()}`,
+      },
+      body: JSON.stringify({
+        propertyId: listingId,
+      }),
+    })
+    if (res.status === 201) {
+      refetch()
+    } else throw new Error()
+  } catch (error) {
+    handleServerError(res)
+  }
 }

@@ -1,12 +1,15 @@
 import { Component, createResource, Show } from "solid-js"
+import { useNavigate } from "@solidjs/router"
 import Listings from "../../components/Listings/Listings"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import { accessToken } from "../../store/store"
 import { listing } from "../../api/api-endpoints"
 import { handleServerError } from "../../utils/utils"
+import routes from "../../utils/client-routes"
 import "./MyListings.scss"
 
 const MyListings: Component = () => {
+  const navigate = useNavigate()
   const fetchListings = async () => {
     let res
     try {
@@ -21,19 +24,31 @@ const MyListings: Component = () => {
       handleServerError(res)
     }
   }
-  const [listings] = createResource(fetchListings)
+  const [listings, { mutate, refetch }] = createResource(fetchListings)
 
   const fallback = (
-    <p class="my-listings__fallback-text">
-      You do not have any listings. Would you like to create one?
-    </p>
+    <>
+      <p class="my-listings__fallback-text">
+        You do not have any listings. Would you like to create one?
+      </p>
+      <button
+        class="my-listings__fallback-button"
+        onclick={() => navigate(routes.newListing)}>
+        new listing
+      </button>
+    </>
   )
 
   return (
     <div class="my-listings">
       <Show when={!listings.loading} fallback={<LoadingSpinner />}>
         <Show when={listings().length > 0} fallback={fallback}>
-          <Listings listings={listings()} edit={true} />
+          <Listings
+            listings={listings()}
+            edit={true}
+            delete={true}
+            refetch={refetch}
+          />
         </Show>
       </Show>
     </div>

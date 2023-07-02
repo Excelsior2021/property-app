@@ -1,18 +1,16 @@
 import { Component } from "solid-js"
 import { disableModal } from "../../utils/utils"
-import { useNavigate } from "@solidjs/router"
-import routes from "../../utils/client-routes"
 import "./ModalOverlay.scss"
 
 interface modalOverlayProps {
   data: {
     message: string
     buttonText: string
+    buttonHandler: () => void
   }
 }
 
 const ModalOverlay: Component<modalOverlayProps> = props => {
-  const navigate = useNavigate()
   return (
     <div class="modal-overlay">
       <div class="modal-overlay__message-container">
@@ -22,7 +20,7 @@ const ModalOverlay: Component<modalOverlayProps> = props => {
         {props.data.buttonText && (
           <button
             class="modal-overlay__button modal-overlay__button--action"
-            onclick={() => navigate(routes.login)}>
+            onclick={props.data.buttonHandler}>
             {props.data.buttonText}
           </button>
         )}

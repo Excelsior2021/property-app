@@ -2,7 +2,14 @@
 @use "../../partials/mixins" as *;
 
 .my-listings {
+  display: flex;
+  flex-direction: column;
+
   &__fallback-text {
     @include text-fallback;
+  }
+
+  &__fallback-button {
+    @include button-form;
   }
 }

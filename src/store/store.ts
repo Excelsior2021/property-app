@@ -21,4 +21,7 @@ export const [modal, setModal] = createSignal(false)
 export const [modalOverlayData, setModalOverlayData] = createSignal({
   message: "",
   buttonText: "",
+  buttonHandler: refetch => {},
 })
+
+export const [refetch, setRefetch] = createSignal(null)
