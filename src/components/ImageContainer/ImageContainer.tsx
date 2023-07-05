@@ -1,4 +1,5 @@
 import { Component, For } from "solid-js"
+import { Slider, SliderProvider, SliderButton } from "solid-slider"
 import { imageObjType } from "../../types/general"
 import "./ImageContainer.scss"
 
@@ -11,17 +12,29 @@ interface ImageContainerProps {
 const ImageContainer: Component<ImageContainerProps> = props => {
   return (
     <div class="image-container">
-      <div class="image-container__list">
-        <For each={props.images}>
-          {image => (
-            <img
-              class="image-container__img"
-              src={image.path}
-              alt="listing images carousel"
-            />
-          )}
-        </For>
-      </div>
+      <SliderProvider>
+        <Slider>
+          <For each={props.images}>
+            {image => (
+              <img
+                class="image-container__img"
+                src={image.path}
+                alt="listing images carousel"
+              />
+            )}
+          </For>
+        </Slider>
+        <SliderButton
+          prev
+          class="image-container__button image-container__button--prev">
+          Prev
+        </SliderButton>
+        <SliderButton
+          next
+          class="image-container__button image-container__button--next">
+          Next
+        </SliderButton>
+      </SliderProvider>
 
       {props.images.length > 1 ? (
         <div class="image-container__dots">

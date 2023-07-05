@@ -3,33 +3,32 @@
 .image-container {
   position: relative;
 
-  &__list {
-    display: flex;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    overflow-x: scroll;
-    width: 100%;
-    border-radius: 12px;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-
-    &::-webkit-scrollbar {
-      width: 0;
-      height: 0;
-    }
-  }
-
   &__img {
-    display: block;
+    // display: block;
     width: 100%;
     aspect-ratio: 10/9; //No IE support
     object-fit: cover;
-    scroll-snap-align: start;
 
     @include media-two-column {
     }
 
     @include media-three-column {
+    }
+  }
+
+  &__button {
+    position: absolute;
+    top: 45%;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    margin: 0 12px;
+    cursor: pointer;
+
+    &--next {
+      right: 0;
     }
   }
 
@@ -71,4 +70,10 @@
       brightness(104%) contrast(101%);
     cursor: pointer;
   }
+}
+
+.keen-slider {
+  display: flex;
+  border-radius: 12px;
+  overflow-x: hidden;
 }
