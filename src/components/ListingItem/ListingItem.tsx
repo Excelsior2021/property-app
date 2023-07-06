@@ -50,7 +50,9 @@ const ListingItem: Component<ListingItemProps> = props => {
   }
 
   return (
-    <li class="listing-item" onclick={null}>
+    <li
+      class="listing-item"
+      onclick={event => handleNavigate(event, "details")}>
       <ImageContainer
         images={props.listing.images}
         handleNavigate={handleNavigate}

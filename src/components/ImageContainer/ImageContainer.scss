@@ -4,7 +4,6 @@
   position: relative;
 
   &__img {
-    // display: block;
     width: 100%;
     aspect-ratio: 10/9; //No IE support
     object-fit: cover;
@@ -17,6 +16,7 @@
   }
 
   &__button {
+    display: none;
     position: absolute;
     top: 45%;
     background-color: rgba(255, 255, 255, 0.9);
@@ -29,6 +29,10 @@
 
     &--next {
       right: 0;
+    }
+
+    &--show {
+      display: block;
     }
   }
 
