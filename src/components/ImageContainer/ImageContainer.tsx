@@ -1,5 +1,6 @@
-import { Component, For, createSignal } from "solid-js"
-import { imageObjType, listingType } from "../../types/general"
+import { Component, createSignal, For } from "solid-js"
+import { Slider, SliderProvider, SliderButton } from "solid-slider"
+import { imageObjType } from "../../types/general"
 import "./ImageContainer.scss"
 
 interface ImageContainerProps {
@@ -22,36 +23,44 @@ const ImageContainer: Component<ImageContainerProps> = props => {
       class="image-container"
       onmouseover={handleHover}
       onmouseout={handleHover}>
-      <div class="image-container__list">
-        <For each={props.images}>
-          {image => (
-            <img
-              class="image-container__img"
-              src={image.path}
-              alt="listing images carousel"
-            />
-          )}
-        </For>
-      </div>
+      <SliderProvider>
+        <Slider>
+          <For each={props.images}>
+            {image => (
+              <img
+                class="image-container__img"
+                src={image.path}
+                alt="listing images carousel"
+              />
+            )}
+          </For>
+        </Slider>
+        {props.images.length > 1 ? (
+          <div onclick={e => e.stopPropagation()}>
+            <SliderButton
+              prev
+              class={`image-container__button image-container__button--prev ${
+                hovered() ? "image-container__button--show" : ""
+              }`}>
+              Prev
+            </SliderButton>
+            <SliderButton
+              next
+              class={`image-container__button image-container__button--next ${
+                hovered() ? "image-container__button--show" : ""
+              }`}>
+              Next
+            </SliderButton>
+          </div>
+        ) : null}
+      </SliderProvider>
 
       {props.images.length > 1 ? (
-        <>
-          <div class="image-container__dots">
-            <For each={props.images}>
-              {_ => <span class="image-container__dot"></span>}
-            </For>
-          </div>
-
-          <div
-            class={
-              hovered()
-                ? "image-container__actions"
-                : "image-container__actions--hide"
-            }>
-            <div class="image-container__actions--prev"></div>
-            <div class="image-container__actions--next"></div>
-          </div>
-        </>
+        <div class="image-container__dots">
+          <For each={props.images}>
+            {_ => <span class="image-container__dot"></span>}
+          </For>
+        </div>
       ) : null}
 
       {props.edit && (

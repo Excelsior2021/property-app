@@ -1,4 +1,4 @@
-import { Component, createSignal } from "solid-js"
+import { Component } from "solid-js"
 import { Routes, Route } from "@solidjs/router"
 import Header from "./components/Header/Header"
 import Navbar from "./components/Navbar/Navbar"
