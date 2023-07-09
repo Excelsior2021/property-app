@@ -64,7 +64,11 @@ const Header: Component = () => {
                       ? `nav__hide`
                       : "nav__item"
                   }>
-                  <A class="nav__link" href={item.link}>
+                  <A
+                    class="nav__link"
+                    href={item.link}
+                    activeClass="nav__link--active"
+                    end>
                     <img class="nav__icon" src={item.icon} alt={item.name} />
                     <span class="nav__text">{item.name}</span>
                   </A>

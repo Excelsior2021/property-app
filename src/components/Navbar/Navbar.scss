@@ -38,6 +38,11 @@
   &__icon {
     width: 20px;
     margin-bottom: 4px;
+
+    &--active {
+      filter: invert(81%) sepia(40%) saturate(5506%) hue-rotate(314deg)
+        brightness(101%) contrast(96%);
+    }
   }
 
   &__hide {

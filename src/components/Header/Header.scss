@@ -64,6 +64,11 @@
     color: black;
     display: flex;
     align-items: center;
+
+    &--active {
+      filter: invert(81%) sepia(40%) saturate(5506%) hue-rotate(314deg)
+        brightness(101%) contrast(96%);
+    }
   }
 
   &__icon {

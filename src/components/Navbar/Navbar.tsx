@@ -61,7 +61,11 @@ const Navbar: Component = () => {
                   ? `navbar__hide`
                   : "navbar__item"
               }>
-              <A class="navbar__link" href={item.link}>
+              <A
+                class="navbar__link"
+                href={item.link}
+                activeClass="navbar__icon--active"
+                end>
                 <img class="navbar__icon" src={item.icon} alt={item.name} />
                 <span class="navbar__text">{item.name}</span>
               </A>
