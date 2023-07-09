@@ -6,14 +6,42 @@
   row-gap: 4px;
   margin-top: 4px;
 
+  &__location {
+    text-transform: capitalize;
+    font-size: 2rem;
+    font-weight: 500;
+
+    @include media-tablet {
+      font-size: 2.6rem;
+    }
+  }
+
+  &__price {
+    color: rgb(84, 84, 84);
+    font-size: 1.6rem;
+    font-weight: 500;
+
+    @include media-tablet {
+      font-size: 2.2rem;
+    }
+  }
+
   &__description {
     margin: 16px 0;
+
+    @include media-tablet {
+      font-size: 2rem;
+    }
   }
 
   &__contact,
   &__email {
     font-size: 1.8rem;
     font-weight: 500;
+
+    @include media-tablet {
+      font-size: 2.2rem;
+    }
   }
 
   &__button {

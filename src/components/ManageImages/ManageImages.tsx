@@ -33,6 +33,7 @@ const ManageImages: Component<manageImagesProps> = props => {
   const [manageImagesForm, { Field, Form }] = createForm<manageImagesForm>()
   const [propertyId, setPropertyId] = createSignal(null)
   const [submitted, setSubmitted] = createSignal(false)
+  const [uploadLimit, setUploadLimit] = createSignal(false)
   const navigate = useNavigate()
   const params = useParams()
   let fileRef
@@ -55,12 +56,21 @@ const ManageImages: Component<manageImagesProps> = props => {
       setPropertyId(params.id)
 
       const { images } = currentListing()
+
       for (const image of images)
         setStoredImages(prevState => [...prevState, image])
     }
   })
 
   const handleUpload = () => {
+    setUploadLimit(false)
+    if (
+      fileRef.files.length + storedImages().length > 5 ||
+      fileRef.files.length + uploadedImages().length > 5
+    ) {
+      setUploadLimit(true)
+      return
+    }
     for (const file of fileRef.files) {
       setUploadedImages(prevState => [...prevState, { id: uuid(), file }])
     }
@@ -147,6 +157,11 @@ const ManageImages: Component<manageImagesProps> = props => {
               />
             )}
           </Field>
+          {uploadLimit() && (
+            <p class="manage-images__text">
+              You can only have a max. of 5 images per listing
+            </p>
+          )}
           <div class="manage-images__stored">
             {storedImages().length > 0 && (
               <h2 class="manage-images__heading">existing images</h2>

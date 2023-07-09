@@ -31,13 +31,15 @@ const ListingDetailsContactButton = () => {
 const ListingDetails: Component<listingDetailsProps> = props => {
   return (
     <div class="listing-details">
-      <ListingItemDetails listing={props.listing} />
+      <p class="listing-details__location">{props.listing.location}</p>
+      <p class="listing-details__price">Gh₵{props.listing.price} p/m</p>
+      <p class="listing-details__price"></p>
       <p class="listing-details__description">{props.listing.description}</p>
       <Show when={loggedIn()} fallback={ListingDetailsContactButton}>
         <p class="listing-details__contact">
-          contact number: {props.listing.phone}
+          Contact Number: {props.listing.phone}
         </p>
-        <p class="listing-details__email">email: {props.listing.email}</p>
+        <p class="listing-details__email">Email: {props.listing.email}</p>
       </Show>
     </div>
   )

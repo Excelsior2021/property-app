@@ -9,6 +9,7 @@ interface ImageContainerProps {
   handleDelete?: (e: Event) => void
   edit?: boolean
   delete?: boolean
+  page?: string
 }
 
 const ImageContainer: Component<ImageContainerProps> = props => {
@@ -20,7 +21,11 @@ const ImageContainer: Component<ImageContainerProps> = props => {
 
   return (
     <div
-      class="image-container"
+      class={
+        props.page === "listing"
+          ? "image-container image-container--listing"
+          : "image-container"
+      }
       onmouseover={handleHover}
       onmouseout={handleHover}>
       <SliderProvider>
@@ -42,14 +47,22 @@ const ImageContainer: Component<ImageContainerProps> = props => {
               class={`image-container__button image-container__button--prev ${
                 hovered() ? "image-container__button--show" : ""
               }`}>
-              Prev
+              <img
+                src="/icons/chevron.svg"
+                alt="image navigate icon"
+                class="image-container__icon image-container__icon--nav image-container__icon--nav--left"
+              />
             </SliderButton>
             <SliderButton
               next
               class={`image-container__button image-container__button--next ${
                 hovered() ? "image-container__button--show" : ""
               }`}>
-              Next
+              <img
+                src="/icons/chevron.svg"
+                alt="image navigate icon"
+                class="image-container__icon image-container__icon--nav image-container__icon--nav--right"
+              />
             </SliderButton>
           </div>
         ) : null}
@@ -82,7 +95,7 @@ const ImageContainer: Component<ImageContainerProps> = props => {
           <img
             src="/icons/delete-image.svg"
             alt="delete listing"
-            class="image-container__icon image-container__icon--edit"
+            class="image-container__icon image-container__icon--delete"
           />
         </div>
       )}

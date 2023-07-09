@@ -37,22 +37,21 @@ const Search: Component = () => {
 
   return (
     <div class="search">
-      <img class="search__icon" src="/icons/discover.svg" alt="search" />
+      <button class="search__button" onclick={handleSearch}>
+        <img class="search__icon" src="/icons/discover.svg" alt="search" />
+      </button>
       <input
         class="search__input"
         type="text"
         name="search"
         id="search"
-        placeholder="where do you want to stay?"
+        placeholder="search location"
         value={searchTerm()}
         onchange={e => {
           setSearchTerm(e.currentTarget.value)
           setSearchTermGlobal(e.currentTarget.value)
         }}
       />
-      <button class="search__button" onclick={handleSearch}>
-        search
-      </button>
     </div>
   )
 }

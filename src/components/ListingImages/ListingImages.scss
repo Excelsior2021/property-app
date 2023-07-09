@@ -1,0 +1,37 @@
+@use "../../partials/mixins" as *;
+
+.listing-images {
+  display: none;
+
+  @include media-tablet {
+    display: flex;
+    width: 100%;
+    column-gap: 8px;
+  }
+
+  &__img-container {
+    display: flex;
+    column-gap: 8px;
+    width: 50%;
+    border-radius: 8px;
+
+    &--top,
+    &--bottom {
+      width: 49.3%;
+      height: 50%;
+    }
+  }
+
+  &__img-containers {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    width: 50%;
+  }
+
+  &__img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+}

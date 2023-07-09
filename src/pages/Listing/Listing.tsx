@@ -5,6 +5,7 @@ import ListingDetails from "../../components/ListingDetails/ListingDetails"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import { fetchListingDetails } from "../../api/api"
 import "./Listing.scss"
+import ListingImages from "../../components/ListingImages/ListingImages"
 
 const Listing: Component = () => {
   const params = useParams()
@@ -14,7 +15,8 @@ const Listing: Component = () => {
     <div class="listing">
       <Show when={!listing.loading} fallback={<LoadingSpinner />}>
         <p class="listing__title">{listing().listing.title}</p>
-        <ImageContainer images={listing().images} />
+        <ImageContainer images={listing().images} page="listing" />
+        <ListingImages images={listing().images} />
         <ListingDetails listing={listing().listing} />
       </Show>
     </div>
