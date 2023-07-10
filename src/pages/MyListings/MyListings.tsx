@@ -6,10 +6,15 @@ import { accessToken } from "../../store/store"
 import { listing } from "../../api/api-endpoints"
 import { handleServerError } from "../../utils/utils"
 import routes from "../../utils/client-routes"
+import {
+  initialListingFormData,
+  setListingFormData,
+} from "../../components/ListingForm/ListingForm"
 import "./MyListings.scss"
 
 const MyListings: Component = () => {
   const navigate = useNavigate()
+
   const fetchListings = async () => {
     let res
     try {
@@ -24,16 +29,20 @@ const MyListings: Component = () => {
       handleServerError(res)
     }
   }
+
   const [listings, { mutate, refetch }] = createResource(fetchListings)
+
+  const handleNewListing = () => {
+    setListingFormData(initialListingFormData)
+    navigate(routes.newListing)
+  }
 
   const fallback = (
     <>
       <p class="my-listings__fallback-text">
         You do not have any listings. Would you like to create one?
       </p>
-      <button
-        class="my-listings__fallback-button"
-        onclick={() => navigate(routes.newListing)}>
+      <button class="my-listings__fallback-button" onclick={handleNewListing}>
         new listing
       </button>
     </>

@@ -4,9 +4,14 @@ import {
   setErrorMessage,
   setLoggedIn,
   setModal,
+  setSavedListingsIds,
 } from "../store/store"
 import routes from "./client-routes"
 import { listing } from "../api/api-endpoints"
+import {
+  initialListingFormData,
+  setListingFormData,
+} from "../components/ListingForm/ListingForm"
 
 export const handleFormInput: handleFormInputType = (event, setFormData) => {
   setErrorMessage("")
@@ -72,4 +77,11 @@ export const handleDeleteListing = async (listingId: string, refetch) => {
   } catch (error) {
     handleServerError(res)
   }
+}
+
+export const logout = () => {
+  localStorage.removeItem("accessToken")
+  setListingFormData(initialListingFormData)
+  setSavedListingsIds([])
+  setLoggedIn(false)
 }

@@ -15,6 +15,8 @@ const Search: Component = () => {
   const handleSearch = async () => {
     let res
 
+    if (searchTerm().trim() === "") return
+
     try {
       res = await fetch(search, {
         method: "POST",

@@ -1,5 +1,5 @@
 import { accessToken, setSavedListingsIds } from "../store/store"
-import { listingType } from "../types/general"
+import { listingDataType, listingType } from "../types/general"
 import { handleServerError } from "../utils/utils"
 import {
   getListingDetails,
@@ -41,11 +41,9 @@ export const fetchListingDetails = async (propertyId: string) => {
   }
 }
 
-export const handleSave = async (listing: listingType, save: boolean) => {
+export const handleSave = async (listing: listingDataType, save: boolean) => {
   const date = new Date().toISOString()
-  const {
-    listing: { email, id },
-  } = listing
+  const { email, id } = listing
   const route = save ? saveListing : unsaveListing
   let res
 

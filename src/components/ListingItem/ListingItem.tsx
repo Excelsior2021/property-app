@@ -8,7 +8,7 @@ import {
   setModal,
   setModalOverlayData,
 } from "../../store/store"
-import { listingType } from "../../types/general"
+import { listingDataType, listingType } from "../../types/general"
 import { handleSave } from "../../api/api"
 import routes from "../../utils/client-routes"
 import { handleDeleteListing } from "../../utils/utils"
@@ -25,19 +25,18 @@ interface ListingItemProps {
 
 const ListingItem: Component<ListingItemProps> = props => {
   const navigate = useNavigate()
+  let listing: listingDataType
 
-  const handleClickOnSave = (event: Event, listing: listingType) => {
+  if (props.search) listing = props.listing
+  else listing = props.listing.listing
+
+  const handleClickOnSave = (event: Event, listing: listingDataType) => {
     event.stopPropagation()
 
     if (loggedIn()) {
-      if (props.saved) {
-        handleSave(listing, false)
-      } else {
-        handleSave(listing, true)
-      }
-    } else {
-      navigate(routes.login)
-    }
+      if (props.saved) handleSave(listing, false)
+      else handleSave(listing, true)
+    } else navigate(routes.login)
   }
 
   const handleNavigate = (event: Event, requestPage: string) => {
@@ -45,11 +44,11 @@ const ListingItem: Component<ListingItemProps> = props => {
 
     switch (requestPage) {
       case "details":
-        navigate(`${routes.listing}/${props.listing.listing.id}`)
+        navigate(`${routes.listing}/${listing.id}`)
         break
       case "edit":
         setCurrentListing(props.listing)
-        navigate(`${routes.editListing}/${props.listing.listing.id}`, {
+        navigate(`${routes.editListing}/${listing.id}`, {
           state: { listing: props.listing },
         })
         break
@@ -65,8 +64,7 @@ const ListingItem: Component<ListingItemProps> = props => {
       message:
         "Are you sure you want to delete this listing? This can not be undone.",
       buttonText: "delete",
-      buttonHandler: () =>
-        handleDeleteListing(props.listing.listing.id, props.refetch),
+      buttonHandler: () => handleDeleteListing(listing.id, props.refetch),
     })
   }
 
@@ -86,13 +84,11 @@ const ListingItem: Component<ListingItemProps> = props => {
         class="listing-item__icon listing-item__icon--save"
         src={props.saved ? "/icons/saved-active.svg" : "/icons/saved.svg"}
         alt="save listing"
-        onclick={event => handleClickOnSave(event, props.listing)}
+        onclick={event => handleClickOnSave(event, listing)}
       />
 
       <div class="listing-item__details">
-        <ListingItemDetails
-          listing={props.search ? props.listing : props.listing.listing}
-        />
+        <ListingItemDetails listing={listing} />
       </div>
     </li>
   )

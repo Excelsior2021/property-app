@@ -16,7 +16,7 @@ import {
 } from "../../components/ListingForm/ListingForm"
 import routes from "../../utils/client-routes"
 import ServerError from "../../components/ServerError/ServerError"
-import { handleServerError } from "../../utils/utils"
+import { handleServerError, logout } from "../../utils/utils"
 import "./Profile.scss"
 
 const Profile: Component = () => {
@@ -47,8 +47,7 @@ const Profile: Component = () => {
   const [profileResource] = createResource(fetchProfile)
 
   const handleLogout = () => {
-    localStorage.removeItem("accessToken")
-    setLoggedIn(false)
+    logout()
     navigate(routes.discover)
   }
 
