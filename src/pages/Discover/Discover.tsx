@@ -28,7 +28,7 @@ const Discover: Component = () => {
       <ServerError data={listings} error={errorMessage()}>
         <Show when={!listings.loading} fallback={<LoadingSpinner />}>
           <Show when={listings().length > 0} fallback={fallback}>
-            <Listings listings={listings()} />
+            <Listings listings={listings()} heading="discover" />
           </Show>
         </Show>
       </ServerError>

@@ -54,6 +54,7 @@ const MyListings: Component = () => {
         <Show when={listings().length > 0} fallback={fallback}>
           <Listings
             listings={listings()}
+            heading="my listings"
             edit={true}
             delete={true}
             refetch={refetch}

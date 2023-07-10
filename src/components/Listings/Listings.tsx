@@ -6,6 +6,7 @@ import "./Listings.scss"
 
 interface listingsProps {
   listings: listingType[]
+  heading: string
   edit?: boolean
   delete?: boolean
   search?: boolean
@@ -14,24 +15,27 @@ interface listingsProps {
 
 const Listings: Component<listingsProps> = props => {
   return (
-    <ul class="listings">
-      <For each={props.listings}>
-        {listing => {
-          return (
-            <ListingItem
-              listing={listing}
-              saved={savedListingsIds().includes(
-                props.search ? listing.id : listing.listing.id
-              )}
-              edit={props.edit ? true : false}
-              delete={props.delete ? true : false}
-              search={props.search ? true : false}
-              refetch={props.refetch}
-            />
-          )
-        }}
-      </For>
-    </ul>
+    <div class="listings">
+      <h2 class="listings__heading">{props.heading}</h2>
+      <ul class="listings__list">
+        <For each={props.listings}>
+          {listing => {
+            return (
+              <ListingItem
+                listing={listing}
+                saved={savedListingsIds().includes(
+                  props.search ? listing.id : listing.listing.id
+                )}
+                edit={props.edit ? true : false}
+                delete={props.delete ? true : false}
+                search={props.search ? true : false}
+                refetch={props.refetch}
+              />
+            )
+          }}
+        </For>
+      </ul>
+    </div>
   )
 }
 

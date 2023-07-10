@@ -7,6 +7,14 @@
     margin: auto;
   }
 
+  &__heading {
+    display: none;
+
+    @include media-tablet {
+      display: block;
+    }
+  }
+
   &__form {
     @include form;
   }

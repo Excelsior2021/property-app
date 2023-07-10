@@ -44,7 +44,10 @@ const SavedListings: Component = () => {
         <ServerError data={savedListings} error={errorMessage()}>
           <Show when={!savedListings.loading} fallback={<LoadingSpinner />}>
             <Show when={savedListings().length > 0} fallback={noDataFallback}>
-              <Listings listings={savedListings()} />
+              <Listings
+                listings={savedListings()}
+                heading="my saved listings"
+              />
             </Show>
           </Show>
         </ServerError>

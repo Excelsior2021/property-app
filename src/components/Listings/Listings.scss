@@ -1,19 +1,30 @@
 @use "../../partials/mixins" as *;
 
 .listings {
-  display: flex;
-  flex-direction: column;
-  row-gap: 36px;
-  max-width: 1280px;
+  &__heading {
+    display: none;
 
-  @include media-two-column {
-    flex-direction: row;
-    column-gap: 24px;
-    flex-wrap: wrap;
+    @include media-tablet {
+      text-transform: capitalize;
+      display: block;
+    }
   }
 
-  @include media-tablet {
-    margin: 24px auto;
-    flex-direction: row;
+  &__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 36px;
+    max-width: 1280px;
+
+    @include media-two-column {
+      flex-direction: row;
+      column-gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    @include media-tablet {
+      margin: 24px auto;
+      flex-direction: row;
+    }
   }
 }

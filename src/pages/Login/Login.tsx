@@ -68,6 +68,7 @@ const Login: Component = () => {
   return (
     <div class="login">
       <Show when={!loggingIn.loading} fallback={<LoadingSpinner />}>
+        <h2 class="login__heading">log in</h2>
         <Form
           class="login__form"
           onSubmit={() => {

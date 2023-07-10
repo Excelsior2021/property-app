@@ -85,6 +85,7 @@ const Signup: Component = () => {
   return (
     <div class="signup">
       <Show when={!signedUp.loading} fallback={<LoadingSpinner />}>
+        <h2 class="signup__heading">sign up</h2>
         <Form
           class="signup__form"
           onSubmit={() => {

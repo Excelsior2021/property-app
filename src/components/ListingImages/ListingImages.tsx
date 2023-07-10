@@ -33,24 +33,24 @@ const ListingImages: Component<listingImagesProps> = props => {
           <img
             src={images().image1}
             alt="listing image"
-            class="listing-images__img"
+            class="listing-images__img listing-images__img--sub"
           />
           <img
             src={images().image2}
             alt="listing image"
-            class="listing-images__img"
+            class="listing-images__img listing-images__img--sub"
           />
         </div>
         <div class="listing-images__img-container listing-images__img-container--bottom">
           <img
             src={images().image3}
             alt="listing image"
-            class="listing-images__img"
+            class="listing-images__img listing-images__img--sub"
           />
           <img
             src={images().image4}
             alt="listing image"
-            class="listing-images__img"
+            class="listing-images__img listing-images__img--sub"
           />
         </div>
       </div>
