@@ -7,6 +7,10 @@
     @include media-tablet {
       text-transform: capitalize;
       display: block;
+
+      &--search {
+        text-transform: none;
+      }
     }
   }
 

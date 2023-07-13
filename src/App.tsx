@@ -41,33 +41,18 @@ const App: Component = () => {
       <Header />
       <main class="app__main">
         <Routes>
-          <Route path={routes.discover} component={() => <Discover />} />
-          <Route
-            path={routes.savedListings}
-            component={() => <SavedListings />}
-          />
-          <Route path={routes.login} component={() => <Login />} />
-          <Route path={routes.signup} component={() => <Signup />} />
-          <Route path={routes.profile} component={() => <Profile />} />
-          <Route path={`${routes.listing}/:id`} component={() => <Listing />} />
-          <Route path={routes.myListings} component={() => <MyListings />} />
-          <Route path={routes.newListing} component={() => <NewListing />} />
-          <Route
-            path={`${routes.editListing}/:id`}
-            component={() => <EditListing />}
-          />
-          <Route
-            path={routes.uploadImages}
-            component={() => <UploadImages />}
-          />
-          <Route
-            path={`${routes.manageImages}/:id`}
-            component={() => <EditImages />}
-          />
-          <Route
-            path={routes.searchResults}
-            component={() => <SearchResults />}
-          />
+          <Route path={routes.discover} component={Discover} />
+          <Route path={routes.savedListings} component={SavedListings} />
+          <Route path={routes.login} component={Login} />
+          <Route path={routes.signup} component={Signup} />
+          <Route path={routes.profile} component={Profile} />
+          <Route path={`${routes.listing}/:id`} component={Listing} />
+          <Route path={routes.myListings} component={MyListings} />
+          <Route path={routes.newListing} component={NewListing} />
+          <Route path={`${routes.editListing}/:id`} component={EditListing} />
+          <Route path={routes.uploadImages} component={UploadImages} />
+          <Route path={`${routes.manageImages}/:id`} component={EditImages} />
+          <Route path={`${routes.searchResults}/*`} component={SearchResults} />
         </Routes>
       </main>
       <Navbar />

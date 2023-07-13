@@ -1,24 +1,54 @@
-import { Component, Show } from "solid-js"
+import { Component, Show, createResource } from "solid-js"
 import Listings from "../../components/Listings/Listings"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
-import { searchResults, searchTermGlobal } from "../../components/Search/Search"
+import { handleServerError } from "../../utils/utils"
+import { useSearchParams } from "@solidjs/router"
+import { search } from "../../api/api-endpoints"
 import "./SearchResults.scss"
+import ServerError from "../../components/ServerError/ServerError"
+import { errorMessage } from "../../store/store"
 
 const SearchResults: Component = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const handleSearch = async () => {
+    let res
+
+    if (searchParams.location.trim() === "") return
+
+    try {
+      res = await fetch(search, {
+        method: "POST",
+        body: JSON.stringify({
+          location: searchParams.location,
+        }),
+      })
+
+      const data = await res.json()
+
+      if (res.status === 200) return data
+      else throw new Error()
+    } catch (error) {
+      handleServerError(res)
+    }
+  }
+
+  const [results] = createResource(searchParams.location, handleSearch)
+
   return (
     <div class="search-results">
-      <Show when={searchResults()} fallback={<LoadingSpinner />}>
-        <p class="search-results__text">
-          {searchResults().listing.length} search result
-          {searchResults().listing.length === 1 ? "" : "s"} for "
-          {searchTermGlobal()}"
-        </p>
-        <Listings
-          listings={searchResults().listing}
-          edit={false}
-          search={true}
-        />
-      </Show>
+      <ServerError data={results} error={errorMessage()}>
+        <Show when={!results.loading} fallback={<LoadingSpinner />}>
+          <Listings
+            listings={results().listing}
+            heading={`${results().listing.length} search result${
+              results().listing.length === 1 ? "" : "s"
+            } for "${searchParams.location}"`}
+            edit={false}
+            search={true}
+          />
+        </Show>
+      </ServerError>
     </div>
   )
 }

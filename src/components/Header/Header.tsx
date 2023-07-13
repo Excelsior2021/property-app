@@ -15,7 +15,11 @@ const Header: Component = () => {
         <div class="header__logo">lifeStyle</div>
 
         <Switch>
-          <Match when={location.pathname === routes.discover}>
+          <Match
+            when={
+              location.pathname === routes.discover ||
+              location.pathname.includes(routes.searchResults)
+            }>
             <Search />
           </Match>
           <Match when={location.pathname === routes.savedListings}>

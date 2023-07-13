@@ -6,7 +6,7 @@ import "./Listings.scss"
 
 interface listingsProps {
   listings: listingType[]
-  heading: string
+  heading?: string
   edit?: boolean
   delete?: boolean
   search?: boolean
@@ -16,7 +16,14 @@ interface listingsProps {
 const Listings: Component<listingsProps> = props => {
   return (
     <div class="listings">
-      <h2 class="listings__heading">{props.heading}</h2>
+      <h2
+        class={
+          props.search
+            ? "listings__heading listings__heading--search"
+            : "listings__heading"
+        }>
+        {props.heading}
+      </h2>
       <ul class="listings__list">
         <For each={props.listings}>
           {listing => {

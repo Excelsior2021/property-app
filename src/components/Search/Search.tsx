@@ -1,7 +1,5 @@
 import { Component, createSignal } from "solid-js"
 import { useNavigate } from "@solidjs/router"
-import { search } from "../../api/api-endpoints"
-import { handleServerError } from "../../utils/utils"
 import routes from "../../utils/client-routes"
 import "./Search.scss"
 
@@ -13,28 +11,8 @@ const Search: Component = () => {
   const navigate = useNavigate()
 
   const handleSearch = async () => {
-    let res
-
-    if (searchTerm().trim() === "") return
-
-    try {
-      res = await fetch(search, {
-        method: "POST",
-        body: JSON.stringify({
-          location: searchTerm(),
-        }),
-      })
-
-      const data = await res.json()
-      console.log(data)
-
-      if (res.status === 200) {
-        setSearchResults(data)
-        navigate(routes.searchResults)
-      } else throw new Error()
-    } catch (error) {
-      handleServerError(res)
-    }
+    navigate(`${routes.searchResults}/?location=${searchTerm()}`)
+    setSearchTerm("")
   }
 
   return (
@@ -49,10 +27,7 @@ const Search: Component = () => {
         id="search"
         placeholder="search location"
         value={searchTerm()}
-        onchange={e => {
-          setSearchTerm(e.currentTarget.value)
-          setSearchTermGlobal(e.currentTarget.value)
-        }}
+        onchange={e => setSearchTerm(e.currentTarget.value)}
       />
     </div>
   )

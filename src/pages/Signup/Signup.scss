@@ -12,6 +12,7 @@
 
     @include media-tablet {
       display: block;
+      text-transform: capitalize;
     }
   }
 
