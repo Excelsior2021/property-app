@@ -23,11 +23,20 @@
     border: 3px solid black;
     border-radius: 1rem;
     padding: 2rem;
+
+    @include media-tablet {
+      margin: 32px auto;
+    }
   }
 
   &__button {
     @include button-form;
-    width: 100%;
     background-color: salmon;
+    width: 100%;
+    margin: 24px auto;
+
+    @include media-tablet {
+      margin: 32px auto;
+    }
   }
 }

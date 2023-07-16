@@ -1,18 +1,10 @@
 import { Component } from "solid-js"
-import { useNavigate } from "@solidjs/router"
-import { deleteImage } from "../../api/api-endpoints"
 import {
-  accessToken,
   currentListing,
-  setCurrentListing,
+  setModal,
+  setModalOverlayData,
 } from "../../store/store"
-import {
-  setStoredImages,
-  setUploadedImages,
-} from "../ManageImages/ManageImages"
-import { fetchListingDetails } from "../../api/api"
-import { handleServerError } from "../../utils/utils"
-import routes from "../../utils/client-routes"
+import { handleDeleteImage } from "../../api/api"
 import "./ImageItem.scss"
 
 interface imageItemProps {
@@ -23,7 +15,6 @@ interface imageItemProps {
 const ImageItem: Component<imageItemProps> = props => {
   let src
   let propertyId: string
-  const navigate = useNavigate()
   if (props.type === "uploaded") src = URL.createObjectURL(props.image.file)
   if (props.type === "stored") {
     src = props.image.path
@@ -31,38 +22,14 @@ const ImageItem: Component<imageItemProps> = props => {
   }
 
   const handleDelete = async () => {
-    if (props.type === "uploaded") {
-      setUploadedImages(prevState =>
-        prevState.filter(image => image.id !== props.image.id)
-      )
-    }
-
-    if (props.type === "stored") {
-      let res
-      try {
-        res = await fetch(deleteImage, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken()}`,
-          },
-          body: JSON.stringify({
-            imageId: props.image.id,
-            propertyId: propertyId,
-          }),
-        })
-
-        if (res.status === 201) {
-          const updatedListing = await fetchListingDetails(propertyId)
-          setStoredImages([])
-          setUploadedImages([])
-          setCurrentListing(updatedListing)
-        } else throw new Error()
-      } catch (error) {
-        const { route } = handleServerError(res)
-        if (route) navigate(routes.login)
-      }
-    }
+    setModal(true)
+    setModalOverlayData({
+      message:
+        "Are you sure you want to delete this image? This can not be undone.",
+      buttonText: "delete",
+      buttonHandler: () =>
+        handleDeleteImage(props.type, props.image.id, propertyId),
+    })
   }
 
   return (

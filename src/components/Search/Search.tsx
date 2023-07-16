@@ -3,14 +3,12 @@ import { useNavigate } from "@solidjs/router"
 import routes from "../../utils/client-routes"
 import "./Search.scss"
 
-export const [searchResults, setSearchResults] = createSignal(null)
-export const [searchTermGlobal, setSearchTermGlobal] = createSignal("")
-
 const Search: Component = () => {
   const [searchTerm, setSearchTerm] = createSignal("")
   const navigate = useNavigate()
 
   const handleSearch = async () => {
+    if (searchTerm().trim() === "") return
     navigate(`${routes.searchResults}/?location=${searchTerm()}`)
     setSearchTerm("")
   }

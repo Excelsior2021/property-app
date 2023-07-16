@@ -25,7 +25,12 @@
     }
   }
 
+  &__link {
+    text-decoration: none;
+  }
+
   &__logo {
+    color: black;
     padding: 12px;
   }
 

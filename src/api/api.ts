@@ -1,9 +1,19 @@
-import { accessToken, setSavedListingsIds } from "../store/store"
+import {
+  setStoredImages,
+  setUploadedImages,
+} from "../components/ManageImages/ManageImages"
+import {
+  accessToken,
+  setCurrentListing,
+  setSavedListingsIds,
+} from "../store/store"
 import { listingDataType, listingType } from "../types/general"
 import { handleServerError } from "../utils/utils"
 import {
+  deleteImage,
   getListingDetails,
   getSavedListings,
+  listing,
   saveListing,
   unsaveListing,
 } from "./api-endpoints"
@@ -65,5 +75,64 @@ export const handleSave = async (listing: listingDataType, save: boolean) => {
     else throw new Error()
   } catch (error) {
     handleServerError(res)
+  }
+}
+
+export const handleDeleteListing = async (listingId: string, refetch) => {
+  let res
+  try {
+    res = await fetch(listing, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken()}`,
+      },
+      body: JSON.stringify({
+        propertyId: listingId,
+      }),
+    })
+    if (res.status === 201) {
+      refetch()
+    } else throw new Error()
+  } catch (error) {
+    handleServerError(res)
+  }
+}
+
+export const handleDeleteImage = async (
+  type: string,
+  imageId: string,
+  propertyId: string
+) => {
+  if (type === "uploaded") {
+    setUploadedImages(prevState =>
+      prevState.filter(image => image.id !== imageId)
+    )
+  }
+
+  if (type === "stored") {
+    let res
+    try {
+      res = await fetch(deleteImage, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken()}`,
+        },
+        body: JSON.stringify({
+          imageId,
+          propertyId,
+        }),
+      })
+
+      if (res.status === 201) {
+        const updatedListing = await fetchListingDetails(propertyId)
+        setStoredImages([])
+        // setUploadedImages([])
+        setCurrentListing(updatedListing)
+      } else throw new Error()
+    } catch (error) {
+      handleServerError(res)
+    }
   }
 }

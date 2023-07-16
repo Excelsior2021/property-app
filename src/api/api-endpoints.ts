@@ -1,6 +1,6 @@
-export const signup = `${import.meta.env.VITE_SERVER_DOMAIN}/api/auth/v1/signup`
+export const signup = `${import.meta.env.VITE_SERVER_DOMAIN}/api/v1/auth/signup`
 
-export const login = `${import.meta.env.VITE_SERVER_DOMAIN}/api/auth/v1/login`
+export const login = `${import.meta.env.VITE_SERVER_DOMAIN}/api/v1/auth/login`
 
 export const profile = `${import.meta.env.VITE_SERVER_DOMAIN}/profile`
 
@@ -14,7 +14,7 @@ export const editListing = (propertyId: string) =>
 
 export const getListings = `${
   import.meta.env.VITE_SERVER_DOMAIN
-}/api/homes/v1/listing`
+}/api/v1/homes/listing`
 
 export const saveListing = `${import.meta.env.VITE_SERVER_DOMAIN}/save`
 
@@ -23,8 +23,8 @@ export const unsaveListing = `${import.meta.env.VITE_SERVER_DOMAIN}/unsave`
 export const getSavedListings = `${import.meta.env.VITE_SERVER_DOMAIN}/likes`
 
 export const getListingDetails = (propertyId: string) =>
-  `${import.meta.env.VITE_SERVER_DOMAIN}/api/homes/v1/property/${propertyId}`
+  `${import.meta.env.VITE_SERVER_DOMAIN}/api/v1/homes/property/${propertyId}`
 
 export const deleteImage = `${import.meta.env.VITE_SERVER_DOMAIN}/image`
 
-export const search = `${import.meta.env.VITE_SERVER_DOMAIN}/api/search/v1`
+export const search = `${import.meta.env.VITE_SERVER_DOMAIN}/api/v1/search`

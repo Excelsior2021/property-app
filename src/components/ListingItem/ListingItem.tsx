@@ -9,9 +9,8 @@ import {
   setModalOverlayData,
 } from "../../store/store"
 import { listingDataType, listingType } from "../../types/general"
-import { handleSave } from "../../api/api"
+import { handleDeleteListing, handleSave } from "../../api/api"
 import routes from "../../utils/client-routes"
-import { handleDeleteListing } from "../../utils/utils"
 import "./ListingItem.scss"
 
 interface ListingItemProps {

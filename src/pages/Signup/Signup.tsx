@@ -34,49 +34,51 @@ const Signup: Component = () => {
 
   const handleSubmit = async () => {
     let res
-    try {
-      res = await fetch(signup, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(signupFormData()),
-      })
+    if (submitted()) {
+      try {
+        res = await fetch(signup, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(signupFormData()),
+        })
 
-      if (res.status === 201) {
-        let res
-        try {
-          res = await fetch(login, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(signupFormData()),
-          })
-
-          if (res.status === 200) {
-            const data = await res.json()
-            localStorage.setItem("accessToken", data.accessToken)
-            setAccessToken(data.accessToken)
-
-            const userDataRes = await fetch(profile, {
+        if (res.status === 201) {
+          let res
+          try {
+            res = await fetch(login, {
+              method: "POST",
               headers: {
-                Authorization: `Bearer ${accessToken()}`,
+                "Content-Type": "application/json",
               },
+              body: JSON.stringify(signupFormData()),
             })
 
-            const userData = await userDataRes.json()
+            if (res.status === 200) {
+              const data = await res.json()
+              localStorage.setItem("accessToken", data.accessToken)
+              setAccessToken(data.accessToken)
 
-            setLoggedIn(true)
-            setUserData(userData)
-            navigate(routes.profile)
+              const userDataRes = await fetch(profile, {
+                headers: {
+                  Authorization: `Bearer ${accessToken()}`,
+                },
+              })
+
+              const userData = await userDataRes.json()
+
+              setLoggedIn(true)
+              setUserData(userData)
+              navigate(routes.profile)
+            }
+          } catch (error) {
+            handleServerError(res)
           }
-        } catch (error) {
-          handleServerError(res)
         }
+      } catch (error) {
+        handleServerError(res)
       }
-    } catch (error) {
-      handleServerError(res)
     }
   }
 

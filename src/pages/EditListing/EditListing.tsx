@@ -24,7 +24,13 @@ const EditListing: Component = () => {
 
   return (
     <div class="edit-listing">
-      {listing() && <ListingForm listing={listing().listing} page="edit" />}
+      {listing() && (
+        <ListingForm
+          listing={listing().listing}
+          page="edit"
+          heading="edit listing"
+        />
+      )}
     </div>
   )
 }

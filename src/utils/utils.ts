@@ -58,27 +58,6 @@ export const disableModal = () => {
   body.style.overflow = "auto"
 }
 
-export const handleDeleteListing = async (listingId: string, refetch) => {
-  let res
-  try {
-    res = await fetch(listing, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken()}`,
-      },
-      body: JSON.stringify({
-        propertyId: listingId,
-      }),
-    })
-    if (res.status === 201) {
-      refetch()
-    } else throw new Error()
-  } catch (error) {
-    handleServerError(res)
-  }
-}
-
 export const logout = () => {
   localStorage.removeItem("accessToken")
   setListingFormData(initialListingFormData)

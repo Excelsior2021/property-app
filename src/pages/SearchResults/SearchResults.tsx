@@ -4,12 +4,12 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import { handleServerError } from "../../utils/utils"
 import { useSearchParams } from "@solidjs/router"
 import { search } from "../../api/api-endpoints"
-import "./SearchResults.scss"
 import ServerError from "../../components/ServerError/ServerError"
 import { errorMessage } from "../../store/store"
+import "./SearchResults.scss"
 
 const SearchResults: Component = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
 
   const handleSearch = async () => {
     let res
@@ -25,6 +25,7 @@ const SearchResults: Component = () => {
       })
 
       const data = await res.json()
+      console.log(data)
 
       if (res.status === 200) return data
       else throw new Error()
@@ -33,7 +34,7 @@ const SearchResults: Component = () => {
     }
   }
 
-  const [results] = createResource(searchParams.location, handleSearch)
+  const [results] = createResource(() => searchParams.location, handleSearch)
 
   return (
     <div class="search-results">

@@ -5,7 +5,7 @@ import "./UploadImages.scss"
 const UploadImages: Component = () => {
   return (
     <div class="upload-images">
-      <ManageImages page="new" />
+      <ManageImages page="new" heading="upload images" />
     </div>
   )
 }

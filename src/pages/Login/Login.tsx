@@ -1,10 +1,4 @@
-import {
-  Component,
-  Show,
-  createResource,
-  createSignal,
-  createEffect,
-} from "solid-js"
+import { Component, Show, createResource, createSignal } from "solid-js"
 import { A, useNavigate } from "@solidjs/router"
 import { createForm, required, email } from "@modular-forms/solid"
 import {
@@ -12,7 +6,6 @@ import {
   accessToken,
   setAccessToken,
   errorMessage,
-  setErrorMessage,
 } from "../../store/store"
 import { handleFormInput, handleServerError } from "../../utils/utils"
 import { login } from "../../api/api-endpoints"
@@ -33,8 +26,6 @@ const Login: Component = () => {
   })
   const [submitted, setSubmitted] = createSignal(0)
   const naviagte = useNavigate()
-
-  // createEffect(() => setErrorMessage(""))
 
   const handleSubmit = async () => {
     if (submitted()) {

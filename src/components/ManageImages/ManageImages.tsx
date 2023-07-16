@@ -5,6 +5,7 @@ import {
   For,
   createResource,
   Show,
+  onCleanup,
 } from "solid-js"
 import { useNavigate, useParams } from "@solidjs/router"
 import { createForm } from "@modular-forms/solid"
@@ -20,6 +21,7 @@ import "./ManageImages.scss"
 
 interface manageImagesProps {
   page: string
+  heading: string
 }
 
 type manageImagesForm = {
@@ -50,8 +52,6 @@ const ManageImages: Component<manageImagesProps> = props => {
   }
 
   createEffect(() => {
-    setStoredImages([])
-    setUploadedImages([])
     if (props.page === "edit") {
       setPropertyId(params.id)
 
@@ -60,6 +60,11 @@ const ManageImages: Component<manageImagesProps> = props => {
       for (const image of images)
         setStoredImages(prevState => [...prevState, image])
     }
+  })
+
+  onCleanup(() => {
+    setStoredImages([])
+    setUploadedImages([])
   })
 
   const handleUpload = () => {
@@ -71,9 +76,8 @@ const ManageImages: Component<manageImagesProps> = props => {
       setUploadLimit(true)
       return
     }
-    for (const file of fileRef.files) {
+    for (const file of fileRef.files)
       setUploadedImages(prevState => [...prevState, { id: uuid(), file }])
-    }
   }
 
   const handleSubmit = async () => {
@@ -130,7 +134,7 @@ const ManageImages: Component<manageImagesProps> = props => {
   const handleReturn = () => {
     if (props.page === "new") navigate(routes.newListing)
     if (props.page === "edit")
-      navigate(`${routes.editListing}/${currentListing().property.id}`)
+      navigate(`${routes.editListing}/${currentListing().listing.id}`)
   }
 
   const [submittedListing] = createResource(submitted, handleSubmit)
@@ -143,6 +147,9 @@ const ManageImages: Component<manageImagesProps> = props => {
           onSubmit={() => {
             setSubmitted(true)
           }}>
+          <h2 class="manage-images__heading manage-images__heading--main">
+            {props.heading}
+          </h2>
           <Field name="upload">
             {(field, props) => (
               <input
@@ -162,22 +169,28 @@ const ManageImages: Component<manageImagesProps> = props => {
               You can only have a max. of 5 images per listing
             </p>
           )}
-          <div class="manage-images__stored">
-            {storedImages().length > 0 && (
+          {storedImages().length > 0 && props.page === "edit" && (
+            <div class="manage-images__stored">
               <h2 class="manage-images__heading">existing images</h2>
-            )}
-            <For each={storedImages()}>
-              {image => <ImageItem image={image} type="stored" />}
-            </For>
-          </div>
-          <div class="manage-images__uploaded">
-            {uploadedImages().length > 0 && (
-              <h2 class="manage-images__heading">new images</h2>
-            )}
-            <For each={uploadedImages()}>
-              {image => <ImageItem image={image} type="uploaded" />}
-            </For>
-          </div>
+              <div class="manage-images__images">
+                <For each={storedImages()}>
+                  {image => <ImageItem image={image} type="stored" />}
+                </For>
+              </div>
+            </div>
+          )}
+          {uploadedImages().length > 0 && (
+            <div class="manage-images__uploaded">
+              {props.page === "edit" && (
+                <h2 class="manage-images__heading">new images</h2>
+              )}
+              <div class="manage-images__images">
+                <For each={uploadedImages()}>
+                  {image => <ImageItem image={image} type="uploaded" />}
+                </For>
+              </div>
+            </div>
+          )}
           <div class="manage-images__actions">
             <button class="manage-images__button" onclick={handleReturn}>
               back

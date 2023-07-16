@@ -34,6 +34,7 @@
 }
 
 @mixin button-form {
+  display: block;
   color: white;
   background-color: dodgerblue;
   font-size: 1.8rem;
@@ -42,6 +43,10 @@
   margin: 16px 0;
   padding: 1.2rem;
   cursor: pointer;
+
+  @include media-tablet {
+    margin: 24px 0;
+  }
 }
 
 @mixin error-form {

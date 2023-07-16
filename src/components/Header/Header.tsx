@@ -12,7 +12,9 @@ const Header: Component = () => {
   return (
     <header class="header">
       <div class="header__container">
-        <div class="header__logo">lifeStyle</div>
+        <A class="header__link" href="/">
+          <div class="header__logo">lifeStyle</div>
+        </A>
 
         <Switch>
           <Match

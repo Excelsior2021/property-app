@@ -5,7 +5,7 @@ import "./EditImages.scss"
 const EditImages: Component = () => {
   return (
     <div class="edit-images">
-      <ManageImages page="edit" />
+      <ManageImages page="edit" heading="manage images" />
     </div>
   )
 }
