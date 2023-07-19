@@ -13,12 +13,6 @@
     width: 100%;
     aspect-ratio: 10/9; //No IE support
     object-fit: cover;
-
-    @include media-two-column {
-    }
-
-    @include media-three-column {
-    }
   }
 
   &__button {
