@@ -12,5 +12,15 @@
     margin: auto;
     padding: 24px;
     max-width: $max-width-app;
+
+    @include media-two-column {
+      padding-left: $padding-page-two-column;
+      padding-right: $padding-page-two-column;
+    }
+
+    @include media-three-column {
+      padding-left: $padding-page-three-column;
+      padding-right: $padding-page-three-column;
+    }
   }
 }

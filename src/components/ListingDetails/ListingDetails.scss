@@ -6,6 +6,32 @@
   row-gap: 4px;
   margin-top: 4px;
 
+  &__container {
+    &--top {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &--save {
+      display: flex;
+      align-items: center;
+      height: fit-content;
+      cursor: pointer;
+    }
+  }
+
+  &__icon {
+    width: 30px;
+    filter: invert(61%) sepia(75%) saturate(1236%) hue-rotate(315deg)
+      brightness(104%) contrast(96%);
+  }
+
+  &__icon-text {
+    color: salmon;
+    text-transform: capitalize;
+    text-decoration: underline;
+  }
+
   &__location {
     text-transform: capitalize;
     font-size: 2rem;
@@ -36,17 +62,24 @@
 
   &__contact,
   &__email {
+    color: rgb(84, 84, 84);
     font-size: 1.8rem;
     font-weight: 500;
 
     @include media-tablet {
-      font-size: 2.2rem;
+      font-size: 2.1rem;
     }
   }
 
   &__button {
     &--contact {
       @include button-form;
+      background-color: salmon;
+
+      @include media-tablet {
+        @include form-max-width;
+        margin-top: 40px;
+      }
     }
   }
 }
