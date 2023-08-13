@@ -4,6 +4,12 @@
   &__heading {
     display: none;
 
+    &--search {
+      display: block;
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
     @include media-tablet {
       text-transform: capitalize;
       display: block;

@@ -6,6 +6,18 @@ import { loggedIn } from "../../store/store"
 import routes from "../../utils/client-routes"
 import "./Header.scss"
 
+const SearchHeader: Component = props => {
+  return (
+    <div
+      class={
+        props.wideOnly
+          ? "header__search header__search--wide"
+          : "header__search"
+      }>
+      <Search />
+    </div>
+  )
+}
 const Header: Component = () => {
   const location = useLocation()
 
@@ -22,10 +34,11 @@ const Header: Component = () => {
               location.pathname === routes.discover ||
               location.pathname.includes(routes.searchResults)
             }>
-            <Search />
+            <SearchHeader />
           </Match>
           <Match when={location.pathname === routes.savedListings}>
             <h1 class="header__heading">saved listings</h1>
+            <SearchHeader wideOnly={true} />
           </Match>
           <Match when={location.pathname === routes.login}>
             <h1 class="header__heading">log in</h1>
@@ -35,9 +48,11 @@ const Header: Component = () => {
           </Match>
           <Match when={location.pathname === routes.profile}>
             <h1 class="header__heading">my profile</h1>
+            <SearchHeader wideOnly={true} />
           </Match>
           <Match when={location.pathname === routes.myListings}>
             <h1 class="header__heading">my listings</h1>
+            <SearchHeader wideOnly={true} />
           </Match>
           <Match when={location.pathname === routes.newListing}>
             <h1 class="header__heading">new listing</h1>
@@ -52,7 +67,10 @@ const Header: Component = () => {
             <h1 class="header__heading">manage images</h1>
           </Match>
           <Match when={location.pathname === routes.searchResults}>
-            <Search />
+            <SearchHeader />
+          </Match>
+          <Match when={location.pathname.includes(routes.listing)}>
+            <SearchHeader wideOnly={true} />
           </Match>
         </Switch>
 

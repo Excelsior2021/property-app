@@ -4,10 +4,6 @@
   position: relative;
   width: 100%;
 
-  @include media-tablet {
-    width: 50%;
-  }
-
   &__button {
     display: flex;
     justify-content: center;

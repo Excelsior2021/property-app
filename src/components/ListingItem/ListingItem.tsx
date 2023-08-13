@@ -7,6 +7,7 @@ import {
   setCurrentListing,
   setModal,
   setModalOverlayData,
+  setPreviousPage,
 } from "../../store/store"
 import { listingDataType, listingType } from "../../types/general"
 import { handleDeleteListing, handleSave } from "../../api/api"
@@ -15,6 +16,7 @@ import "./ListingItem.scss"
 
 interface ListingItemProps {
   listing: listingType
+  page: string
   saved: boolean
   edit: boolean
   delete: boolean
@@ -43,6 +45,7 @@ const ListingItem: Component<ListingItemProps> = props => {
 
     switch (requestPage) {
       case "details":
+        setPreviousPage(props.page)
         navigate(`${routes.listing}/${listing.id}`)
         break
       case "edit":

@@ -26,6 +26,9 @@ const Search: Component = () => {
         placeholder="search location"
         value={searchTerm()}
         onchange={e => setSearchTerm(e.currentTarget.value)}
+        onkeyup={e => {
+          if (e.key === "Enter") handleSearch()
+        }}
       />
     </div>
   )

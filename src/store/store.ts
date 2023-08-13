@@ -25,3 +25,5 @@ export const [modalOverlayData, setModalOverlayData] = createSignal({
 })
 
 export const [refetch, setRefetch] = createSignal(null)
+
+export const [previousPage, setPreviousPage] = createSignal("")

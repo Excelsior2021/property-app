@@ -5,11 +5,14 @@ import { handleServerError } from "../../utils/utils"
 import { useSearchParams } from "@solidjs/router"
 import { search } from "../../api/api-endpoints"
 import ServerError from "../../components/ServerError/ServerError"
-import { errorMessage } from "../../store/store"
+import { errorMessage, previousPage } from "../../store/store"
+import routes from "../../utils/client-routes"
 import "./SearchResults.scss"
 
 const SearchResults: Component = () => {
   const [searchParams] = useSearchParams()
+
+  console.log(routes.searchResults)
 
   const handleSearch = async () => {
     let res
@@ -25,7 +28,6 @@ const SearchResults: Component = () => {
       })
 
       const data = await res.json()
-      console.log(data)
 
       if (res.status === 200) return data
       else throw new Error()
@@ -42,6 +44,7 @@ const SearchResults: Component = () => {
         <Show when={!results.loading} fallback={<LoadingSpinner />}>
           <Listings
             listings={results().listing}
+            page={`${routes.searchResults}/?location=${searchParams.location}`}
             heading={`${results().listing.length} search result${
               results().listing.length === 1 ? "" : "s"
             } for "${searchParams.location}"`}

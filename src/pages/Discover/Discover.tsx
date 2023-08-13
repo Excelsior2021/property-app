@@ -5,6 +5,7 @@ import { getListings } from "../../api/api-endpoints"
 import ServerError from "../../components/ServerError/ServerError"
 import { handleServerError } from "../../utils/utils"
 import { errorMessage } from "../../store/store"
+import routes from "../../utils/client-routes"
 import "./Discover.scss"
 
 const Discover: Component = () => {
@@ -28,7 +29,11 @@ const Discover: Component = () => {
       <ServerError data={listings} error={errorMessage()}>
         <Show when={!listings.loading} fallback={<LoadingSpinner />}>
           <Show when={listings().length > 0} fallback={fallback}>
-            <Listings listings={listings()} heading="discover" />
+            <Listings
+              listings={listings()}
+              heading="discover"
+              page={routes.discover}
+            />
           </Show>
         </Show>
       </ServerError>

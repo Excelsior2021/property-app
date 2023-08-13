@@ -54,6 +54,7 @@ const MyListings: Component = () => {
         <Show when={listings().length > 0} fallback={fallback}>
           <Listings
             listings={listings()}
+            page={routes.myListings}
             heading="my listings"
             edit={true}
             delete={true}

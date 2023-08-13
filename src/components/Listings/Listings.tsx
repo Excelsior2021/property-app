@@ -6,6 +6,7 @@ import "./Listings.scss"
 
 interface listingsProps {
   listings: listingType[]
+  page: string
   heading?: string
   edit?: boolean
   delete?: boolean
@@ -30,6 +31,7 @@ const Listings: Component<listingsProps> = props => {
             return (
               <ListingItem
                 listing={listing}
+                page={props.page}
                 saved={savedListingsIds().includes(
                   props.search ? listing.id : listing.listing.id
                 )}

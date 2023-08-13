@@ -4,8 +4,9 @@ import { getSavedListings } from "../../api/api-endpoints"
 import Listings from "../../components/Listings/Listings"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import ServerError from "../../components/ServerError/ServerError"
-import "./SavedListings.scss"
 import { handleServerError } from "../../utils/utils"
+import routes from "../../utils/client-routes"
+import "./SavedListings.scss"
 
 const SavedListings: Component = () => {
   const fetchListings = async () => {
@@ -47,6 +48,7 @@ const SavedListings: Component = () => {
               <Listings
                 listings={savedListings()}
                 heading="my saved listings"
+                page={routes.savedListings}
               />
             </Show>
           </Show>
