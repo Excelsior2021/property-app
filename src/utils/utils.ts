@@ -22,6 +22,7 @@ export const handleFormInput: handleFormInputType = (event, setFormData) => {
 }
 
 export const handleServerError = res => {
+  console.log(res.status)
   localStorage.removeItem("accessToken")
   setLoggedIn(false)
   if (res) {
@@ -33,7 +34,7 @@ export const handleServerError = res => {
         break
       case 401:
         setErrorMessage(
-          "You are unauthorized to view that page or execute that action. Please log in again."
+          "You are unauthorized to view that page or execute that action. Please log in."
         )
         return { route: routes.login }
       case 404:

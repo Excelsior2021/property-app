@@ -71,11 +71,11 @@ const Signup: Component = () => {
               setLoggedIn(true)
               setUserData(userData)
               navigate(routes.profile)
-            }
+            } else throw new Error()
           } catch (error) {
             handleServerError(res)
           }
-        }
+        } else throw new Error()
       } catch (error) {
         handleServerError(res)
       }
@@ -173,7 +173,7 @@ const Signup: Component = () => {
           <button class="signup__button">sign up</button>
         </Form>
 
-        <div class="signup__error signup__error--from">
+        <div class="signup__error signup__error--form">
           {errorMessage() && errorMessage()}
         </div>
 

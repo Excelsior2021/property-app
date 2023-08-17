@@ -1,0 +1,17 @@
+.autocomplete {
+  background-color: white;
+  border: 1px solid lightgrey;
+  border-radius: 20px;
+  padding: 20px 0;
+
+  &__item {
+    list-style: none;
+    text-transform: capitalize;
+    padding: 2rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(245, 245, 245);
+    }
+  }
+}

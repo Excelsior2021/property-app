@@ -1,24 +1,38 @@
 @use "../../partials/mixins" as *;
 
+$container-height: 40px;
+
 .search {
   position: relative;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__container {
+    width: 100%;
+    height: $container-height;
+    display: flex;
+    align-items: center;
+  }
+
+  &__autocomplete {
+    position: absolute;
+    top: calc($container-height + 5px);
+    width: 100%;
+  }
 
   &__button {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 15%;
+    background-color: white;
+    width: 12%;
+    height: 100%;
     min-width: 50px;
     max-width: 80px;
-    height: 100%;
-    border: none;
-    border-radius: 20px;
     border: 1px solid lightgrey;
-    background-color: white;
+    border-radius: 20px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
     cursor: pointer;
 
     &:hover {
@@ -32,15 +46,14 @@
 
   &__input {
     width: 100%;
-    border-radius: 20px;
-    outline: none;
+    height: 100%;
     border: 1px solid lightgrey;
-    padding: 1rem;
-
-    @include media-tablet {
-      margin: 0;
-      margin-right: 24px;
-      max-width: 768px;
-    }
+    border-right: 0;
+    border-radius: 20px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    outline: none;
+    padding-left: 2rem;
+    padding-right: 1rem;
   }
 }

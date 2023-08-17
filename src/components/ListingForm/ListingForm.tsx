@@ -111,7 +111,7 @@ const ListingForm: Component<listingFormProps> = props => {
                 class="listing-form__input"
                 type="number"
                 placeholder="price"
-                min="1"
+                min="0"
                 value={listingFormData().price}
                 onchange={event => handleFormInput(event, setListingFormData)}
                 required

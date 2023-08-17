@@ -5,14 +5,12 @@ import { handleServerError } from "../../utils/utils"
 import { useSearchParams } from "@solidjs/router"
 import { search } from "../../api/api-endpoints"
 import ServerError from "../../components/ServerError/ServerError"
-import { errorMessage, previousPage } from "../../store/store"
+import { errorMessage } from "../../store/store"
 import routes from "../../utils/client-routes"
 import "./SearchResults.scss"
 
 const SearchResults: Component = () => {
   const [searchParams] = useSearchParams()
-
-  console.log(routes.searchResults)
 
   const handleSearch = async () => {
     let res
