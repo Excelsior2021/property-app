@@ -1,5 +1,5 @@
 import { Component } from "solid-js"
-import { Routes, Route } from "@solidjs/router"
+import { Routes, Route, Navigate, Outlet } from "@solidjs/router"
 import Header from "./components/Header/Header"
 import Navbar from "./components/Navbar/Navbar"
 import Discover from "./pages/Discover/Discover"
@@ -26,9 +26,8 @@ import routes from "./utils/client-routes"
 import "./App.scss"
 
 const App: Component = () => {
-  const accessToken = localStorage.getItem("accessToken")
-  if (accessToken) {
-    setAccessToken(accessToken)
+  if (localStorage.accessToken) {
+    setAccessToken(localStorage.accessToken)
     setLoggedIn(true)
     fetchSavedListingsIds()
   }
@@ -45,14 +44,41 @@ const App: Component = () => {
           <Route path={routes.savedListings} component={SavedListings} />
           <Route path={routes.login} component={Login} />
           <Route path={routes.signup} component={Signup} />
-          <Route path={routes.profile} component={Profile} />
-          <Route path={`${routes.listing}/:id`} component={Listing} />
-          <Route path={routes.myListings} component={MyListings} />
-          <Route path={routes.newListing} component={NewListing} />
-          <Route path={`${routes.editListing}/:id`} component={EditListing} />
-          <Route path={routes.uploadImages} component={UploadImages} />
-          <Route path={`${routes.manageImages}/:id`} component={EditImages} />
-          <Route path={`${routes.searchResults}/*`} component={SearchResults} />
+          <Route
+            path={`${routes.listing}/${routes.listingId}`}
+            component={Listing}
+          />
+          <Route
+            path={`${routes.searchResults}/${routes.uncaught}`}
+            component={SearchResults}
+          />
+
+          <Route
+            path={routes.uncaught}
+            element={() =>
+              localStorage.accessToken ? (
+                <Outlet />
+              ) : (
+                <Navigate href={routes.login} />
+              )
+            }>
+            <Route path={routes.profile} component={Profile} />
+            <Route path={routes.myListings} component={MyListings} />
+            <Route path={routes.newListing} component={NewListing} />
+            <Route
+              path={`${routes.editListing}/${routes.listingId}`}
+              component={EditListing}
+            />
+            <Route path={routes.uploadImages} component={UploadImages} />
+            <Route
+              path={`${routes.manageImages}/${routes.listingId}`}
+              component={EditImages}
+            />
+          </Route>
+          <Route
+            path={routes.uncaught}
+            component={() => <div>404: Page Not Found!</div>}
+          />
         </Routes>
       </main>
       <Navbar />

@@ -1,38 +1,18 @@
-const discover = "/"
-
-const savedListings = "/saved-listings"
-
-const login = "/login"
-
-const signup = "/sign-up"
-
-const profile = "/profile"
-
-const listing = "/listing"
-
-const myListings = "/my-listings"
-
-const newListing = "/new-listing"
-
-const editListing = "/edit-listing"
-
-const uploadImages = "/upload-images"
-
-const manageImages = "/manage-images"
-
-const searchResults = "/search"
-
-export default {
-  discover,
-  savedListings,
-  login,
-  signup,
-  profile,
-  listing,
-  myListings,
-  newListing,
-  editListing,
-  uploadImages,
-  manageImages,
-  searchResults,
+const routes = {
+  discover: "/",
+  savedListings: "/saved-listings",
+  login: "/login",
+  signup: "/sign-up",
+  profile: "/profile",
+  listing: "/listing",
+  myListings: "/my-listings",
+  newListing: "/new-listing",
+  editListing: "/edit-listing",
+  uploadImages: "/upload-images",
+  manageImages: "/manage-images",
+  searchResults: "/search",
+  listingId: ":id",
+  uncaught: "*",
 }
+
+export default routes

@@ -1,13 +1,11 @@
 import { handleFormInputType } from "../types/general"
 import {
-  accessToken,
   setErrorMessage,
   setLoggedIn,
   setModal,
   setSavedListingsIds,
 } from "../store/store"
 import routes from "./client-routes"
-import { listing } from "../api/api-endpoints"
 import {
   initialListingFormData,
   setListingFormData,

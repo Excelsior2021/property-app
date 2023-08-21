@@ -1,10 +1,11 @@
 import { Component, Show } from "solid-js"
 import { useNavigate } from "@solidjs/router"
+import ContactCard from "../ContactCard/ContactCard"
 import { listingDataType } from "../../types/general"
 import { loggedIn, setModal, setModalOverlayData } from "../../store/store"
+import { handleSave } from "../../api/api"
 import routes from "../../utils/client-routes"
 import "./ListingDetails.scss"
-import { handleSave } from "../../api/api"
 
 interface listingDetailsProps {
   listing: listingDataType
@@ -59,7 +60,6 @@ const ListingDetails: Component<listingDetailsProps> = props => {
           </p>
         </div>
       </div>
-      <p class="listing-details__price"></p>
       <p class="listing-details__description">{props.listing.description}</p>
       <Show when={loggedIn()} fallback={ListingDetailsContactButton}>
         <p class="listing-details__contact">
@@ -67,6 +67,7 @@ const ListingDetails: Component<listingDetailsProps> = props => {
         </p>
         <p class="listing-details__email">Email: {props.listing.email}</p>
       </Show>
+      {/* <ContactCard /> */}
     </div>
   )
 }
