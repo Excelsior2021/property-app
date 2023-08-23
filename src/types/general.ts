@@ -23,7 +23,7 @@ export interface listingType {
 
 export type handleFormInputType = (
   event: Event & {
-    currentTarget: HTMLInputElement | HTMLTextAreaElement
+    currentTarget: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
   },
   setter: Setter<{}>
 ) => void

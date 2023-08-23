@@ -26,6 +26,7 @@
 }
 
 @mixin form-field {
+  font-family: inherit;
   font-size: 1.8rem;
   border: 1px solid lightgrey;
   border-radius: 8px;

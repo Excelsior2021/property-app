@@ -28,3 +28,7 @@ export const getListingDetails = (propertyId: string) =>
 export const deleteImage = `${import.meta.env.VITE_SERVER_DOMAIN}/image`
 
 export const search = `${import.meta.env.VITE_SERVER_DOMAIN}/api/v1/search`
+
+export const getLocations = `${
+  import.meta.env.VITE_SERVER_DOMAIN
+}/api/v1/locations`

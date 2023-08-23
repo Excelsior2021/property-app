@@ -1,9 +1,17 @@
-import { Component, createSignal, Switch, Match } from "solid-js"
+import {
+  Component,
+  createSignal,
+  Switch,
+  Match,
+  For,
+  createResource,
+  Show,
+} from "solid-js"
 import { createForm, required } from "@modular-forms/solid"
 import { useNavigate, useParams } from "@solidjs/router"
 import { handleFormInput, handleServerError } from "../../utils/utils"
 import { listingDataType } from "../../types/general"
-import { editListing } from "../../api/api-endpoints"
+import { editListing, getLocations } from "../../api/api-endpoints"
 import { accessToken } from "../../store/store"
 import CancelButton from "../CancelButton/CancelButton"
 import routes from "../../utils/client-routes"
@@ -59,7 +67,7 @@ const ListingForm: Component<listingFormProps> = props => {
       navigate(`${routes.manageImages}/${props.listing.id}`)
   }
 
-  const handleSave = async () => {
+  const handleSaveListing = async () => {
     let res
     try {
       res = await fetch(editListing(params.id), {
@@ -83,6 +91,20 @@ const ListingForm: Component<listingFormProps> = props => {
     if (props.page === "edit") navigate(routes.myListings)
   }
 
+  const fetchLocations = async () => {
+    let res
+    try {
+      res = await fetch(getLocations)
+      if (res.status !== 200) throw new Error()
+      const data = await res.json()
+      return data.locations
+    } catch (error) {
+      handleServerError(res)
+    }
+  }
+
+  const [locations] = createResource(fetchLocations)
+
   return (
     <div class="listing-form">
       <Form class="listing-form__form" onSubmit={handleFormSubmission}>
@@ -97,7 +119,6 @@ const ListingForm: Component<listingFormProps> = props => {
                 placeholder="title"
                 value={listingFormData().title}
                 onchange={event => handleFormInput(event, setListingFormData)}
-                required
               />
               {field.error && <p class="listing-form__error">{field.error}</p>}
             </>
@@ -114,7 +135,6 @@ const ListingForm: Component<listingFormProps> = props => {
                 min="0"
                 value={listingFormData().price}
                 onchange={event => handleFormInput(event, setListingFormData)}
-                required
               />
               {field.error && <p class="listing-form__error">{field.error}</p>}
             </>
@@ -131,7 +151,6 @@ const ListingForm: Component<listingFormProps> = props => {
                 placeholder="description"
                 value={listingFormData().description}
                 onchange={event => handleFormInput(event, setListingFormData)}
-                required
                 cols="30"
                 rows="10"></textarea>
               {field.error && <p class="listing-form__error">{field.error}</p>}
@@ -140,18 +159,42 @@ const ListingForm: Component<listingFormProps> = props => {
         </Field>
         <Field
           name="location"
-          validate={[required("please provide a location")]}>
+          validate={
+            !listingFormData().location && [
+              required("please provide a location"),
+            ]
+          }>
           {(field, fieldProps) => (
             <>
-              <input
+              <select
+                {...fieldProps}
+                name="location"
+                id="locations"
+                class="listing-form__input"
+                value={listingFormData().location}
+                onchange={event => handleFormInput(event, setListingFormData)}>
+                <option selected>choose location</option>
+                <Show when={!locations.loading} fallback={null}>
+                  <For each={locations()}>
+                    {location => (
+                      <option
+                        value={location}
+                        selected={listingFormData().location === location}>
+                        {location}
+                      </option>
+                    )}
+                  </For>
+                </Show>
+              </select>
+              {/* <input
                 {...fieldProps}
                 class="listing-form__input"
                 type="text"
                 placeholder="location"
                 value={listingFormData().location}
                 onchange={event => handleFormInput(event, setListingFormData)}
-                required
-              />
+  
+              /> */}
               {field.error && <p class="listing-form__error">{field.error}</p>}
             </>
           )}
@@ -168,7 +211,6 @@ const ListingForm: Component<listingFormProps> = props => {
                 placeholder="contact number"
                 value={listingFormData().phone}
                 onchange={event => handleFormInput(event, setListingFormData)}
-                required
               />
               {field.error && <p class="listing-form__error">{field.error}</p>}
             </>
