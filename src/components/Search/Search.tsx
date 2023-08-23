@@ -1,11 +1,11 @@
-import { Component, createSignal, createResource } from "solid-js"
+import { Component, createSignal } from "solid-js"
 import { useNavigate } from "@solidjs/router"
+import Autocomplete from "../Autocomplete/Autocomplete"
 import routes from "../../utils/client-routes"
 import { handleServerError } from "../../utils/utils"
 import { search } from "../../api/api-endpoints"
-import Autocomplete from "../Autocomplete/Autocomplete"
-import "./Search.scss"
 import { listingDataType } from "../../types/general"
+import "./Search.scss"
 
 const Search: Component = () => {
   const [searchTerm, setSearchTerm] = createSignal("")
@@ -19,7 +19,11 @@ const Search: Component = () => {
     setAutoCompleteResults(null)
   }
 
-  const handleAutocomplete = async e => {
+  const handleAutocomplete = async (
+    e: Event & {
+      currentTarget: HTMLInputElement
+    }
+  ) => {
     let res
     setSearchTerm(e.currentTarget.value)
 

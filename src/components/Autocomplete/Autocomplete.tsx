@@ -9,8 +9,12 @@ interface autocompleteProps {
 }
 
 const Autocomplete: Component<autocompleteProps> = props => {
-  const handleClick = e => {
-    props.setSearchTerm(e.target.id)
+  const handleClick = (
+    e: Event & {
+      currentTarget: HTMLElement
+    }
+  ) => {
+    props.setSearchTerm(e.currentTarget.id)
     props.handleSearch()
   }
 
