@@ -5,6 +5,7 @@ import { handleServerError } from "../../utils/utils"
 import { search } from "../../api/api-endpoints"
 import Autocomplete from "../Autocomplete/Autocomplete"
 import "./Search.scss"
+import { listingDataType } from "../../types/general"
 
 const Search: Component = () => {
   const [searchTerm, setSearchTerm] = createSignal("")
@@ -34,7 +35,10 @@ const Search: Component = () => {
         })
 
         const data = await res.json()
-        setAutoCompleteResults(data.listing)
+        const locations = data.listing.map(
+          (listing: listingDataType) => listing.location
+        )
+        setAutoCompleteResults([...new Set(locations)])
 
         if (res.status !== 200) throw new Error()
       } catch (error) {
