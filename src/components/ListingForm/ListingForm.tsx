@@ -52,7 +52,7 @@ const ListingForm: Component<listingFormProps> = props => {
   const subActionsClass = "listing-form__actions--sub"
   const cancelButtonClass = "listing-form__button--cancel"
 
-  if (props.page === "edit" && !listingFormData().id) {
+  if (props.page === "edit") {
     for (const property in initialListingFormData) {
       setListingFormData(prevState => ({
         ...prevState,

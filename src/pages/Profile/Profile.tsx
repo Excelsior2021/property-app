@@ -5,7 +5,6 @@ import {
   accessToken,
   errorMessage,
   loggedIn,
-  setLoggedIn,
   setUserData,
 } from "../../store/store"
 import { userData } from "../../store/store"
