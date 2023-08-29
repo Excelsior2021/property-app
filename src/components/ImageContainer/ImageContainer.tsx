@@ -40,7 +40,7 @@ const ImageContainer: Component<ImageContainerProps> = props => {
             )}
           </For>
         </Slider>
-        {props.images.length > 1 ? (
+        {props.images && props.images.length > 1 ? (
           <div onclick={e => e.stopPropagation()}>
             <SliderButton
               prev
@@ -68,7 +68,7 @@ const ImageContainer: Component<ImageContainerProps> = props => {
         ) : null}
       </SliderProvider>
 
-      {props.images.length > 1 ? (
+      {props.images && props.images.length > 1 ? (
         <div class="image-container__dots">
           <For each={props.images}>
             {_ => <span class="image-container__dot"></span>}

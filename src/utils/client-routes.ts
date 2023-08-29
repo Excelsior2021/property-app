@@ -2,7 +2,7 @@ const routes = {
   discover: "/",
   savedListings: "/saved-listings",
   login: "/login",
-  signup: "/sign-up",
+  signup: "/signup",
   profile: "/profile",
   listing: "/listing",
   myListings: "/my-listings",

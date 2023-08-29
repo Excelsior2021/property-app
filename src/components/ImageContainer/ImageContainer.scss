@@ -70,14 +70,14 @@
 
   &__edit-container {
     background-color: rgba(0, 0, 0, 0.361);
-    right: 0;
-    border-bottom-right-radius: 12px;
+    left: 0;
+    border-bottom-left-radius: 12px;
   }
 
   &__delete-container {
     background-color: rgba(255, 0, 0, 0.6);
-    left: 0;
-    border-bottom-left-radius: 12px;
+    right: 0;
+    border-bottom-right-radius: 12px;
   }
 
   &__icon {

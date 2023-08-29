@@ -60,14 +60,16 @@ const ListingDetails: Component<listingDetailsProps> = props => {
           </p>
         </div>
       </div>
-      <p class="listing-details__description">{props.listing.description}</p>
-      <Show when={loggedIn()} fallback={ListingDetailsContactButton}>
+      <div class="listing-details__container listing-details__container--bottom">
+        <p class="listing-details__description">{props.listing.description}</p>
+        <ContactCard phone={props.listing.phone} email={props.listing.email} />
+      </div>
+      {/* <Show when={loggedIn()} fallback={ListingDetailsContactButton}>
         <p class="listing-details__contact">
           Contact number: {props.listing.phone}
         </p>
         <p class="listing-details__email">Email: {props.listing.email}</p>
-      </Show>
-      {/* <ContactCard /> */}
+      </Show> */}
     </div>
   )
 }

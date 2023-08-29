@@ -21,7 +21,7 @@ import {
   setAccessToken,
   setLoggedIn,
 } from "./store/store"
-import { fetchSavedListingsIds } from "./api/api"
+import { fetchProfile, fetchSavedListingsIds } from "./api/api"
 import routes from "./utils/client-routes"
 import "./App.scss"
 
@@ -30,6 +30,7 @@ const App: Component = () => {
     setAccessToken(localStorage.accessToken)
     setLoggedIn(true)
     fetchSavedListingsIds()
+    fetchProfile()
   }
 
   return (
@@ -42,8 +43,6 @@ const App: Component = () => {
         <Routes>
           <Route path={routes.discover} component={Discover} />
           <Route path={routes.savedListings} component={SavedListings} />
-          <Route path={routes.login} component={Login} />
-          <Route path={routes.signup} component={Signup} />
           <Route
             path={`${routes.listing}/${routes.listingId}`}
             component={Listing}
@@ -52,7 +51,18 @@ const App: Component = () => {
             path={`${routes.searchResults}/${routes.uncaught}`}
             component={SearchResults}
           />
-
+          <Route
+            path={routes.uncaught}
+            element={() =>
+              !localStorage.accessToken ? (
+                <Outlet />
+              ) : (
+                <Navigate href={routes.profile} />
+              )
+            }>
+            <Route path={routes.login} component={Login} />
+            <Route path={routes.signup} component={Signup} />
+          </Route>
           <Route
             path={routes.uncaught}
             element={() =>

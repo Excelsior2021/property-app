@@ -33,7 +33,7 @@
     column-gap: 16px;
 
     @include media-tablet {
-      justify-content: flex-end;
+      justify-content: center;
       column-gap: 24px;
     }
   }

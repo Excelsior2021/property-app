@@ -38,7 +38,7 @@ const ManageImages: Component<manageImagesProps> = props => {
   const [uploadLimit, setUploadLimit] = createSignal(false)
   const navigate = useNavigate()
   const params = useParams()
-  let fileRef
+  let fileRef: HTMLInputElement
   let apiMethod: string
   let apiRoute: string
 
@@ -68,6 +68,7 @@ const ManageImages: Component<manageImagesProps> = props => {
   })
 
   const handleUpload = () => {
+    console.log(typeof fileRef)
     setUploadLimit(false)
     if (
       fileRef.files.length + storedImages().length > 5 ||
@@ -151,9 +152,9 @@ const ManageImages: Component<manageImagesProps> = props => {
             {props.heading}
           </h2>
           <Field name="upload">
-            {(field, props) => (
+            {(field, fieldProps) => (
               <input
-                {...props}
+                {...fieldProps}
                 id="upload"
                 class="manage-images__input"
                 type="file"

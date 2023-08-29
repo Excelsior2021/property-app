@@ -1,0 +1,49 @@
+@use "../../partials/mixins" as *;
+
+.contact-card {
+  position: relative;
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 2rem;
+
+    &--hide {
+      filter: blur(6px);
+    }
+  }
+
+  &__label {
+    border-bottom: 1px solid lightgrey;
+    margin-bottom: 8px;
+  }
+
+  &__value {
+    margin-bottom: 16px;
+  }
+}
+
+.contact-button {
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  &__button {
+    @include button-form;
+    position: absolute;
+    background-color: salmon;
+    @include media-tablet {
+      @include form-max-width;
+      margin-top: 40px;
+    }
+  }
+}

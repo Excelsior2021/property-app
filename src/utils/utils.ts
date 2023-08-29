@@ -20,7 +20,6 @@ export const handleFormInput: handleFormInputType = (event, setFormData) => {
 }
 
 export const handleServerError = res => {
-  console.log(res.status)
   localStorage.removeItem("accessToken")
   setLoggedIn(false)
   if (res) {

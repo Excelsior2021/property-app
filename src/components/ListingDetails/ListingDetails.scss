@@ -14,6 +14,15 @@
       justify-content: space-between;
     }
 
+    &--bottom {
+      @include media-tablet {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+      }
+    }
+
     &--save {
       display: flex;
       align-items: center;
@@ -70,18 +79,6 @@
 
     @include media-tablet {
       font-size: 2.1rem;
-    }
-  }
-
-  &__button {
-    &--contact {
-      @include button-form;
-      background-color: salmon;
-
-      @include media-tablet {
-        @include form-max-width;
-        margin-top: 40px;
-      }
     }
   }
 }

@@ -179,7 +179,7 @@ const Signup: Component = () => {
 
         <p class="signup__text">
           Already have an account?{" "}
-          <A class="signup__link" href="/login">
+          <A class="signup__link" href={routes.login}>
             Log in here
           </A>
         </p>

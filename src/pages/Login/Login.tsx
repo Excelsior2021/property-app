@@ -11,6 +11,7 @@ import { handleFormInput, handleServerError } from "../../utils/utils"
 import { login } from "../../api/api-endpoints"
 import { fetchSavedListingsIds } from "../../api/api"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
+import routes from "../../utils/client-routes"
 import "./Login.scss"
 
 type LoginForm = {
@@ -112,7 +113,7 @@ const Login: Component = () => {
 
         <p class="login__text">
           Don't have an account?{" "}
-          <A class="login__link" href="/sign-up">
+          <A class="login__link" href={routes.signup}>
             Sign up here
           </A>
         </p>

@@ -6,6 +6,7 @@ import {
   accessToken,
   setCurrentListing,
   setSavedListingsIds,
+  setUserData,
 } from "../store/store"
 import { listingDataType, listingType } from "../types/general"
 import { handleServerError } from "../utils/utils"
@@ -14,9 +15,32 @@ import {
   getListingDetails,
   getSavedListings,
   listing,
+  profile,
   saveListing,
   unsaveListing,
 } from "./api-endpoints"
+
+export const fetchProfile = async () => {
+  let res
+  try {
+    res = await fetch(profile, {
+      headers: {
+        Authorization: `Bearer ${accessToken()}`,
+      },
+    })
+
+    if (res.status === 200) {
+      const { name, email } = await res.json()
+      setUserData({
+        name,
+        email,
+      })
+      return { name, email }
+    }
+  } catch (error) {
+    handleServerError(res)
+  }
+}
 
 export const fetchSavedListingsIds = async () => {
   let res
@@ -44,8 +68,11 @@ export const fetchListingDetails = async (propertyId: string) => {
   let res
   try {
     res = await fetch(getListingDetails(propertyId))
-    if (res.status === 200) return await res.json()
-    else throw new Error()
+    if (res.status === 200) {
+      const data = await res.json()
+      console.log(data)
+      return data
+    } else throw new Error()
   } catch (error) {
     handleServerError(res)
   }

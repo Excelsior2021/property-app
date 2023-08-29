@@ -1,48 +1,19 @@
-import { Component, createSignal, createResource, Show } from "solid-js"
+import { Component, createResource, Show } from "solid-js"
 import { A, useNavigate } from "@solidjs/router"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
-import {
-  accessToken,
-  errorMessage,
-  loggedIn,
-  setUserData,
-} from "../../store/store"
-import { userData } from "../../store/store"
-import { profile } from "../../api/api-endpoints"
+import { errorMessage, loggedIn } from "../../store/store"
 import {
   initialListingFormData,
   setListingFormData,
 } from "../../components/ListingForm/ListingForm"
 import routes from "../../utils/client-routes"
 import ServerError from "../../components/ServerError/ServerError"
-import { handleServerError, logout } from "../../utils/utils"
+import { logout } from "../../utils/utils"
 import "./Profile.scss"
+import { fetchProfile } from "../../api/api"
 
 const Profile: Component = () => {
   const navigate = useNavigate()
-
-  const fetchProfile = async () => {
-    let res
-    try {
-      res = await fetch(profile, {
-        headers: {
-          Authorization: `Bearer ${accessToken()}`,
-        },
-      })
-
-      if (res.status === 200) {
-        const { name, email } = await res.json()
-        setUserData({
-          name: name,
-          email: email,
-        })
-        return { name, email }
-      }
-    } catch (error) {
-      handleServerError(res)
-    }
-  }
-
   const [profileResource] = createResource(fetchProfile)
 
   const handleLogout = () => {
@@ -58,7 +29,7 @@ const Profile: Component = () => {
         <ServerError data={profileResource} error={errorMessage()}>
           <Show when={!profileResource.loading} fallback={<LoadingSpinner />}>
             <h2 class="profile__greeting">
-              Hello {userData().name ? userData().name : "user"},
+              Hello {profileResource().name ? profileResource().name : "user"},
             </h2>
             <p class="profile__text">What would you like to do?</p>
             <div class="profile__actions">
