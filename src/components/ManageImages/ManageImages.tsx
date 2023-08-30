@@ -151,20 +151,30 @@ const ManageImages: Component<manageImagesProps> = props => {
           <h2 class="manage-images__heading manage-images__heading--main">
             {props.heading}
           </h2>
-          <Field name="upload">
-            {(field, fieldProps) => (
-              <input
-                {...fieldProps}
-                id="upload"
-                class="manage-images__input"
-                type="file"
-                accept="image/jpeg, image/png, image/jpg"
-                multiple
-                ref={fileRef}
-                onchange={handleUpload}
+          <div class="input__container">
+            <Field name="upload">
+              {(field, fieldProps) => (
+                <input
+                  {...fieldProps}
+                  id="upload"
+                  class="input__input"
+                  type="file"
+                  accept="image/jpeg, image/png, image/jpg"
+                  multiple
+                  ref={fileRef}
+                  onchange={handleUpload}
+                />
+              )}
+            </Field>
+            <label for="upload" class="input__image">
+              <img
+                src="/public/icons/upload.svg"
+                alt="upload icon"
+                class="input__icon"
               />
-            )}
-          </Field>
+            </label>
+          </div>
+
           {uploadLimit() && (
             <p class="manage-images__text">
               You can only have a max. of 5 images per listing

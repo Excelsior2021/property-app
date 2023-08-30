@@ -24,10 +24,6 @@
     text-align: center;
   }
 
-  &__input {
-    margin: 0 auto;
-  }
-
   &__actions {
     display: flex;
     column-gap: 16px;
@@ -45,5 +41,43 @@
     @include media-tablet {
       max-width: 200px;
     }
+  }
+}
+
+.input {
+  &__container {
+    position: relative;
+    border-radius: 20px;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  &__input {
+    &::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+    border-radius: inherit;
+    padding: 20px;
+  }
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    border: 4px dashed lightgrey;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  &__icon {
+    width: 30px;
+    filter: invert(90%) sepia(0%) saturate(1518%) hue-rotate(195deg)
+      brightness(94%) contrast(97%);
   }
 }

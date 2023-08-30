@@ -8,7 +8,12 @@ const ReturnButton: Component = () => {
   const handleReturn = () => navigate(previousPage())
   return (
     <button class="return-button" onclick={handleReturn}>
-      🠔 Go back
+      <img
+        src="/public/icons/back-arrow.svg"
+        alt="return arrow"
+        class="return-button__icon"
+      />
+      Go back
     </button>
   )
 }

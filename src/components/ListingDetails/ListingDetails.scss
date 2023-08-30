@@ -18,7 +18,6 @@
       @include media-tablet {
         display: flex;
         justify-content: space-between;
-        align-items: center;
         height: 100%;
       }
     }
@@ -68,17 +67,6 @@
     @include media-tablet {
       font-size: 2rem;
       width: 68%;
-    }
-  }
-
-  &__contact,
-  &__email {
-    color: rgb(84, 84, 84);
-    font-size: 1.8rem;
-    font-weight: 500;
-
-    @include media-tablet {
-      font-size: 2.1rem;
     }
   }
 }

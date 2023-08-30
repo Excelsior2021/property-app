@@ -1,6 +1,12 @@
 .return-button {
+  display: flex;
+  align-items: center;
   background-color: transparent;
   border: none;
   text-decoration: underline;
   cursor: pointer;
+
+  &__icon {
+    width: 20px;
+  }
 }

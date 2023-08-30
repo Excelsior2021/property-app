@@ -70,7 +70,6 @@ export const fetchListingDetails = async (propertyId: string) => {
     res = await fetch(getListingDetails(propertyId))
     if (res.status === 200) {
       const data = await res.json()
-      console.log(data)
       return data
     } else throw new Error()
   } catch (error) {
