@@ -16,6 +16,10 @@
 
   &__input {
     @include form-field;
+
+    &--description {
+      resize: none;
+    }
   }
 
   &__actions {

@@ -68,11 +68,10 @@ const ManageImages: Component<manageImagesProps> = props => {
   })
 
   const handleUpload = () => {
-    console.log(typeof fileRef)
     setUploadLimit(false)
     if (
-      fileRef.files.length + storedImages().length > 5 ||
-      fileRef.files.length + uploadedImages().length > 5
+      fileRef.files.length + storedImages().length + uploadedImages().length >
+      5
     ) {
       setUploadLimit(true)
       return
@@ -90,6 +89,7 @@ const ManageImages: Component<manageImagesProps> = props => {
     }
 
     try {
+      console.log(listingFormData())
       res = await fetch(apiRoute, {
         method: apiMethod,
         headers: {
@@ -168,7 +168,7 @@ const ManageImages: Component<manageImagesProps> = props => {
             </Field>
             <label for="upload" class="input__image">
               <img
-                src="/public/icons/upload.svg"
+                src="/icons/upload.svg"
                 alt="upload icon"
                 class="input__icon"
               />

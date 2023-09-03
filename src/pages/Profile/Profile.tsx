@@ -42,12 +42,12 @@ const Profile: Component = () => {
               <A class="profile__link" href={routes.myListings}>
                 my listings
               </A>
-              <button
-                class="profile__button profile__button--logout"
-                onclick={handleLogout}>
-                logout
-              </button>
             </div>
+            <button
+              class="profile__button profile__button--logout"
+              onclick={handleLogout}>
+              logout
+            </button>
           </Show>
         </ServerError>
       </Show>

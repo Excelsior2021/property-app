@@ -4,16 +4,10 @@ import ListingForm, {
 } from "../../components/ListingForm/ListingForm"
 import "./NewListing.scss"
 
-const NewListing: Component = () => {
-  return (
-    <div class="new-listing">
-      <ListingForm
-        listing={listingFormData()}
-        page="new"
-        heading="new listing"
-      />
-    </div>
-  )
-}
+const NewListing: Component = () => (
+  <div class="new-listing">
+    <ListingForm listing={listingFormData()} page="new" heading="new listing" />
+  </div>
+)
 
 export default NewListing

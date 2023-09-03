@@ -79,6 +79,7 @@ const App: Component = () => {
               path={`${routes.editListing}/${routes.listingId}`}
               component={EditListing}
             />
+            <Route path={routes.uncaught} element={() => {}}></Route>
             <Route path={routes.uploadImages} component={UploadImages} />
             <Route
               path={`${routes.manageImages}/${routes.listingId}`}

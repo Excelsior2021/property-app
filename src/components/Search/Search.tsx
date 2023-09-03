@@ -61,7 +61,7 @@ const Search: Component = () => {
           id="search"
           placeholder="search location"
           value={searchTerm()}
-          oninput={handleAutocomplete}
+          onInput={handleAutocomplete}
           onkeyup={e => {
             if (e.key === "Enter") handleSearch()
           }}

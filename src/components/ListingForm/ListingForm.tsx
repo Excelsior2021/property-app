@@ -7,7 +7,7 @@ import {
   createResource,
   Show,
 } from "solid-js"
-import { createForm, required } from "@modular-forms/solid"
+import { createForm, required, custom } from "@modular-forms/solid"
 import { useNavigate, useParams } from "@solidjs/router"
 import { handleFormInput, handleServerError } from "../../utils/utils"
 import { listingDataType } from "../../types/general"
@@ -26,7 +26,7 @@ interface listingFormProps {
 type listingForm = {
   title: string
   description: string
-  price: number
+  price: string
   location: string
   phone: string
 }
@@ -36,7 +36,7 @@ export const initialListingFormData = {
   email: "",
   title: "",
   description: "",
-  price: NaN,
+  price: "",
   location: "",
   phone: "",
 }
@@ -46,7 +46,9 @@ export const [listingFormData, setListingFormData] = createSignal(
 )
 
 const ListingForm: Component<listingFormProps> = props => {
-  const [listingForm, { Field, Form }] = createForm<listingForm>()
+  const [listingForm, { Field, Form }] = createForm<listingForm>({
+    validateOn: "change",
+  })
   const navigate = useNavigate()
   const params = useParams()
   const subActionsClass = "listing-form__actions--sub"
@@ -115,7 +117,6 @@ const ListingForm: Component<listingFormProps> = props => {
               <input
                 {...fieldProps}
                 class="listing-form__input"
-                type="text"
                 placeholder="title"
                 value={listingFormData().title}
                 onchange={event => handleFormInput(event, setListingFormData)}
@@ -124,15 +125,22 @@ const ListingForm: Component<listingFormProps> = props => {
             </>
           )}
         </Field>
-        <Field name="price" validate={[required("please provide a price")]}>
+        <Field
+          name="price"
+          validate={[
+            required("please provide a price"),
+            custom(
+              value => /^\d+$/.test(value),
+              "please provide a valid price"
+            ),
+          ]}>
           {(field, fieldProps) => (
             <>
               <input
                 {...fieldProps}
+                inputmode="numeric"
                 class="listing-form__input"
-                type="number"
-                placeholder="price"
-                min="0"
+                placeholder="rental price"
                 value={listingFormData().price}
                 onchange={event => handleFormInput(event, setListingFormData)}
               />
@@ -147,11 +155,10 @@ const ListingForm: Component<listingFormProps> = props => {
             <>
               <textarea
                 {...fieldProps}
-                class="listing-form__input"
+                class="listing-form__input listing-form__input--description"
                 placeholder="description"
                 value={listingFormData().description}
                 onchange={event => handleFormInput(event, setListingFormData)}
-                cols="30"
                 rows="10"></textarea>
               {field.error && <p class="listing-form__error">{field.error}</p>}
             </>
@@ -186,22 +193,19 @@ const ListingForm: Component<listingFormProps> = props => {
                   </For>
                 </Show>
               </select>
-              {/* <input
-                {...fieldProps}
-                class="listing-form__input"
-                type="text"
-                placeholder="location"
-                value={listingFormData().location}
-                onchange={event => handleFormInput(event, setListingFormData)}
-  
-              /> */}
               {field.error && <p class="listing-form__error">{field.error}</p>}
             </>
           )}
         </Field>
         <Field
           name="phone"
-          validate={[required("please provide a contact number")]}>
+          validate={[
+            required("please provide a contact number"),
+            custom(
+              value => /^\d+$/.test(value),
+              "please provide a valid contact number"
+            ),
+          ]}>
           {(field, fieldProps) => (
             <>
               <input

@@ -80,7 +80,8 @@ const Login: Component = () => {
                   class="login__input"
                   type="email"
                   placeholder="email"
-                  onchange={event => handleFormInput(event, setLoginFormData)}
+                  value={loginFormData().email}
+                  onChange={event => handleFormInput(event, setLoginFormData)}
                   required
                 />
                 {field.error && <p class="login__error">{field.error}</p>}
@@ -97,13 +98,15 @@ const Login: Component = () => {
                   class="login__input"
                   type="password"
                   placeholder="password"
-                  onchange={event => handleFormInput(event, setLoginFormData)}
+                  value={loginFormData().password}
+                  onChange={event => handleFormInput(event, setLoginFormData)}
                   required
                 />
                 {field.error && <p class="login__error">{field.error}</p>}
               </>
             )}
           </Field>
+          {/* <input type="text" onInput={() => console.log("hello")} /> */}
           <button class="login__button login__button--login">log in</button>
         </Form>
 

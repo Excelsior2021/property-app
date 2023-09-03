@@ -9,7 +9,7 @@ const ReturnButton: Component = () => {
   return (
     <button class="return-button" onclick={handleReturn}>
       <img
-        src="/public/icons/back-arrow.svg"
+        src="/icons/back-arrow.svg"
         alt="return arrow"
         class="return-button__icon"
       />

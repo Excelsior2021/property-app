@@ -101,7 +101,7 @@ const Signup: Component = () => {
                   class="signup__input"
                   type="text"
                   placeholder="name"
-                  onchange={event => handleFormInput(event, setSignupFormData)}
+                  onInput={event => handleFormInput(event, setSignupFormData)}
                   required
                 />
                 {field.error && <p class="signup__error">{field.error}</p>}
@@ -121,7 +121,7 @@ const Signup: Component = () => {
                   class="signup__input"
                   type="email"
                   placeholder="email"
-                  onchange={event => handleFormInput(event, setSignupFormData)}
+                  onInput={event => handleFormInput(event, setSignupFormData)}
                   required
                 />
                 {field.error && <p class="signup__error">{field.error}</p>}
@@ -138,7 +138,7 @@ const Signup: Component = () => {
                   class="signup__input"
                   type="password"
                   placeholder="password"
-                  onchange={event => handleFormInput(event, setSignupFormData)}
+                  onInput={event => handleFormInput(event, setSignupFormData)}
                   required
                 />
                 {field.error && <p class="signup__error">{field.error}</p>}
@@ -161,7 +161,7 @@ const Signup: Component = () => {
                   class="signup__input"
                   type="password"
                   placeholder="retype password"
-                  onchange={event =>
+                  onInput={event =>
                     setRetypePassword(event.currentTarget.value)
                   }
                   required

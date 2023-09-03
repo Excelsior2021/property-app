@@ -2,6 +2,10 @@
 @use "../../partials/mixins" as *;
 
 .profile {
+  @include media-tablet {
+    width: 90%;
+    margin: auto;
+  }
   &__greeting {
     text-transform: capitalize;
     margin-bottom: 4px;
@@ -9,7 +13,9 @@
 
   &__actions {
     @include media-tablet {
-      @include form-max-width;
+      display: flex;
+      column-gap: 40px;
+      margin: auto;
     }
   }
 
@@ -25,7 +31,12 @@
     padding: 2rem;
 
     @include media-tablet {
-      margin: 32px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      height: 180px;
+      margin: 36px 0;
     }
   }
 
@@ -36,7 +47,8 @@
     margin: 24px auto;
 
     @include media-tablet {
-      margin: 32px auto;
+      margin-left: auto;
+      width: 100px;
     }
   }
 }

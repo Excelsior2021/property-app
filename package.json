@@ -19,7 +19,7 @@
     "vite-plugin-solid": "^2.5.0"
   },
   "dependencies": {
-    "@modular-forms/solid": "^0.17.2",
+    "@modular-forms/solid": "^0.19.2",
     "@solidjs/router": "^0.8.2",
     "sass": "^1.59.3",
     "solid-js": "^1.6.10",
