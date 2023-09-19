@@ -106,7 +106,6 @@ const Login: Component = () => {
               </>
             )}
           </Field>
-          {/* <input type="text" onInput={() => console.log("hello")} /> */}
           <button class="login__button login__button--login">log in</button>
         </Form>
 

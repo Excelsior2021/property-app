@@ -1,34 +1,32 @@
-export const signup = `${import.meta.env.VITE_SERVER_DOMAIN}/api/v1/auth/signup`
+const serverDomain = import.meta.env.VITE_SERVER_DOMAIN
 
-export const login = `${import.meta.env.VITE_SERVER_DOMAIN}/api/v1/auth/login`
+export const signup = `${serverDomain}/api/v1/auth/signup`
 
-export const profile = `${import.meta.env.VITE_SERVER_DOMAIN}/profile`
+export const login = `${serverDomain}/api/v1/auth/login`
+
+export const profile = `${serverDomain}/profile`
 
 export const uploadImage = (propertyId: string) =>
-  `${import.meta.env.VITE_SERVER_DOMAIN}/upload?propertyId=${propertyId}`
+  `${serverDomain}/upload?propertyId=${propertyId}`
 
-export const listing = `${import.meta.env.VITE_SERVER_DOMAIN}/property`
+export const listing = `${serverDomain}/property`
 
 export const editListing = (propertyId: string) =>
-  `${import.meta.env.VITE_SERVER_DOMAIN}/property?propertyId=${propertyId}`
+  `${serverDomain}/property?propertyId=${propertyId}`
 
-export const getListings = `${
-  import.meta.env.VITE_SERVER_DOMAIN
-}/api/v1/homes/listing`
+export const getListings = `${serverDomain}/api/v1/homes/listing`
 
-export const saveListing = `${import.meta.env.VITE_SERVER_DOMAIN}/save`
+export const saveListing = `${serverDomain}/save`
 
-export const unsaveListing = `${import.meta.env.VITE_SERVER_DOMAIN}/unsave`
+export const unsaveListing = `${serverDomain}/unsave`
 
-export const getSavedListings = `${import.meta.env.VITE_SERVER_DOMAIN}/likes`
+export const getSavedListings = `${serverDomain}/likes`
 
 export const getListingDetails = (propertyId: string) =>
-  `${import.meta.env.VITE_SERVER_DOMAIN}/api/v1/homes/property/${propertyId}`
+  `${serverDomain}/api/v1/homes/property/${propertyId}`
 
-export const deleteImage = `${import.meta.env.VITE_SERVER_DOMAIN}/image`
+export const deleteImage = `${serverDomain}/image`
 
-export const search = `${import.meta.env.VITE_SERVER_DOMAIN}/api/v1/search`
+export const search = `${serverDomain}/api/v1/search`
 
-export const getLocations = `${
-  import.meta.env.VITE_SERVER_DOMAIN
-}/api/v1/locations`
+export const getLocations = `${serverDomain}/api/v1/locations`
