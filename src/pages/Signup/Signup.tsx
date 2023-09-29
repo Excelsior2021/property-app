@@ -4,7 +4,6 @@ import { createForm, required, email, custom } from "@modular-forms/solid"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import {
   setLoggedIn,
-  setUserData,
   accessToken,
   setAccessToken,
   errorMessage,
@@ -69,8 +68,7 @@ const Signup: Component = () => {
               const userData = await userDataRes.json()
 
               setLoggedIn(true)
-              setUserData(userData)
-              navigate(routes.profile)
+              navigate(routes.account)
             } else throw new Error()
           } catch (error) {
             handleServerError(res)

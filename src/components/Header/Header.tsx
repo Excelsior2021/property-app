@@ -6,7 +6,11 @@ import { loggedIn } from "../../store/store"
 import routes from "../../utils/client-routes"
 import "./Header.scss"
 
-const SearchHeader: Component = props => {
+interface searchHeaderProps {
+  wideOnly?: boolean
+}
+
+const SearchHeader: Component<searchHeaderProps> = props => {
   return (
     <div
       class={
@@ -46,8 +50,12 @@ const Header: Component = () => {
           <Match when={location.pathname === routes.signup}>
             <h1 class="header__heading">sign up</h1>
           </Match>
-          <Match when={location.pathname === routes.profile}>
+          <Match when={location.pathname === routes.account}>
             <h1 class="header__heading">my profile</h1>
+            <SearchHeader wideOnly={true} />
+          </Match>
+          <Match when={location.pathname === routes.myDetails}>
+            <h1 class="header__heading">my details</h1>
             <SearchHeader wideOnly={true} />
           </Match>
           <Match when={location.pathname === routes.myListings}>

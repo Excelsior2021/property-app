@@ -38,6 +38,11 @@ const ContactCard: Component<contactCardProps> = props => {
             ? "contact-card__details"
             : "contact-card__details contact-card__details--hide"
         }>
+        <img
+          class="contact-card__img"
+          src="/public/icons/profile-pic.svg"
+          alt="profile picture"
+        />
         <p class="contact-card__label">contact number</p>
         <p class="contact-card__value">{props.phone}</p>
         <p class="contact-card__label">email</p>

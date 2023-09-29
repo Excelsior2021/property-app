@@ -6,7 +6,6 @@ import {
   accessToken,
   setCurrentListing,
   setSavedListingsIds,
-  setUserData,
 } from "../store/store"
 import { listingDataType, listingType } from "../types/general"
 import { handleServerError } from "../utils/utils"
@@ -20,7 +19,7 @@ import {
   unsaveListing,
 } from "./api-endpoints"
 
-export const fetchProfile = async () => {
+export const fetchUserDetails = async () => {
   let res
   try {
     res = await fetch(profile, {
@@ -31,10 +30,6 @@ export const fetchProfile = async () => {
 
     if (res.status === 200) {
       const { name, email } = await res.json()
-      setUserData({
-        name,
-        email,
-      })
       return { name, email }
     }
   } catch (error) {

@@ -89,7 +89,7 @@ const ListingForm: Component<listingFormProps> = props => {
   }
 
   const handleCancel = () => {
-    if (props.page === "new") navigate(routes.profile)
+    if (props.page === "new") navigate(routes.account)
     if (props.page === "edit") navigate(routes.myListings)
   }
 

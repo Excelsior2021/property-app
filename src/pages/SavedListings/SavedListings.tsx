@@ -47,7 +47,7 @@ const SavedListings: Component = () => {
             <Show when={savedListings().length > 0} fallback={noDataFallback}>
               <Listings
                 listings={savedListings()}
-                heading="my saved listings"
+                heading="saved listings"
                 page={routes.savedListings}
               />
             </Show>

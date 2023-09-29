@@ -46,7 +46,7 @@ const Login: Component = () => {
           localStorage.setItem("accessToken", data.accessToken)
           setAccessToken(data.accessToken)
           setLoggedIn(true)
-          naviagte("/profile")
+          naviagte(routes.account)
           fetchSavedListingsIds()
         } else throw new Error()
       } catch (error) {

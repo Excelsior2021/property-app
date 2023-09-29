@@ -6,7 +6,7 @@ import Discover from "./pages/Discover/Discover"
 import SavedListings from "./pages/SavedListings/SavedListings"
 import Login from "./pages/Login/Login"
 import Signup from "./pages/Signup/Signup"
-import Profile from "./pages/Profile/Profile"
+import Account from "./pages/Account/Account"
 import Listing from "./pages/Listing/Listing"
 import NewListing from "./pages/NewListing/NewListing"
 import EditListing from "./pages/EditListing/EditListing"
@@ -21,16 +21,17 @@ import {
   setAccessToken,
   setLoggedIn,
 } from "./store/store"
-import { fetchProfile, fetchSavedListingsIds } from "./api/api"
+import { fetchUserDetails, fetchSavedListingsIds } from "./api/api"
 import routes from "./utils/client-routes"
 import "./App.scss"
+import MyDetails from "./pages/MyDetails/MyDetails"
 
 const App: Component = () => {
   if (localStorage.accessToken) {
     setAccessToken(localStorage.accessToken)
     setLoggedIn(true)
     fetchSavedListingsIds()
-    fetchProfile()
+    fetchUserDetails()
   }
 
   return (
@@ -57,7 +58,7 @@ const App: Component = () => {
               !localStorage.accessToken ? (
                 <Outlet />
               ) : (
-                <Navigate href={routes.profile} />
+                <Navigate href={routes.account} />
               )
             }>
             <Route path={routes.login} component={Login} />
@@ -72,14 +73,15 @@ const App: Component = () => {
                 <Navigate href={routes.login} />
               )
             }>
-            <Route path={routes.profile} component={Profile} />
+            <Route path={routes.account} component={Account} />
             <Route path={routes.myListings} component={MyListings} />
             <Route path={routes.newListing} component={NewListing} />
+            <Route path={routes.myDetails} component={MyDetails} />
             <Route
               path={`${routes.editListing}/${routes.listingId}`}
               component={EditListing}
             />
-            <Route path={routes.uncaught} element={() => {}}></Route>
+            <Route path={routes.uncaught} element={() => null}></Route>
             <Route path={routes.uploadImages} component={UploadImages} />
             <Route
               path={`${routes.manageImages}/${routes.listingId}`}

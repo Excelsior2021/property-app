@@ -5,17 +5,21 @@ import ListingDetails from "../../components/ListingDetails/ListingDetails"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import { fetchListingDetails } from "../../api/api"
 import ListingImages from "../../components/ListingImages/ListingImages"
-import { savedListingsIds } from "../../store/store"
+import { previousPage, savedListingsIds } from "../../store/store"
 import ReturnButton from "../../components/ReturnButton/ReturnButton"
 import "./Listing.scss"
 
 const Listing: Component = () => {
   const params = useParams()
-  const [listing] = createResource(() => fetchListingDetails(params.id))
+  const [listing] = createResource(async () => {
+    const listing = await fetchListingDetails(params.id)
+    console.log(listing)
+    return listing
+  })
 
   return (
     <div class="listing">
-      <ReturnButton />
+      {previousPage() && <ReturnButton />}
       <Show when={!listing.loading} fallback={<LoadingSpinner />}>
         <p class="listing__title">{listing().listing.title}</p>
         <ImageContainer images={listing().images} page="listing" />

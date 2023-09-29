@@ -22,8 +22,8 @@ export const navbarItems = [
     login: true,
   },
   {
-    name: "profile",
-    link: routes.profile,
+    name: "account",
+    link: routes.account,
     icon: "/icons/account.svg",
     profile: true,
   },

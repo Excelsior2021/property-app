@@ -1,7 +1,7 @@
 @use "../../partials/variables" as *;
 @use "../../partials/mixins" as *;
 
-.profile {
+.account {
   @include media-tablet {
     width: 90%;
     margin: auto;
@@ -26,7 +26,7 @@
     text-decoration: none;
     text-transform: capitalize;
     margin: 24px auto;
-    border: 2px solid black;
+    border: 2px solid lightgrey;
     border-radius: 1rem;
     padding: 2rem;
 
@@ -34,9 +34,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      font-size: 1.8rem;
       width: 200px;
       height: 180px;
       margin: 36px 0;
+      box-shadow: -2px 2px lightgrey;
     }
   }
 
