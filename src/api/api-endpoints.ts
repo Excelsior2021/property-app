@@ -30,3 +30,6 @@ export const deleteImage = `${serverDomain}/image`
 export const search = `${serverDomain}/api/v1/search`
 
 export const getLocations = `${serverDomain}/api/v1/locations`
+
+export const sendEmailVerification = (email: string) =>
+  `${serverDomain}/api/v1/email/send?email=${email}`

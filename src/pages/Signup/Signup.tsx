@@ -1,5 +1,5 @@
 import { Component, createResource, createSignal, Show } from "solid-js"
-import { A, useNavigate } from "@solidjs/router"
+import { A, useNavigate, useRouteData } from "@solidjs/router"
 import { createForm, required, email, custom } from "@modular-forms/solid"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import {
@@ -9,7 +9,12 @@ import {
   errorMessage,
 } from "../../store/store"
 import { handleFormInput, handleServerError } from "../../utils/utils"
-import { login, profile, signup } from "../../api/api-endpoints"
+import {
+  login,
+  profile,
+  sendEmailVerification,
+  signup,
+} from "../../api/api-endpoints"
 import routes from "../../utils/client-routes"
 import "./Signup.scss"
 
@@ -28,7 +33,7 @@ const Signup: Component = () => {
     password: "",
   })
   const [retypePassword, setRetypePassword] = createSignal("")
-  const [submitted, setSubmitted] = createSignal(0)
+  const [submitted, setSubmitted] = createSignal(false)
   const navigate = useNavigate()
 
   const handleSubmit = async () => {
@@ -66,6 +71,17 @@ const Signup: Component = () => {
               })
 
               const userData = await userDataRes.json()
+              console.log(userDataRes)
+
+              if (userData.res === 200) {
+                let res
+                try {
+                  res = await fetch(sendEmailVerification(userData.email))
+                  console.log("email verification", res)
+                } catch (error) {
+                  handleServerError(res)
+                }
+              }
 
               setLoggedIn(true)
               navigate(routes.account)
@@ -86,11 +102,7 @@ const Signup: Component = () => {
     <div class="signup">
       <Show when={!signedUp.loading} fallback={<LoadingSpinner />}>
         <h2 class="signup__heading">sign up</h2>
-        <Form
-          class="signup__form"
-          onSubmit={() => {
-            setSubmitted(prev => prev + 1)
-          }}>
+        <Form class="signup__form" onSubmit={() => setSubmitted(true)}>
           <Field name="name" validate={[required("a full name is required.")]}>
             {(field, props) => (
               <>

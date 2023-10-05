@@ -51,7 +51,7 @@ const Header: Component = () => {
             <h1 class="header__heading">sign up</h1>
           </Match>
           <Match when={location.pathname === routes.account}>
-            <h1 class="header__heading">my profile</h1>
+            <h1 class="header__heading">my account</h1>
             <SearchHeader wideOnly={true} />
           </Match>
           <Match when={location.pathname === routes.myDetails}>
