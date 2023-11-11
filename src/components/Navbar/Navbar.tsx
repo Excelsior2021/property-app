@@ -25,7 +25,7 @@ export const navbarItems = [
     name: "account",
     link: routes.account,
     icon: "/icons/account.svg",
-    profile: true,
+    account: true,
   },
 ]
 
@@ -53,12 +53,12 @@ const Navbar: Component = () => {
           {item => (
             <li
               class={
-                loggedIn() && item.profile
+                loggedIn() && item.account
                   ? "navbar__item"
                   : loggedIn() && item.login
-                  ? "navbar__hide"
-                  : !loggedIn() && item.profile
-                  ? `navbar__hide`
+                  ? "navbar__item navbar__item--hide"
+                  : !loggedIn() && item.account
+                  ? `navbar__item navbar__item--hide`
                   : "navbar__item"
               }>
               <A

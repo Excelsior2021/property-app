@@ -4,6 +4,7 @@ import ListingForm from "../../components/ListingForm/ListingForm"
 import { getListingDetails } from "../../api/api-endpoints"
 import { handleServerError } from "../../utils/utils"
 import "./EditListing.scss"
+import headings from "../../utils/page-headings"
 
 const EditListing: Component = () => {
   const [listing, setListing] = createSignal(null)
@@ -28,7 +29,7 @@ const EditListing: Component = () => {
         <ListingForm
           listing={listing().listing}
           page="edit"
-          heading="edit listing"
+          heading={headings.editListing}
         />
       )}
     </div>

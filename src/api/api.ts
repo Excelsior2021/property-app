@@ -12,11 +12,14 @@ import { handleServerError } from "../utils/utils"
 import {
   deleteImage,
   getListingDetails,
+  getListings,
   getSavedListings,
   listing,
   profile,
   saveListing,
+  sendEmailVerification,
   unsaveListing,
+  verifyEmail,
 } from "./api-endpoints"
 
 export const fetchUserDetails = async () => {
@@ -29,9 +32,20 @@ export const fetchUserDetails = async () => {
     })
 
     if (res.status === 200) {
-      const { name, email } = await res.json()
-      return { name, email }
+      const data = await res.json()
+      return data
     }
+  } catch (error) {
+    handleServerError(res)
+  }
+}
+
+export const fetchListings = async () => {
+  let res
+  try {
+    res = await fetch(getListings)
+    if (res.status !== 200) throw new Error()
+    return await res.json()
   } catch (error) {
     handleServerError(res)
   }
@@ -149,11 +163,32 @@ export const handleDeleteImage = async (
       if (res.status === 201) {
         const updatedListing = await fetchListingDetails(propertyId)
         setStoredImages([])
-        // setUploadedImages([])
         setCurrentListing(updatedListing)
       } else throw new Error()
     } catch (error) {
       handleServerError(res)
     }
+  }
+}
+
+export const handleVerifySendEmail = async (email: string) => {
+  let res
+  try {
+    res = await fetch(sendEmailVerification(email))
+    if (res.status === 200) return true
+    else throw new Error()
+  } catch (error) {
+    handleServerError(res)
+  }
+}
+
+export const handleVerifyEmail = async (token: string) => {
+  let res
+  try {
+    res = await fetch(verifyEmail(token))
+    if (res.status === 200 || res.status === 400) return res.status
+    else throw new Error()
+  } catch (error) {
+    handleServerError(res)
   }
 }

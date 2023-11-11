@@ -1,0 +1,20 @@
+@use "../../partials/mixins" as *;
+
+.please-verify {
+  &__text {
+    @include text-fallback;
+  }
+
+  &__button {
+    @include button-form;
+
+    &:disabled {
+      background-color: lightgrey;
+      cursor: default;
+    }
+
+    @include media-tablet {
+      margin: 24px auto;
+    }
+  }
+}

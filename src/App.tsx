@@ -25,6 +25,7 @@ import { fetchUserDetails, fetchSavedListingsIds } from "./api/api"
 import routes from "./utils/client-routes"
 import "./App.scss"
 import MyDetails from "./pages/MyDetails/MyDetails"
+import EmailVerified from "./pages/EmailVerified/EmailVerified"
 
 const App: Component = () => {
   if (localStorage.accessToken) {
@@ -87,11 +88,11 @@ const App: Component = () => {
               path={`${routes.manageImages}/${routes.listingId}`}
               component={EditImages}
             />
+            <Route
+              path={routes.emailVerificationLink}
+              element={EmailVerified}
+            />
           </Route>
-          <Route
-            path={routes.uncaught}
-            component={() => <div>404: Page Not Found!</div>}
-          />
         </Routes>
       </main>
       <Navbar />

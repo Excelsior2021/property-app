@@ -11,6 +11,7 @@ import {
   setListingFormData,
 } from "../../components/ListingForm/ListingForm"
 import "./MyListings.scss"
+import headings from "../../utils/page-headings"
 
 const MyListings: Component = () => {
   const navigate = useNavigate()
@@ -55,7 +56,7 @@ const MyListings: Component = () => {
           <Listings
             listings={listings()}
             page={routes.myListings}
-            heading="my listings"
+            heading={headings.myListings}
             edit={true}
             delete={true}
             refetch={refetch}

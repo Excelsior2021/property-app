@@ -1,4 +1,4 @@
-const serverDomain = import.meta.env.VITE_SERVER_DOMAIN
+const serverDomain: string = import.meta.env.VITE_SERVER_DOMAIN
 
 export const signup = `${serverDomain}/api/v1/auth/signup`
 
@@ -33,3 +33,6 @@ export const getLocations = `${serverDomain}/api/v1/locations`
 
 export const sendEmailVerification = (email: string) =>
   `${serverDomain}/api/v1/email/send?email=${email}`
+
+export const verifyEmail = (token: string) =>
+  `${serverDomain}/api/v1/email/verification?token=${token}`

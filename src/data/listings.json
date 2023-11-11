@@ -1,0 +1,108 @@
+[
+  {
+    "images": [
+      {
+        "path": "/property_images/stock-4.jpg"
+      },
+      {
+        "path": "/property_images/stock-1.jpg"
+      },
+      {
+        "path": "/property_images/stock-2.jpg"
+      },
+      {
+        "path": "/property_images/stock-3.jpg"
+      },
+      {
+        "path": "/property_images/stock-5.jpg"
+      },
+      {
+        "path": "/property_images/stock-6.jpg"
+      },
+      {
+        "path": "/property_images/stock-7.jpg"
+      },
+      {
+        "path": "/property_images/stock-8.jpg"
+      }
+    ],
+    "listing": {
+      "id": "dummy-2",
+      "title": "A beautiful home",
+      "price": 1000,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras fermentum odio eu feugiat pretium nibh. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Congue eu consequat ac felis. Neque vitae tempus quam pellentesque nec nam aliquam sem. Duis ultricies lacus sed turpis tincidunt id aliquet. Non odio euismod lacinia at quis risus sed vulputate. Tellus molestie nunc non blandit massa enim nec. A lacus vestibulum sed arcu. Velit ut tortor pretium viverra suspendisse potenti. Interdum velit euismod in pellentesque massa placerat duis ultricies lacus. Tempus urna et pharetra pharetra. Feugiat sed lectus vestibulum mattis ullamcorper velit. In dictum non consectetur a erat. Arcu non odio euismod lacinia at quis risus sed vulputate. Faucibus purus in massa tempor nec feugiat nisl pretium fusce. Nisi quis eleifend quam adipiscing. Neque egestas congue quisque egestas. Sodales ut etiam sit amet nisl purus in mollis nunc. Convallis posuere morbi leo urna molestie at elementum eu facilisis. Odio tempor orci dapibus ultrices in iaculis. At quis risus sed vulputate.",
+      "location": "accra, ghana",
+      "phone": "030 345 4596",
+      "email": "lifestyle@lifestyle.com"
+    }
+  },
+  {
+    "images": [
+      {
+        "path": "/property_images/stock-2.jpg"
+      },
+      {
+        "path": "/property_images/stock-3.jpg"
+      },
+      {
+        "path": "/property_images/stock-5.jpg"
+      }
+    ],
+    "listing": {
+      "id": "dummy-3",
+      "title": "A beautiful home near the sea of soul",
+      "price": 5000,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras fermentum odio eu feugiat pretium nibh. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Congue eu consequat ac felis. Neque vitae tempus quam pellentesque nec nam aliquam sem. Duis ultricies lacus sed turpis tincidunt id aliquet. Non odio euismod lacinia at quis risus sed vulputate. Tellus molestie nunc non blandit massa enim nec. A lacus vestibulum sed arcu. Velit ut tortor pretium viverra suspendisse potenti.",
+      "location": "Aburi, eastern region",
+      "phone": "030 345 4596",
+      "email": "lifestyle@lifestyle.com"
+    }
+  },
+  {
+    "images": [
+      {
+        "path": "/property_images/stock-9.jpg"
+      }
+    ],
+    "listing": {
+      "id": "dummy-1",
+      "title": "A mice apartment with wonderful views of the river near the wilderness",
+      "price": 3000,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "location": "ejisu, ghana",
+      "phone": "030 345 4596",
+      "email": "lifestyle@lifestyle.com"
+    }
+  },
+  {
+    "images": [
+      {
+        "path": "/property_images/stock-7.jpg"
+      },
+      {
+        "path": "/property_images/stock-3.jpg"
+      },
+      {
+        "path": "/property_images/stock-9.jpg"
+      },
+      {
+        "path": "/property_images/stock-4.jpg"
+      },
+      {
+        "path": "/property_images/stock-5.jpg"
+      },
+      {
+        "path": "/property_images/stock-6.jpg"
+      }
+    ],
+    "listing": {
+      "id": "dummy-4",
+      "title": "My home",
+      "price": 10000,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras fermentum odio eu feugiat pretium nibh. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Congue eu consequat ac felis. Neque vitae tempus quam pellentesque nec nam aliquam sem. Duis ultricies lacus sed turpis tincidunt id aliquet. Non odio euismod lacinia at quis risus sed vulputate. Tellus molestie nunc non blandit massa enim nec. A lacus vestibulum sed arcu. Velit ut tortor pretium viverra suspendisse potenti. Interdum velit euismod in pellentesque massa placerat duis ultricies lacus. Tempus urna et pharetra pharetra. Feugiat sed lectus vestibulum mattis ullamcorper velit. In dictum non consectetur a erat. Arcu non odio euismod lacinia at quis risus sed vulputate. Faucibus purus in massa tempor nec feugiat nisl pretium fusce. Nisi quis eleifend quam adipiscing. Neque egestas congue quisque egestas. Sodales ut etiam sit amet nisl purus in mollis nunc.",
+      "location": "Adako Jachie Road, Ejisu",
+      "phone": "030 345 4596",
+      "email": "lifestyle@lifestyle.com"
+    }
+  }
+]

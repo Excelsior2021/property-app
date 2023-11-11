@@ -49,8 +49,7 @@
     margin: 24px auto;
 
     @include media-tablet {
-      margin-left: auto;
-      width: 100px;
+      display: none;
     }
   }
 }

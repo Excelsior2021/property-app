@@ -1,0 +1,29 @@
+@use "../../partials/mixins" as *;
+
+.account-menu {
+  display: none;
+
+  @include media-tablet {
+    display: block;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background-color: white;
+    width: 200px;
+    border-radius: 16px;
+    box-shadow: 2px 2px 10px lightgrey;
+  }
+
+  &__nav {
+    padding: 10px 0;
+  }
+
+  &__item {
+    list-style: none;
+    padding: 10px;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(245, 245, 245);
+    }
+  }
+}

@@ -9,15 +9,20 @@
     align-items: center;
     width: 100%;
     max-width: 250px;
-    height: 100%;
     border: 1px solid lightgrey;
     border-radius: 20px;
     margin: auto;
     padding: 2rem;
-    box-shadow: -2px 2px lightgrey;
 
     @include media-tablet {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       width: 250px;
+      border: 1px solid lightgrey;
+      border-radius: 20px;
+      margin: auto;
+      padding: 2rem;
     }
 
     &--hide {
@@ -29,6 +34,12 @@
     @include profile-pic-color;
     width: 75px;
     margin: 8px auto 16px auto;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
   }
 
   &__label {

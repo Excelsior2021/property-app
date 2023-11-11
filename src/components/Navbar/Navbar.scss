@@ -25,6 +25,10 @@
 
   &__item {
     list-style: none;
+
+    &--hide {
+      display: none;
+    }
   }
 
   &__link {
@@ -43,9 +47,5 @@
       filter: invert(81%) sepia(40%) saturate(5506%) hue-rotate(314deg)
         brightness(101%) contrast(96%);
     }
-  }
-
-  &__hide {
-    display: none;
   }
 }

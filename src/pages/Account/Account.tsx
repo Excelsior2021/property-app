@@ -14,6 +14,11 @@ import "./Account.scss"
 
 const accountActions = [
   {
+    name: "my details",
+    route: routes.myDetails,
+    onclick: null,
+  },
+  {
     name: "new listing",
     route: routes.newListing,
     onclick: () => setListingFormData(initialListingFormData),
@@ -21,11 +26,6 @@ const accountActions = [
   {
     name: "my listings",
     route: routes.myListings,
-    onclick: null,
-  },
-  {
-    name: "my details",
-    route: routes.myDetails,
     onclick: null,
   },
 ]

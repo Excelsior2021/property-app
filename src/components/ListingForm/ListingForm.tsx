@@ -118,6 +118,7 @@ const ListingForm: Component<listingFormProps> = props => {
                 {...fieldProps}
                 class="listing-form__input"
                 placeholder="title"
+                aria-label="title"
                 value={listingFormData().title}
                 onchange={event => handleFormInput(event, setListingFormData)}
               />
@@ -141,6 +142,7 @@ const ListingForm: Component<listingFormProps> = props => {
                 inputmode="numeric"
                 class="listing-form__input"
                 placeholder="rental price"
+                aria-label="rental price"
                 value={listingFormData().price}
                 onchange={event => handleFormInput(event, setListingFormData)}
               />

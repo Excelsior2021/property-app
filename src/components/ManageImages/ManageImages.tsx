@@ -10,7 +10,7 @@ import {
 import { useNavigate, useParams } from "@solidjs/router"
 import { createForm } from "@modular-forms/solid"
 import { listingFormData } from "../ListingForm/ListingForm"
-import { accessToken, currentListing, errorMessage } from "../../store/store"
+import { accessToken, currentListing } from "../../store/store"
 import { editListing, listing, uploadImage } from "../../api/api-endpoints"
 import ImageItem from "../ImageItem/ImageItem"
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner"

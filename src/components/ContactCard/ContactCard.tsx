@@ -43,10 +43,13 @@ const ContactCard: Component<contactCardProps> = props => {
           src="/public/icons/profile-pic.svg"
           alt="profile picture"
         />
-        <p class="contact-card__label">contact number</p>
-        <p class="contact-card__value">{props.phone}</p>
-        <p class="contact-card__label">email</p>
-        <p class="contact-card__value">{props.email}</p>
+
+        <div class="contact-card__info">
+          <p class="contact-card__label">contact number</p>
+          <p class="contact-card__value">{props.phone}</p>
+          <p class="contact-card__label">email</p>
+          <p class="contact-card__value">{props.email}</p>
+        </div>
       </div>
       {!loggedIn() && <ContactButton />}
     </div>

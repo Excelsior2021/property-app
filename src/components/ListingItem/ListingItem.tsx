@@ -34,6 +34,8 @@ const ListingItem: Component<ListingItemProps> = props => {
   const handleClickOnSave = (event: Event, listing: listingDataType) => {
     event.stopPropagation()
 
+    if (listing.id.includes("dummy")) return
+
     if (loggedIn()) {
       if (props.saved) handleSave(listing, false)
       else handleSave(listing, true)

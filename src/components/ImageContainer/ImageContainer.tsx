@@ -15,9 +15,7 @@ interface ImageContainerProps {
 const ImageContainer: Component<ImageContainerProps> = props => {
   const [hovered, setHovered] = createSignal(false)
 
-  const handleHover = () => {
-    setHovered(!hovered())
-  }
+  const handleHover = () => setHovered(!hovered())
 
   return (
     <div

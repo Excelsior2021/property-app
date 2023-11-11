@@ -7,6 +7,7 @@ import ServerError from "../../components/ServerError/ServerError"
 import { handleServerError } from "../../utils/utils"
 import routes from "../../utils/client-routes"
 import "./SavedListings.scss"
+import headings from "../../utils/page-headings"
 
 const SavedListings: Component = () => {
   const fetchListings = async () => {
@@ -47,7 +48,7 @@ const SavedListings: Component = () => {
             <Show when={savedListings().length > 0} fallback={noDataFallback}>
               <Listings
                 listings={savedListings()}
-                heading="saved listings"
+                heading={headings.savedListings}
                 page={routes.savedListings}
               />
             </Show>
