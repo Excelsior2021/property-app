@@ -13,7 +13,7 @@ const routes = {
   manageImages: "/manage-images",
   searchResults: "/search",
   listingId: ":id",
-  emailVerificationLink: "/api/v1/email/verification",
+  emailVerificationLink: "/email-verification",
   uncaught: "*",
 }
 

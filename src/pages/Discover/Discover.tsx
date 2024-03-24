@@ -16,7 +16,7 @@ const Discover: Component = () => {
 
   return (
     <div class="discover">
-      <ServerError data={listings} error={errorMessage()}>
+      <ServerError error={errorMessage()}>
         <Show when={!listings.loading} fallback={<LoadingSpinner />}>
           <Show
             when={listings().length > 0 || dummyListings.length > 0}

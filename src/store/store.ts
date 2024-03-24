@@ -1,4 +1,5 @@
-import { createSignal } from "solid-js"
+import { createSignal, createResource } from "solid-js"
+import { fetchUserDetails } from "../api/api"
 
 const stringArray: string[] = []
 
@@ -19,7 +20,5 @@ export const [modalOverlayData, setModalOverlayData] = createSignal({
   buttonText: "",
   buttonHandler: () => {},
 })
-
-export const [refetch, setRefetch] = createSignal(null)
 
 export const [previousPage, setPreviousPage] = createSignal("")

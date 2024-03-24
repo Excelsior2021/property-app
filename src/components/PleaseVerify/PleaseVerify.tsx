@@ -1,10 +1,19 @@
-import { Component, createSignal } from "solid-js"
+import { Component, createResource, createSignal, Show } from "solid-js"
 import { handleVerifySendEmail } from "../../api/api"
-import "./PleaseVerify.scss"
 import { errorMessage } from "../../store/store"
+import "./PleaseVerify.scss"
 
 const PleaseVerify: Component = props => {
+  const [sendEmail, setSendEmail] = createSignal(false)
   const [emailSent, setEmailSent] = createSignal(false)
+
+  const sendVerificationEmail = async () => {
+    const res = await handleVerifySendEmail(props.user().email)
+    setEmailSent(res)
+    return res
+  }
+
+  const [email] = createResource(sendEmail, sendVerificationEmail)
 
   return (
     <div class="please-verify">
@@ -14,11 +23,15 @@ const PleaseVerify: Component = props => {
       </p>
       <button
         class="please-verify__button"
-        onclick={async () =>
-          setEmailSent(await handleVerifySendEmail(props.user().email))
-        }
+        onclick={() => setSendEmail(true)}
         disabled={emailSent()}>
-        {emailSent() ? "email sent" : "verify email address"}
+        <Show when={sendEmail()} fallback="verify email address">
+          <Show when={!email.loading} fallback="please wait...">
+            <Show when={email()} fallback="error occured">
+              {"email sent"}
+            </Show>
+          </Show>
+        </Show>
       </button>
       {errorMessage() && errorMessage()}
     </div>

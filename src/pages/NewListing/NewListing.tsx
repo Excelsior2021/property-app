@@ -1,4 +1,4 @@
-import { Component, Show, createResource } from "solid-js"
+import { Component, Show, createEffect, createResource } from "solid-js"
 import ListingForm, {
   listingFormData,
 } from "../../components/ListingForm/ListingForm"
@@ -11,10 +11,15 @@ import ServerError from "../../components/ServerError/ServerError"
 import { errorMessage } from "../../store/store"
 
 const NewListing: Component = () => {
-  const [user] = createResource(fetchUserDetails)
+  const [user, { mutate, refetch }] = createResource(fetchUserDetails)
+
+  createEffect(async () => {
+    const user = await fetchUserDetails()
+    mutate(user)
+  })
 
   return (
-    <ServerError data={user} error={errorMessage()}>
+    <ServerError error={errorMessage()}>
       <Show when={user && !user.loading} fallback={<LoadingSpinner />}>
         <Show when={user().verified} fallback={<PleaseVerify user={user} />}>
           <div class="new-listing">

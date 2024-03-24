@@ -38,7 +38,7 @@ const SearchResults: Component = () => {
 
   return (
     <div class="search-results">
-      <ServerError data={results} error={errorMessage()}>
+      <ServerError error={errorMessage()}>
         <Show when={!results.loading} fallback={<LoadingSpinner />}>
           <Listings
             listings={results().listing}

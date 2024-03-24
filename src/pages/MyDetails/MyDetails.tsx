@@ -10,7 +10,7 @@ const MyDetails: Component = () => {
 
   return (
     <div class="my-details">
-      <ServerError data={profileResource} error={errorMessage()}>
+      <ServerError error={errorMessage()}>
         <Show when={!profileResource.loading} fallback={<LoadingSpinner />}>
           <div class="my-details__details">
             <img

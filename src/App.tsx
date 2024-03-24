@@ -21,7 +21,7 @@ import {
   setAccessToken,
   setLoggedIn,
 } from "./store/store"
-import { fetchUserDetails, fetchSavedListingsIds } from "./api/api"
+import { fetchSavedListingsIds } from "./api/api"
 import routes from "./utils/client-routes"
 import "./App.scss"
 import MyDetails from "./pages/MyDetails/MyDetails"
@@ -32,7 +32,6 @@ const App: Component = () => {
     setAccessToken(localStorage.accessToken)
     setLoggedIn(true)
     fetchSavedListingsIds()
-    fetchUserDetails()
   }
 
   return (

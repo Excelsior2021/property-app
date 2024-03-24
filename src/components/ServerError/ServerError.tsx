@@ -1,22 +1,22 @@
-import { Component, Resource, Show, JSX } from "solid-js"
+import { Component, ErrorBoundary, JSX } from "solid-js"
 import "./ServerError.scss"
+import { errorMessage } from "../../store/store"
 
 interface serverErrorProps {
-  data: Resource<any>
   children: JSX.Element
-  error: string
 }
 
-const ServerError: Component<serverErrorProps> = props => {
-  return (
-    <div class="server-error">
-      <Show
-        when={!props.data.error}
-        fallback={<p class="server-error__message">{props.error}</p>}>
-        {props.children}
-      </Show>
-    </div>
-  )
-}
+const ServerError: Component<serverErrorProps> = props => (
+  <div class="server-error">
+    <ErrorBoundary
+      fallback={err => (
+        <p class="server-error__message">
+          {err ? err.message : errorMessage()}
+        </p>
+      )}>
+      {props.children}
+    </ErrorBoundary>
+  </div>
+)
 
 export default ServerError

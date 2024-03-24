@@ -45,8 +45,7 @@ export const handleServerError = res => {
         throw new Error()
     }
   } else {
-    setErrorMessage("There was a server error. Please try again later.")
-    throw new Error()
+    throw new Error("There was a server error. Please try again later.")
   }
 }
 

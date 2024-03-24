@@ -1,25 +1,30 @@
-import { Match, Show, Switch, createResource } from "solid-js"
+import { Match, Show, Switch, createEffect, createResource } from "solid-js"
 import { A, useSearchParams } from "@solidjs/router"
 import routes from "../../utils/client-routes"
 import ServerError from "../../components/ServerError/ServerError"
 import { handleVerifyEmail } from "../../api/api"
 import { errorMessage } from "../../store/store"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
+import { logout } from "../../utils/utils"
 import "./EmailVerified.scss"
 
 const EmailVerified = () => {
   const [searchParams] = useSearchParams()
   const [verify] = createResource(() => handleVerifyEmail(searchParams.token))
 
+  createEffect(() => {
+    if (verify() === 200) logout()
+  })
+
   return (
     <div class="email-verified">
-      <ServerError data={verify} error={errorMessage()}>
+      <ServerError error={errorMessage()}>
         <Show when={!verify.loading} fallback={<LoadingSpinner />}>
           <Switch>
             <Match when={verify() === 200}>
               <p>
-                Your email address has be verified. Go to your{" "}
-                <A href={routes.account}>account</A>.
+                Your email address has been verified. Please{" "}
+                <A href={routes.login}>log in</A>.
               </p>
             </Match>
             <Match when={verify() === 400}>

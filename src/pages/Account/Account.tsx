@@ -41,7 +41,7 @@ const Profile: Component = () => {
 
   return (
     <div class="account">
-      <ServerError data={profileResource} error={errorMessage()}>
+      <ServerError error={errorMessage()}>
         <Show when={!profileResource.loading} fallback={<LoadingSpinner />}>
           <h2 class="account__greeting">
             Hello {profileResource().name ? profileResource().name : "user"},
